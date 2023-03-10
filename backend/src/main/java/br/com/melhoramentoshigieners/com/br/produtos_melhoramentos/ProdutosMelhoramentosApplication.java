@@ -1,4 +1,4 @@
-package br.com.melhopramentoshigieners.com.br.produtos_melhoramentos;
+package br.com.melhoramentoshigieners.com.br.produtos_melhoramentos;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
