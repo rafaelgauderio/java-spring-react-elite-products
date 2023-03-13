@@ -1,4 +1,4 @@
-package br.com.melhoramentoshigieners.com.br.produtos_melhoramentos.entidades.controladores;
+package br.com.melhoramentoshigieners.com.br.produtos_melhoramentos.controladores;
 
 import java.util.ArrayList;
 import java.util.List;
