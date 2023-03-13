@@ -1,22 +1,22 @@
-package br.com.melhoramentoshigieners.com.br.produtos_melhoramentos.entidades;
+package br.com.melhoramentoshigieners.produtos_melhoramentos.entidades;
 
-import java.io.Serializable;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.enumerados.Permissao;
 
-public class Categoria implements Serializable {	
-	
-	private static final long serialVersionUID = 1L;
-	
+public class Regra {
+
 	private Long id;
 	private String descricao;
+	private Permissao permissao;
 	
-	public Categoria () {
-		
+	public Regra() {
+
 	}
 
-	public Categoria(Long id, String descricao) {
+	public Regra(Long id, String descricao, Permissao permissao) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
+		this.permissao = permissao;
 	}
 
 	public Long getId() {
@@ -35,6 +35,14 @@ public class Categoria implements Serializable {
 		this.descricao = descricao;
 	}
 
+	public Permissao getPermissao() {
+		return permissao;
+	}
+
+	public void setPermissao(Permissao permissao) {
+		this.permissao = permissao;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -51,13 +59,14 @@ public class Categoria implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Categoria other = (Categoria) obj;
+		Regra other = (Regra) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
+	}		
+	
 
 }
