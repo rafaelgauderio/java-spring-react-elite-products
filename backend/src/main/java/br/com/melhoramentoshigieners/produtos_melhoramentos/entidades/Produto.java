@@ -1,4 +1,4 @@
-package br.com.melhoramentoshigieners.com.br.produtos_melhoramentos.entidades;
+package br.com.melhoramentoshigieners.produtos_melhoramentos.entidades;
 
 import java.time.Instant;
 import java.util.HashSet;

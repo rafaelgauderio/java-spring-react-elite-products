@@ -1,6 +1,8 @@
-package br.com.melhoramentoshigieners.com.br.produtos_melhoramentos.entidades;
+package br.com.melhoramentoshigieners.produtos_melhoramentos.entidades;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Embalagem implements Serializable {	
 	
@@ -8,6 +10,7 @@ public class Embalagem implements Serializable {
 	
 	private Long id;
 	private String descricao;
+	private Set<Produto> produtos = new HashSet<Produto>();
 	
 	public Embalagem () {
 		
@@ -34,6 +37,16 @@ public class Embalagem implements Serializable {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
+	public Set<Produto> getProdutos() {
+		return produtos;
+	}
+
+	/*
+	public void setProdutos(Set<Produto> produtos) {
+		this.produtos = produtos;
+	}
+	*/
 
 	@Override
 	public int hashCode() {
@@ -41,7 +54,9 @@ public class Embalagem implements Serializable {
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
-	}
+	}	
+
+
 
 	@Override
 	public boolean equals(Object obj) {

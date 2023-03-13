@@ -1,22 +1,25 @@
-package br.com.melhoramentoshigieners.com.br.produtos_melhoramentos.entidades;
+package br.com.melhoramentoshigieners.produtos_melhoramentos.entidades;
 
-import br.com.melhoramentoshigieners.com.br.produtos_melhoramentos.entidades.enumerados.Permissao;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
-public class Regra {
-
+public class Categoria implements Serializable {	
+	
+	private static final long serialVersionUID = 1L;
+	
 	private Long id;
 	private String descricao;
-	private Permissao permissao;
+	private Set<Produto> produtos = new HashSet<Produto>();
 	
-	public Regra() {
-
+	public Categoria () {
+		
 	}
 
-	public Regra(Long id, String descricao, Permissao permissao) {
+	public Categoria(Long id, String descricao) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
-		this.permissao = permissao;
 	}
 
 	public Long getId() {
@@ -33,15 +36,19 @@ public class Regra {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
+	}	
+	
 
-	public Permissao getPermissao() {
-		return permissao;
+	public Set<Produto> getProdutos() {
+		return produtos;
 	}
-
-	public void setPermissao(Permissao permissao) {
-		this.permissao = permissao;
+	
+	/* não se usa método set para coleções.
+	 * se adiciona ou remove por métodos add e remove.	 
+	public void setProdutos(Set<Produto> produtos) {
+		this.produtos = produtos;
 	}
+	*/
 
 	@Override
 	public int hashCode() {
@@ -59,14 +66,13 @@ public class Regra {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Regra other = (Regra) obj;
+		Categoria other = (Categoria) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}		
-	
+	}
 
 }
