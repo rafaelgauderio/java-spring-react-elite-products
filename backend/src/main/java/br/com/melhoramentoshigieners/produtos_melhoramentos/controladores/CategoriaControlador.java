@@ -12,7 +12,7 @@ import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Categoria;
 
 @RestController
 @RequestMapping(value = "/categorias")
-public class ControladorCategoria {
+public class CategoriaControlador {
 	
 	@GetMapping
 	public ResponseEntity<List<Categoria>> buscarTodas () {

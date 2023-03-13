@@ -1,16 +1,24 @@
 package br.com.melhoramentoshigieners.produtos_melhoramentos.entidades;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="tb_embalagem")
 public class Embalagem implements Serializable {	
 	
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long id;
 	private String descricao;
-	private Set<Produto> produtos = new HashSet<Produto>();
+	//private Set<Produto> produtos = new HashSet<Produto>();
 	
 	public Embalagem () {
 		
@@ -34,13 +42,12 @@ public class Embalagem implements Serializable {
 		return descricao;
 	}
 
+	/*
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	*/	
 	
-	public Set<Produto> getProdutos() {
-		return produtos;
-	}
 
 	/*
 	public void setProdutos(Set<Produto> produtos) {
