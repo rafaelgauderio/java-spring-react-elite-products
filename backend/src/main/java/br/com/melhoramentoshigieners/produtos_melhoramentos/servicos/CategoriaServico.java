@@ -2,6 +2,7 @@ package br.com.melhoramentoshigieners.produtos_melhoramentos.servicos;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,15 @@ public class CategoriaServico {
 		// convertendo de lista de Categoria para um lista de CategoriaDTO
 		List<CategoriaDTO> dto = listaDeCategoria.stream().map(c -> new CategoriaDTO(c)).collect(Collectors.toList());
 		return dto;		
+	}
+	
+	@Transactional(readOnly=true)
+	public CategoriaDTO byscarPorId (Long id) {
+		Optional<Categoria> optionalDeCategoria = categoriaRepositorio.findById(id);
+		Categoria categoria = optionalDeCategoria.get();
+		CategoriaDTO dto = new CategoriaDTO(categoria);
+		return dto;
+		
 	}
 
 }
