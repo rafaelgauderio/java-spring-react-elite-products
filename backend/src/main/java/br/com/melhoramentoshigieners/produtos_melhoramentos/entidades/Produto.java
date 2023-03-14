@@ -20,7 +20,7 @@ public class Produto {
 	// um produto pode pertencer a várias categorias diferentes private
 	private Set<Categoria> categorias = new HashSet<Categoria>();
 
-	private Produto() {
+	public Produto() {
 		
 	}
 
