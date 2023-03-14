@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.EmbalagemDTO;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Embalagem;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.EmbalagemServico;
 
@@ -20,8 +21,8 @@ public class EmbalagemControlador {
 	private EmbalagemServico embalagemServico;
 	
 	@GetMapping
-	public ResponseEntity<List<Embalagem>> buscarTodas () {
-		List<Embalagem> listaDeEmbalagens = new ArrayList<Embalagem>();
+	public ResponseEntity<List<EmbalagemDTO>> buscarTodas () {
+		List<EmbalagemDTO> listaDeEmbalagens = new ArrayList<EmbalagemDTO>();
 		listaDeEmbalagens = embalagemServico.buscarTodas();		
 		return ResponseEntity.ok().body(listaDeEmbalagens);
 	}
