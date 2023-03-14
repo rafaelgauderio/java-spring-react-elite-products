@@ -33,7 +33,7 @@ public class EmbalagemServico {
 		Optional<Embalagem> optionalDeEmbalagem = embalagemRepositorio.findById(id);
 		//Embalagem embalagem = optionalDeEmbalagem.get();
 		// vai disparar excecao senao informar um id inexistente
-		Embalagem embalagem = optionalDeEmbalagem.orElseThrow(() -> new ExcecaoEntidadeNaoEncontrada("Embalagem não encontrada com a id de número " + id));
+		Embalagem embalagem = optionalDeEmbalagem.orElseThrow(() -> new ExcecaoEntidadeNaoEncontrada("Embalagem não encontrada com o id de número " + id));
 		EmbalagemDTO embalagemDTO = new EmbalagemDTO(embalagem);
 		return embalagemDTO; 
 		

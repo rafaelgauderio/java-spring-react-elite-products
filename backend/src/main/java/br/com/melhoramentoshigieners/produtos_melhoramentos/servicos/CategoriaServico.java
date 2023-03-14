@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.CategoriaDTO;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Categoria;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.CategoriaRepositorio;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoEntidadeNaoEncontrada;
 
 @Service
 public class CategoriaServico {
@@ -31,7 +32,8 @@ public class CategoriaServico {
 	@Transactional(readOnly=true)
 	public CategoriaDTO byscarPorId (Long id) {
 		Optional<Categoria> optionalDeCategoria = categoriaRepositorio.findById(id);
-		Categoria categoria = optionalDeCategoria.get();
+		//Categoria categoria = optionalDeCategoria.get();
+		Categoria categoria = optionalDeCategoria.orElseThrow(() -> new ExcecaoEntidadeNaoEncontrada("Categoria não encontrada com o id de número " + id));
 		CategoriaDTO dto = new CategoriaDTO(categoria);
 		return dto;
 		
