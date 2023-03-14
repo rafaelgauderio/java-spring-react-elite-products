@@ -20,10 +20,10 @@ public class ManipuladorDeExcecoesDoControlador {
 	public ResponseEntity<ExcecaoCustomizada> excecaoEntidadeNaoEncontrada(ExcecaoEntidadeNaoEncontrada mensagemErro, HttpServletRequest requisicao) {
 		
 		ExcecaoCustomizada excecaoCustomizada = new ExcecaoCustomizada();
-		excecaoCustomizada.setNomeDoErro("Entidade ou Objeto não Encontrado");
+		excecaoCustomizada.setNomeDoErro("Recurso não Encontrado");
 		excecaoCustomizada.setMenssagemDeErro(mensagemErro.getMessage());
 		excecaoCustomizada.setCaminho(requisicao.getRequestURI());
-		excecaoCustomizada.setStatusDoErro(HttpStatus.NOT_FOUND.value()); // CÓDIGO HTTP 404
+		excecaoCustomizada.setCodigoHttpDoErro(HttpStatus.NOT_FOUND.value()); // CÓDIGO HTTP 404
 		excecaoCustomizada.setMomentoDoErro(Instant.now());
 		
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(excecaoCustomizada);		

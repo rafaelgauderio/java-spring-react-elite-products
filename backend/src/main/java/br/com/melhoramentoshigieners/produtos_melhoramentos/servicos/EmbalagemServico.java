@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.EmbalagemDTO;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Embalagem;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.EmbalagemRepositorio;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoEntidadeNaoEncontrada;
 
 @Service
 public class EmbalagemServico {
@@ -30,7 +31,9 @@ public class EmbalagemServico {
 	@Transactional(readOnly=true)
 	public EmbalagemDTO buscarPorId(Long id) {
 		Optional<Embalagem> optionalDeEmbalagem = embalagemRepositorio.findById(id);
-		Embalagem embalagem = optionalDeEmbalagem.get();
+		//Embalagem embalagem = optionalDeEmbalagem.get();
+		// vai disparar excecao senao informar um id inexistente
+		Embalagem embalagem = optionalDeEmbalagem.orElseThrow(() -> new ExcecaoEntidadeNaoEncontrada("Embalagem não encontrada com a id de número " + id));
 		EmbalagemDTO embalagemDTO = new EmbalagemDTO(embalagem);
 		return embalagemDTO; 
 		

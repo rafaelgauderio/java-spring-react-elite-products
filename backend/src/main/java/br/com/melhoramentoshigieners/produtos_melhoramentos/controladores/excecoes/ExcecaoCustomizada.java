@@ -10,19 +10,19 @@ public class ExcecaoCustomizada implements Serializable {
 	private String nomeDoErro;
 	private String menssagemDeErro;
 	private String caminho;
-	private Integer statusDoErro;
+	private Integer codigoHttpDoErro;
 	private Instant momentoDoErro;
 	
 	public ExcecaoCustomizada () {
 		
 	}
 
-	public ExcecaoCustomizada(String nomeDoErro, String menssagemDeErro, String caminho, Integer statusDoErro, Instant momentoDoErro) {
+	public ExcecaoCustomizada(String nomeDoErro, String menssagemDeErro, String caminho, Integer codigoHttpDoErro, Instant momentoDoErro) {
 		
 		this.nomeDoErro = nomeDoErro;
 		this.menssagemDeErro = menssagemDeErro;
 		this.caminho = caminho;
-		this.statusDoErro = statusDoErro;
+		this.codigoHttpDoErro = codigoHttpDoErro;
 		this.momentoDoErro = momentoDoErro;
 	}
 
@@ -50,12 +50,12 @@ public class ExcecaoCustomizada implements Serializable {
 		this.caminho = caminho;
 	}
 
-	public Integer getStatusDoErro() {
-		return statusDoErro;
+	public Integer getcodigoHttpDoErro() {
+		return codigoHttpDoErro;
 	}
 
-	public void setStatusDoErro(Integer statusDoErro) {
-		this.statusDoErro = statusDoErro;
+	public void setCodigoHttpDoErro(Integer codigoHttpDoErro) {
+		this.codigoHttpDoErro = codigoHttpDoErro;
 	}
 
 	public Instant getMomentoDoErro() {
