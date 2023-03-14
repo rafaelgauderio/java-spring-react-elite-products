@@ -24,8 +24,7 @@ public class Produto {
 		
 	}
 
-	public Produto(Long id, String descricao, Double preco, Double comprimento, Double largura, Double altura,
-			Double peso, String imgUrl, Instant dataCadastro) {
+	public Produto(Long id, String descricao, Double preco, Double comprimento, Double largura, Double altura,	Double peso, String imgUrl, Instant dataCadastro) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
