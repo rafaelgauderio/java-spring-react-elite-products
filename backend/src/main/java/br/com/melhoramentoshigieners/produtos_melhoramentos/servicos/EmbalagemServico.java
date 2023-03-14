@@ -2,6 +2,7 @@ package br.com.melhoramentoshigieners.produtos_melhoramentos.servicos;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,16 @@ public class EmbalagemServico {
 		List <Embalagem> listaDeEmbalagem = new ArrayList<Embalagem>();
 		listaDeEmbalagem = embalagemRepositorio.findAll();
 		return listaDeEmbalagem.stream().map(e -> new EmbalagemDTO(e)).collect(Collectors.toList());
+	}
+	
+	// método para buscar Embalagem pelo id
+	@Transactional(readOnly=true)
+	public EmbalagemDTO buscarPorId(Long id) {
+		Optional<Embalagem> optionalDeEmbalagem = embalagemRepositorio.findById(id);
+		Embalagem embalagem = optionalDeEmbalagem.get();
+		EmbalagemDTO embalagemDTO = new EmbalagemDTO(embalagem);
+		return embalagemDTO; 
+		
 	}
 
 }
