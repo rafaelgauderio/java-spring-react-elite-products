@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.CategoriaDTO;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Categoria;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.CategoriaServico;
 
@@ -20,8 +21,8 @@ public class CategoriaControlador {
 	private CategoriaServico servico;
 	
 	@GetMapping
-	public ResponseEntity<List<Categoria>> buscarTodas () {
-		List<Categoria> listaDeCategorias = new ArrayList<Categoria>();
+	public ResponseEntity<List<CategoriaDTO>> buscarTodas () {
+		List<CategoriaDTO> listaDeCategorias = new ArrayList<CategoriaDTO>();
 		listaDeCategorias = servico.buscarTodas();		
 		return ResponseEntity.ok().body(listaDeCategorias);
 	}

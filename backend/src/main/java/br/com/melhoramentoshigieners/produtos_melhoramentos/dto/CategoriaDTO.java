@@ -2,29 +2,26 @@ package br.com.melhoramentoshigieners.produtos_melhoramentos.dto;
 
 import java.io.Serializable;
 
-import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Embalagem;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Categoria;
 
-public class EmbalagemDTO implements Serializable {	
-
+public class CategoriaDTO implements Serializable {			
+	
 	private static final long serialVersionUID = 1L;
-	// DTO = Data Transfer Object
-	// agiliza a comunicação. Ao invés de passar cada atributo individualmente, transfere apenas os atributos necessários em um 
-	// objeto único
 	
 	private Long id;
 	private String descricao;
 	
-	public EmbalagemDTO () {
+	public CategoriaDTO () {
 		
 	}
 
-	public EmbalagemDTO(Long id, String descricao) {
+	public CategoriaDTO(Long id, String descricao) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
 	}
 	
-	public EmbalagemDTO(Embalagem entidade) {
+	public CategoriaDTO(Categoria entidade) {
 		this.id = entidade.getId();
 		this.descricao = entidade.getDescricao();
 	}
