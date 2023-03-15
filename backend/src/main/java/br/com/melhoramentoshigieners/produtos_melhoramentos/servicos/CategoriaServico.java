@@ -35,8 +35,16 @@ public class CategoriaServico {
 		//Categoria categoria = optionalDeCategoria.get();
 		Categoria categoria = optionalDeCategoria.orElseThrow(() -> new ExcecaoEntidadeNaoEncontrada("Categoria não encontrada com o id de número " + id));
 		CategoriaDTO dto = new CategoriaDTO(categoria);
-		return dto;
-		
+		return dto;		
+	}
+	
+	@Transactional(readOnly=false)
+	public CategoriaDTO inserir(CategoriaDTO dto) {
+		Categoria entidade = new Categoria();
+		entidade.setDescricao(dto.getDescricao());
+		entidade = categoriaRepositorio.save(entidade);
+		CategoriaDTO categoriaDTO = new CategoriaDTO(entidade);
+		return categoriaDTO;
 	}
 
 }
