@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,6 +45,12 @@ public class EmbalagemControlador {
 		// URI = Uniform Resource Identifier
 		URI identificador = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(embalagemDTO.getId()).toUri();
 		return ResponseEntity.created(identificador).body(embalagemDTO);		
+	}
+	
+	@PutMapping(value ="/{id}")
+	public ResponseEntity<EmbalagemDTO> atualizarEmgalagem(@PathVariable Long id, @RequestBody EmbalagemDTO embalagemDTO) {
+		embalagemDTO = embalagemServico.atualizar(id, embalagemDTO);
+		return ResponseEntity.ok().body(embalagemDTO);
 	}
 
 }

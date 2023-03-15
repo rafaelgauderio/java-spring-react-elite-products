@@ -47,5 +47,18 @@ public class EmbalagemServico {
 		EmbalagemDTO embalagemDTO = new EmbalagemDTO(entidade);
 		return embalagemDTO;
 	}
+	
+	@Transactional(readOnly=false)
+	public EmbalagemDTO atualizar(Long id, EmbalagemDTO dto) {
+		try {
+			Embalagem entidade = embalagemRepositorio.getReferenceById(id);
+			entidade.setDescricao(dto.getDescricao());
+			entidade = embalagemRepositorio.save(entidade);
+			EmbalagemDTO embalagemDTO = new EmbalagemDTO(entidade);
+			return embalagemDTO;
+		} catch (ExcecaoEntidadeNaoEncontrada erro) {			
+			throw new ExcecaoEntidadeNaoEncontrada("Embalagem não encontrada com o id de número " + id);
+		}
+	}
 
 }
