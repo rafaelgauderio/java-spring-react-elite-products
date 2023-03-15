@@ -16,6 +16,7 @@ import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Embalagem;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.EmbalagemRepositorio;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoEntidadeNaoEncontrada;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoIntegridadeBancoDeDados;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class EmbalagemServico {
@@ -60,7 +61,7 @@ public class EmbalagemServico {
 			entidade = embalagemRepositorio.save(entidade);
 			EmbalagemDTO embalagemDTO = new EmbalagemDTO(entidade);
 			return embalagemDTO;
-		} catch (ExcecaoEntidadeNaoEncontrada erro) {
+		} catch (EntityNotFoundException erro) {
 			throw new ExcecaoEntidadeNaoEncontrada("Embalagem não encontrada com o id de número " + id);
 		}
 	}

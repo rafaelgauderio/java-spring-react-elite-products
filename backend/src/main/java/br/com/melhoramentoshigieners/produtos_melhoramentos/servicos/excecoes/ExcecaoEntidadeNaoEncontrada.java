@@ -7,8 +7,4 @@ public class ExcecaoEntidadeNaoEncontrada extends RuntimeException {
 	public ExcecaoEntidadeNaoEncontrada (String mensagem) {
 		super(mensagem);
 	}
-	
-	
-	
-
 }

@@ -34,13 +34,13 @@ public class ManipuladorDeExcecoesDoControlador {
 	@ExceptionHandler(ExcecaoIntegridadeBancoDeDados.class)
 	public ResponseEntity<ExcecaoCustomizada> excecaoDeBancoDeDados (ExcecaoIntegridadeBancoDeDados mensagemErro, HttpServletRequest requisicao) {
 		
-		HttpStatus codigoHttp = HttpStatus.FORBIDDEN;
+		HttpStatus codigoHttp = HttpStatus.BAD_REQUEST;
 		ExcecaoCustomizada excecaoCustomizada = new ExcecaoCustomizada();
 		excecaoCustomizada.setNomeDoErro("Exceção de banco de dados");
 		excecaoCustomizada.setMenssagemDeErro(mensagemErro.getMessage());
 		excecaoCustomizada.setCaminho(requisicao.getRequestURI());
 		// não pode excluir um entidade que relaciona com outra entidade. vai dar erro de violação de integridade de database
-		excecaoCustomizada.setCodigoHttpDoErro(codigoHttp.value()); // CÓDIGO HTTP 403
+		excecaoCustomizada.setCodigoHttpDoErro(codigoHttp.value()); // CÓDIGO HTTP 400
 		excecaoCustomizada.setMomentoDoErro(Instant.now());
 		
 		return ResponseEntity.status(codigoHttp).body(excecaoCustomizada);		

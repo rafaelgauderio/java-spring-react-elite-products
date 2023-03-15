@@ -6,6 +6,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +15,8 @@ import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.CategoriaDTO;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Categoria;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.CategoriaRepositorio;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoEntidadeNaoEncontrada;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoIntegridadeBancoDeDados;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class CategoriaServico {
@@ -55,9 +59,22 @@ public class CategoriaServico {
 			entidade = categoriaRepositorio.save(entidade);
 			CategoriaDTO categoriaDTO = new CategoriaDTO(entidade);
 			return categoriaDTO;
-		} catch (ExcecaoEntidadeNaoEncontrada erro) {			
+		} catch (EntityNotFoundException erro) {			
 			throw new ExcecaoEntidadeNaoEncontrada("Categoria não encontrada com o id de número " + id);
 		}	
+	}
+	
+	@Transactional(readOnly = false)
+	public void delete(Long id) {
+		try {
+			categoriaRepositorio.deleteById(id);
+		} catch (EmptyResultDataAccessException erro) {
+			throw new ExcecaoEntidadeNaoEncontrada("Categoria não encontrada com o id de número " + id);
+		} catch (DataIntegrityViolationException erro) {
+			throw new ExcecaoIntegridadeBancoDeDados(
+					"Não é possivel excluir uma categoria já relacionada com outra Entidade");
+		}
+
 	}
 
 }

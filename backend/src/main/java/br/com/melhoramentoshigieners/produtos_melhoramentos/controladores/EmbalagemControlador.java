@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.EmbalagemDTO;
-import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Embalagem;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.EmbalagemServico;
 
 @RestController
@@ -56,7 +55,7 @@ public class EmbalagemControlador {
 	}
 	
 	// retornar codigo http 204 No Content
-	// solicitação bem sucedida, mas não retorna conteudeo nenhum
+	// solicitação bem sucedida, mas não retorna conteudo nenhum
 	
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> deletarEmbalagemPorId(@PathVariable Long id) {		
