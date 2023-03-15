@@ -1,5 +1,6 @@
 package br.com.melhoramentoshigieners.produtos_melhoramentos.controladores;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.EmbalagemDTO;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.EmbalagemServico;
@@ -31,6 +35,15 @@ public class EmbalagemControlador {
 	public ResponseEntity<EmbalagemDTO> buscarPorId(@PathVariable Long id) {
 		EmbalagemDTO embalagemDTO = embalagemServico.buscarPorId(id);
 		return ResponseEntity.ok().body(embalagemDTO);
+	}
+	
+	// retornar codigo http 201 Created
+	@PostMapping
+	public ResponseEntity<EmbalagemDTO> inserirEmbalagem(@RequestBody EmbalagemDTO embalagemDTO) {
+		embalagemDTO = embalagemServico.inserir(embalagemDTO);
+		// URI = Uniform Resource Identifier
+		URI identificador = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(embalagemDTO.getId()).toUri();
+		return ResponseEntity.created(identificador).body(embalagemDTO);		
 	}
 
 }

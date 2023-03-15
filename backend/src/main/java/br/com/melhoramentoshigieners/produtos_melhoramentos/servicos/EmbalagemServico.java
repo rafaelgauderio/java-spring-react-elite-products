@@ -38,5 +38,14 @@ public class EmbalagemServico {
 		return embalagemDTO; 
 		
 	}
+	
+	@Transactional(readOnly=false)
+	public EmbalagemDTO inserir(EmbalagemDTO dto) {
+		Embalagem entidade = new Embalagem();
+		entidade.setDescricao(dto.getDescricao());
+		entidade = embalagemRepositorio.save(entidade);
+		EmbalagemDTO embalagemDTO = new EmbalagemDTO(entidade);
+		return embalagemDTO;
+	}
 
 }
