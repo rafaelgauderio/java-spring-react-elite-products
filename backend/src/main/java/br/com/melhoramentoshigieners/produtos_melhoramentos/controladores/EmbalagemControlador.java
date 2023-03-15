@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.EmbalagemDTO;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Embalagem;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.EmbalagemServico;
 
 @RestController
@@ -52,5 +54,14 @@ public class EmbalagemControlador {
 		embalagemDTO = embalagemServico.atualizar(id, embalagemDTO);
 		return ResponseEntity.ok().body(embalagemDTO);
 	}
+	
+	// retornar codigo http 204 No Content
+	// solicitação bem sucedida, mas não retorna conteudeo nenhum
+	
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<Void> deletarEmbalagemPorId(@PathVariable Long id) {		
+		embalagemServico.delete(id);
+		return ResponseEntity.noContent().build();	
+	}		
 
 }

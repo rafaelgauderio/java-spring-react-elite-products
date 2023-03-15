@@ -6,6 +6,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,33 +15,35 @@ import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.EmbalagemDTO;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Embalagem;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.EmbalagemRepositorio;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoEntidadeNaoEncontrada;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoIntegridadeBancoDeDados;
 
 @Service
 public class EmbalagemServico {
-	
+
 	@Autowired
 	private EmbalagemRepositorio embalagemRepositorio;
-	
-	@Transactional(readOnly=true)
+
+	@Transactional(readOnly = true)
 	public List<EmbalagemDTO> buscarTodas() {
-		List <Embalagem> listaDeEmbalagem = new ArrayList<Embalagem>();
+		List<Embalagem> listaDeEmbalagem = new ArrayList<Embalagem>();
 		listaDeEmbalagem = embalagemRepositorio.findAll();
 		return listaDeEmbalagem.stream().map(e -> new EmbalagemDTO(e)).collect(Collectors.toList());
 	}
-	
+
 	// método para buscar Embalagem pelo id
-	@Transactional(readOnly=true)
+	@Transactional(readOnly = true)
 	public EmbalagemDTO buscarPorId(Long id) {
 		Optional<Embalagem> optionalDeEmbalagem = embalagemRepositorio.findById(id);
-		//Embalagem embalagem = optionalDeEmbalagem.get();
+		// Embalagem embalagem = optionalDeEmbalagem.get();
 		// vai disparar excecao senao informar um id inexistente
-		Embalagem embalagem = optionalDeEmbalagem.orElseThrow(() -> new ExcecaoEntidadeNaoEncontrada("Embalagem não encontrada com o id de número " + id));
+		Embalagem embalagem = optionalDeEmbalagem.orElseThrow(
+				() -> new ExcecaoEntidadeNaoEncontrada("Embalagem não encontrada com o id de número " + id));
 		EmbalagemDTO embalagemDTO = new EmbalagemDTO(embalagem);
-		return embalagemDTO; 
-		
+		return embalagemDTO;
+
 	}
-	
-	@Transactional(readOnly=false)
+
+	@Transactional(readOnly = false)
 	public EmbalagemDTO inserir(EmbalagemDTO dto) {
 		Embalagem entidade = new Embalagem();
 		entidade.setDescricao(dto.getDescricao());
@@ -47,8 +51,8 @@ public class EmbalagemServico {
 		EmbalagemDTO embalagemDTO = new EmbalagemDTO(entidade);
 		return embalagemDTO;
 	}
-	
-	@Transactional(readOnly=false)
+
+	@Transactional(readOnly = false)
 	public EmbalagemDTO atualizar(Long id, EmbalagemDTO dto) {
 		try {
 			Embalagem entidade = embalagemRepositorio.getReferenceById(id);
@@ -56,9 +60,27 @@ public class EmbalagemServico {
 			entidade = embalagemRepositorio.save(entidade);
 			EmbalagemDTO embalagemDTO = new EmbalagemDTO(entidade);
 			return embalagemDTO;
-		} catch (ExcecaoEntidadeNaoEncontrada erro) {			
+		} catch (ExcecaoEntidadeNaoEncontrada erro) {
 			throw new ExcecaoEntidadeNaoEncontrada("Embalagem não encontrada com o id de número " + id);
-		}	
+		}
+	}
+
+	@Transactional(readOnly = false)
+	public void delete(Long id) {
+		// podem estourar 2 tipos e exceções.
+		// Senão tiver embalgem com o id informado ou se já tiver algum produto
+		// cadastrado relacionada com essa embalagem
+		// daria um erro de violação de integridade de database
+
+		try {
+			embalagemRepositorio.deleteById(id);
+		} catch (EmptyResultDataAccessException erro) {
+			throw new ExcecaoEntidadeNaoEncontrada("Embalagem não encontrada com o id de número " + id);
+		} catch (DataIntegrityViolationException erro) {
+			throw new ExcecaoIntegridadeBancoDeDados(
+					"Não é possivel excluir uma embalagem já relacionada com outra Entidade");
+		}
+
 	}
 
 }
