@@ -46,5 +46,18 @@ public class CategoriaServico {
 		CategoriaDTO categoriaDTO = new CategoriaDTO(entidade);
 		return categoriaDTO;
 	}
+	
+	@Transactional(readOnly=false)
+	public CategoriaDTO atualizar(Long id, CategoriaDTO dto) {
+		try {
+			Categoria entidade = categoriaRepositorio.getReferenceById(id);
+			entidade.setDescricao(dto.getDescricao());
+			entidade = categoriaRepositorio.save(entidade);
+			CategoriaDTO categoriaDTO = new CategoriaDTO(entidade);
+			return categoriaDTO;
+		} catch (ExcecaoEntidadeNaoEncontrada erro) {			
+			throw new ExcecaoEntidadeNaoEncontrada("Categoria não encontrada com o id de número " + id);
+		}	
+	}
 
 }

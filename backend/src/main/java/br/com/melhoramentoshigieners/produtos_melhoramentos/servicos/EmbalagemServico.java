@@ -58,7 +58,7 @@ public class EmbalagemServico {
 			return embalagemDTO;
 		} catch (ExcecaoEntidadeNaoEncontrada erro) {			
 			throw new ExcecaoEntidadeNaoEncontrada("Embalagem não encontrada com o id de número " + id);
-		}
+		}	
 	}
 
 }
