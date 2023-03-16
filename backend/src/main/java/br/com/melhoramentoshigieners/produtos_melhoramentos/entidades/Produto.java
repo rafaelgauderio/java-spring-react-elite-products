@@ -1,38 +1,81 @@
 package br.com.melhoramentoshigieners.produtos_melhoramentos.entidades;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Produto {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "tb_produto")
+public class Produto implements Serializable {
+
+	
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String descricao;
+	
+	// texto com mais de 255 caracteres
+	@Column(columnDefinition = "TEXT")
+	private String descricaoCompleta;
 	private Double preco;
 	private Double comprimento;
 	private Double largura;
 	private Double altura;
 	private Double peso;
 	private String imgUrl;
+
+	// salvar no banco sem o timezone para poder alterar de acordo com o local que a
+	// API for acessada
+	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant dataCadastro;
-	// um produto pode ter várias embalagens
+
+	// um produto pode ter várias embalagens. Associação many to many precisa de um
+	// terceira tabela para representar
+	@ManyToMany
+	@JoinTable(name = "tb_produto_embalagem", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "embalagem_id"))
 	private Set<Embalagem> embalagens = new HashSet<Embalagem>();
-	// um produto pode pertencer a várias categorias diferentes private
+	
+	@ManyToMany
+	@JoinTable(name = "tb_produto_categoria", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
 	private Set<Categoria> categorias = new HashSet<Categoria>();
 
 	public Produto() {
-		
+
 	}
 
-	public Produto(Long id, String descricao, Double preco, Double comprimento, Double largura, Double altura,	Double peso, String imgUrl, Instant dataCadastro) {
+	public Produto(Long id, String descricao, String descricaoCompleta, Double preco, Double comprimento,
+			Double largura, Double altura, Double peso, String imgUrl, Instant dataCadastro) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
+		this.descricaoCompleta = descricaoCompleta;
 		this.preco = preco;
 		this.comprimento = comprimento;
 		this.largura = largura;
 		this.altura = altura;
 		this.peso = peso;
+		this.imgUrl = imgUrl;
+		this.dataCadastro = dataCadastro;
+	}
+
+	public Produto(Long id, String descricao, String descricaoCompleta, String imgUrl , Instant dataCadastro) {
+
+		this.id = id;
+		this.descricao = descricao;
+		this.descricaoCompleta = descricaoCompleta;
 		this.imgUrl = imgUrl;
 		this.dataCadastro = dataCadastro;
 	}
@@ -51,6 +94,14 @@ public class Produto {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public String getDescricaoCompleta() {
+		return descricaoCompleta;
+	}
+
+	public void setDescricaoCompleta(String descricaoCompleta) {
+		this.descricaoCompleta = descricaoCompleta;
 	}
 
 	public Double getPreco() {
@@ -113,28 +164,17 @@ public class Produto {
 		return embalagens;
 	}
 
-	/* sem método set em coleções
-	public void setEmbalagens(Set<Embalagem> embalagens) {
-		this.embalagens = embalagens;
-	}
-	*/
+	/*
+	 * sem método set em coleções public void setEmbalagens(Set<Embalagem>
+	 * embalagens) { this.embalagens = embalagens; }
+	 */
 	public Set<Categoria> getCategorias() {
 		return categorias;
 	}
 
-	/* sem método set para coleções
-	public void setCategorias(Set<Categoria> categorias) {
-		this.categorias = categorias;
-	}
-	*/
-	
-	
-	
-	
-	
-	
-	
-
-
+	/*
+	 * sem método set para coleções public void setCategorias(Set<Categoria>
+	 * categorias) { this.categorias = categorias; }
+	 */
 
 }
