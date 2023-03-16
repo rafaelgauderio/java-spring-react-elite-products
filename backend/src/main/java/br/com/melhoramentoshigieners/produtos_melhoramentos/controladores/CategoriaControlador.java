@@ -2,9 +2,11 @@ package br.com.melhoramentoshigieners.produtos_melhoramentos.controladores;
 
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,10 +29,10 @@ public class CategoriaControlador {
 	private CategoriaServico servico;
 	
 	@GetMapping
-	public ResponseEntity<List<CategoriaDTO>> buscarTodas () {
-		List<CategoriaDTO> listaDeCategorias = new ArrayList<CategoriaDTO>();
-		listaDeCategorias = servico.buscarTodas();		
-		return ResponseEntity.ok().body(listaDeCategorias);
+	public ResponseEntity<Page<CategoriaDTO>> buscarTodas (Pageable requisicaoPaginada) {
+		Page<CategoriaDTO> listaPaginadaDeCategorias = new PageImpl<>(new ArrayList<CategoriaDTO>());
+		listaPaginadaDeCategorias = servico.buscarTodas(requisicaoPaginada);			
+		return ResponseEntity.ok().body(listaPaginadaDeCategorias);
 	}
 	
 	@GetMapping(value = "/{id}")
