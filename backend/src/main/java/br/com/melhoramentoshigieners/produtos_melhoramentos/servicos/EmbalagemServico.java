@@ -1,13 +1,12 @@
 package br.com.melhoramentoshigieners.produtos_melhoramentos.servicos;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,10 +24,9 @@ public class EmbalagemServico {
 	private EmbalagemRepositorio embalagemRepositorio;
 
 	@Transactional(readOnly = true)
-	public List<EmbalagemDTO> buscarTodas() {
-		List<Embalagem> listaDeEmbalagem = new ArrayList<Embalagem>();
-		listaDeEmbalagem = embalagemRepositorio.findAll();
-		return listaDeEmbalagem.stream().map(e -> new EmbalagemDTO(e)).collect(Collectors.toList());
+	public Page<EmbalagemDTO> buscarTodas(Pageable requisicaoPaginada) {
+		Page<Embalagem> listaPaginadaDeEmbalagem = embalagemRepositorio.findAll(requisicaoPaginada);		
+		return listaPaginadaDeEmbalagem.map(emb -> new EmbalagemDTO(emb));
 	}
 
 	// método para buscar Embalagem pelo id

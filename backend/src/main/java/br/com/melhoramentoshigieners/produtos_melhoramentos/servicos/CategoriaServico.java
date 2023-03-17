@@ -1,13 +1,12 @@
 package br.com.melhoramentoshigieners.produtos_melhoramentos.servicos;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,12 +24,10 @@ public class CategoriaServico {
 	private CategoriaRepositorio categoriaRepositorio;
 	
 	@Transactional(readOnly= true)
-	public List<CategoriaDTO> buscarTodas () {
-		List<Categoria> listaDeCategoria = new ArrayList<Categoria>();
-		listaDeCategoria = categoriaRepositorio.findAll();
-		// convertendo de lista de Categoria para um lista de CategoriaDTO
-		List<CategoriaDTO> dto = listaDeCategoria.stream().map(c -> new CategoriaDTO(c)).collect(Collectors.toList());
-		return dto;		
+	public Page<CategoriaDTO> buscarTodas (Pageable requisicaoPaginada) {
+		Page<Categoria> listaPaginadaDeCategoria = categoriaRepositorio.findAll(requisicaoPaginada);		
+		return  listaPaginadaDeCategoria.map(cat -> new CategoriaDTO(cat));
+			
 	}
 	
 	@Transactional(readOnly=true)

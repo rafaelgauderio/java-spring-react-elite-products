@@ -1,10 +1,10 @@
 package br.com.melhoramentoshigieners.produtos_melhoramentos.controladores;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,10 +27,9 @@ public class EmbalagemControlador {
 	private EmbalagemServico embalagemServico;
 	
 	@GetMapping
-	public ResponseEntity<List<EmbalagemDTO>> buscarTodas () {
-		List<EmbalagemDTO> listaDeEmbalagens = new ArrayList<EmbalagemDTO>();
-		listaDeEmbalagens = embalagemServico.buscarTodas();		
-		return ResponseEntity.ok().body(listaDeEmbalagens);
+	public ResponseEntity<Page<EmbalagemDTO>> buscarTodas (Pageable requisicaoPaginada) {
+		Page<EmbalagemDTO> listaPaginadaDeEmbalagens = embalagemServico.buscarTodas(requisicaoPaginada);				
+		return ResponseEntity.ok().body(listaPaginadaDeEmbalagens);
 	}
 	
 	@GetMapping(value="/{id}")
