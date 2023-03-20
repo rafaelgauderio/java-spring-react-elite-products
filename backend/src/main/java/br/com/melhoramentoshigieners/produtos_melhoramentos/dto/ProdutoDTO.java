@@ -46,8 +46,6 @@ public class ProdutoDTO implements Serializable {
         this.dataCadastro = dataCadastro;
     }
 
-
-
     public ProdutoDTO (Produto produto) {
         super();
         id = produto.getId();
@@ -149,6 +147,8 @@ public class ProdutoDTO implements Serializable {
     public void setDataCadastro(Instant dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
+
+
     public Set<EmbalagemDTO> getEmbalagens() {
         return embalagens;
     }
