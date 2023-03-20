@@ -31,10 +31,10 @@ public class Produto implements Serializable {
 	@Column(columnDefinition = "TEXT")
 	private String descricaoCompleta;
 	private Double preco;
-	private Double comprimento;
 	private Double largura;
-	private Double altura;
+	private Integer metragem;
 	private Double peso;
+	private String fragrancia;
 	private String imgUrl;
 
 	// salvar no banco sem o timezone para poder alterar de acordo com o local que a
@@ -56,26 +56,15 @@ public class Produto implements Serializable {
 
 	}
 
-	public Produto(Long id, String descricao, String descricaoCompleta, Double preco, Double comprimento,
-			Double largura, Double altura, Double peso, String imgUrl, Instant dataCadastro) {
-		super();
+	public Produto(Long id, String descricao, String descricaoCompleta, Double preco, Double largura, Integer metragem, Double peso, String fragrancia, String imgUrl, Instant dataCadastro) {
 		this.id = id;
 		this.descricao = descricao;
 		this.descricaoCompleta = descricaoCompleta;
 		this.preco = preco;
-		this.comprimento = comprimento;
 		this.largura = largura;
-		this.altura = altura;
+		this.metragem = metragem;
 		this.peso = peso;
-		this.imgUrl = imgUrl;
-		this.dataCadastro = dataCadastro;
-	}
-
-	public Produto(Long id, String descricao, String descricaoCompleta, String imgUrl , Instant dataCadastro) {
-
-		this.id = id;
-		this.descricao = descricao;
-		this.descricaoCompleta = descricaoCompleta;
+		this.fragrancia = fragrancia;
 		this.imgUrl = imgUrl;
 		this.dataCadastro = dataCadastro;
 	}
@@ -112,14 +101,6 @@ public class Produto implements Serializable {
 		this.preco = preco;
 	}
 
-	public Double getComprimento() {
-		return comprimento;
-	}
-
-	public void setComprimento(Double comprimento) {
-		this.comprimento = comprimento;
-	}
-
 	public Double getLargura() {
 		return largura;
 	}
@@ -128,12 +109,20 @@ public class Produto implements Serializable {
 		this.largura = largura;
 	}
 
-	public Double getAltura() {
-		return altura;
+	public Integer getMetragem() {
+		return metragem;
 	}
 
-	public void setAltura(Double altura) {
-		this.altura = altura;
+	public void setMetragem(Integer metragem) {
+		this.metragem = metragem;
+	}
+
+	public String getFragrancia() {
+		return fragrancia;
+	}
+
+	public void setFragrancia(String fragrancia) {
+		this.fragrancia = fragrancia;
 	}
 
 	public Double getPeso() {
