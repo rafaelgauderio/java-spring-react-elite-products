@@ -5,12 +5,16 @@ import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Embalagem;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Produto;
 import jakarta.persistence.Column;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ProdutoDTO {
+public class ProdutoDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Long id;
     private String descricao;
@@ -22,8 +26,8 @@ public class ProdutoDTO {
     private String fragrancia;
     private String imgUrl;
     private Instant dataCadastro;
-    private List<EmbalagemDTO> embalagens = new ArrayList<EmbalagemDTO>();
-    private List<CategoriaDTO> categorias = new ArrayList<CategoriaDTO>();
+    private Set<EmbalagemDTO> embalagens = new HashSet<>();
+    private Set<CategoriaDTO> categorias = new HashSet<CategoriaDTO>();
 
     public ProdutoDTO () {
 
@@ -42,7 +46,10 @@ public class ProdutoDTO {
         this.dataCadastro = dataCadastro;
     }
 
+
+
     public ProdutoDTO (Produto produto) {
+        super();
         id = produto.getId();
         descricao = produto.getDescricao();
         descricaoCompleta = produto.getDescricaoCompleta();
@@ -55,9 +62,10 @@ public class ProdutoDTO {
         dataCadastro = produto.getDataCadastro();
     }
 
+
     // sobrecarga adicionando uma lista de embalagens e de categorias
-    public ProdutoDTO(Produto entidade, Set<Embalagem> embalagens, Set<Categoria> categorias) {
-        this(entidade);
+    public ProdutoDTO(Produto produto, Set<Embalagem> embalagens, Set<Categoria> categorias) {
+        this(produto);
         embalagens.forEach( x -> this.embalagens.add(new EmbalagemDTO(x)));
         categorias.forEach( x -> this.categorias.add(new CategoriaDTO(x)));
     }
@@ -141,24 +149,16 @@ public class ProdutoDTO {
     public void setDataCadastro(Instant dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
-
-    public List<EmbalagemDTO> getEmbalagens() {
+    public Set<EmbalagemDTO> getEmbalagens() {
         return embalagens;
     }
 
-    /*
-    public void setEmbalagens(List<EmbalagemDTO> embalagens) {
-        this.embalagens = embalagens;
-    }
-     */
 
-    public List<CategoriaDTO> getCategorias() {
+    public Set<CategoriaDTO> getCategorias() {
         return categorias;
     }
 
-    /*
-    public void setCategorias(List<CategoriaDTO> categorias) {
-        this.categorias = categorias;
-    }
-     */
+
+
+
 }
