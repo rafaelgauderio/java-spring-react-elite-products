@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +25,13 @@ public class ProdutoControlador {
     public ResponseEntity<Page<ProdutoDTO>> buscarTodosProdutos (Pageable requisicaoPaginada) {
         Page listaPaginadaDeProdutos = servico.buscarTodos(requisicaoPaginada);
         return ResponseEntity.ok().body(listaPaginadaDeProdutos);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<ProdutoDTO> buscarProdutoPorId(@PathVariable Long id) {
+        ProdutoDTO produtoDTO = servico.buscarPorId(id);
+        return ResponseEntity.ok().body(produtoDTO);
+
     }
 
 
