@@ -40,6 +40,13 @@ public class ProdutoControlador {
         return ResponseEntity.created(identificador).body(produtoDTO);
     }
 
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ProdutoDTO> atualizarProduto(@PathVariable Long id, @RequestBody ProdutoDTO produtoDTO) {
+        produtoDTO = servico.update(id, produtoDTO);
+        return ResponseEntity.ok().body(produtoDTO);
+    }
+
+
 
 
 }
