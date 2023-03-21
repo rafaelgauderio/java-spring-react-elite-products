@@ -10,8 +10,11 @@ import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.Categor
 import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.EmbalagemRepositorio;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.ProdutoRepositorio;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoEntidadeNaoEncontrada;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoIntegridadeBancoDeDados;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -111,6 +114,17 @@ public class ProdutoServico {
             throw new ExcecaoEntidadeNaoEncontrada("Não foi encontrado o produto com id de número " + id);
         }
 
+    }
+
+    //@Transactional(readOnly = false)
+    public void deleteById(Long id) {
+        try {
+            repositorioDeProdutos.deleteById(id);
+        } catch (EmptyResultDataAccessException erro) {
+            throw new ExcecaoEntidadeNaoEncontrada("Produto de id de núemro " + id + " não encontrado");
+        } catch (DataIntegrityViolationException erro) {
+            throw new ExcecaoIntegridadeBancoDeDados("Não é possível excluir um produto referenciado em outras entidades");
+        }
     }
 
 }

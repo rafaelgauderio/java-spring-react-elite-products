@@ -46,7 +46,9 @@ public class ProdutoControlador {
         return ResponseEntity.ok().body(produtoDTO);
     }
 
-
-
-
+    @DeleteMapping(value="/{id}")
+    public ResponseEntity<Void> deletarProduto(@PathVariable Long id) {
+        servico.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }
