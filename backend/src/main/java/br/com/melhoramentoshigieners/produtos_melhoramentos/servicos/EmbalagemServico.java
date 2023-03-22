@@ -64,7 +64,7 @@ public class EmbalagemServico {
 		}
 	}
 
-	@Transactional(readOnly = false)
+
 	public void delete(Long id) {
 		// podem estourar 2 tipos e exceções.
 		// Senão tiver embalgem com o id informado ou se já tiver algum produto

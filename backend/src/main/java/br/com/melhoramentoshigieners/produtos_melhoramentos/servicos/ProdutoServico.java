@@ -116,7 +116,7 @@ public class ProdutoServico {
 
     }
 
-    //@Transactional(readOnly = false)
+
     public void deleteById(Long id) {
         try {
             repositorioDeProdutos.deleteById(id);
