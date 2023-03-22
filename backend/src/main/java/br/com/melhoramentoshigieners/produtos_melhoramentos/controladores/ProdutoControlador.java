@@ -40,6 +40,15 @@ public class ProdutoControlador {
         return ResponseEntity.created(identificador).body(produtoDTO);
     }
 
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ProdutoDTO> atualizarProduto(@PathVariable Long id, @RequestBody ProdutoDTO produtoDTO) {
+        produtoDTO = servico.update(id, produtoDTO);
+        return ResponseEntity.ok().body(produtoDTO);
+    }
 
-
+    @DeleteMapping(value="/{id}")
+    public ResponseEntity<Void> deletarProduto(@PathVariable Long id) {
+        servico.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }
