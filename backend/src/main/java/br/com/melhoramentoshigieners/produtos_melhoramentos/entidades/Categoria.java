@@ -1,15 +1,11 @@
 package br.com.melhoramentoshigieners.produtos_melhoramentos.entidades;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name="tb_categoria")
@@ -24,7 +20,13 @@ public class Categoria implements Serializable {
 	
 	@ManyToMany(mappedBy = "categorias")
 	private Set<Produto> produtos = new HashSet<Produto>();
-	
+
+	@Column(columnDefinition= "TIMESTAMP WITHOUT TIME ZONE")
+	private Instant dataInsercao;
+
+	@Column(columnDefinition= "TIMESTAMP WITHOUT TIME ZONE")
+	private Instant dataAtualziacao;
+
 	public Categoria () {
 		
 	}
@@ -51,7 +53,7 @@ public class Categoria implements Serializable {
 		this.descricao = descricao;
 	}	
 	
-	/*
+
 	public Set<Produto> getProdutos() {
 		return produtos;
 	}
@@ -62,6 +64,25 @@ public class Categoria implements Serializable {
 		this.produtos = produtos;
 	}
 	*/
+
+
+	public Instant getDataInsercao() {
+		return dataInsercao;
+	}
+
+	public Instant getDataAtualziacao() {
+		return dataAtualziacao;
+	}
+
+	@PrePersist
+	public void preInsercao() {
+		this.dataInsercao = Instant.now();
+	}
+
+	@PreUpdate
+	public void preAtualizacao() {
+		this.dataAtualziacao = Instant.now();
+	}
 
 	@Override
 	public int hashCode() {

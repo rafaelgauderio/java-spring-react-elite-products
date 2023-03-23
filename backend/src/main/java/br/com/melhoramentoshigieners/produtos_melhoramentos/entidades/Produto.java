@@ -3,6 +3,7 @@ package br.com.melhoramentoshigieners.produtos_melhoramentos.entidades;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import jakarta.persistence.Column;
@@ -45,11 +46,15 @@ public class Produto implements Serializable {
 	// um produto pode ter várias embalagens. Associação many to many precisa de um
 	// terceira tabela para representar
 	@ManyToMany
-	@JoinTable(name = "tb_produto_embalagem", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "embalagem_id"))
+	@JoinTable(name = "tb_produto_embalagem",
+			joinColumns = @JoinColumn(name = "produto_id"),
+			inverseJoinColumns = @JoinColumn(name = "embalagem_id"))
 	private Set<Embalagem> embalagens = new HashSet<Embalagem>();
 	
 	@ManyToMany
-	@JoinTable(name = "tb_produto_categoria", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+	@JoinTable(name = "tb_produto_categoria",
+			joinColumns = @JoinColumn(name = "produto_id"),
+			inverseJoinColumns = @JoinColumn(name = "categoria_id"))
 	private Set<Categoria> categorias = new HashSet<Categoria>();
 
 	public Produto() {
@@ -166,4 +171,16 @@ public class Produto implements Serializable {
 	 * categorias) { this.categorias = categorias; }
 	 */
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Produto produto = (Produto) o;
+		return id.equals(produto.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
 }
