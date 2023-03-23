@@ -1,13 +1,29 @@
 package br.com.melhoramentoshigieners.produtos_melhoramentos.entidades;
 
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.enumerados.Permissao;
+import jakarta.persistence.*;
 
-public class Regra {
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+@Entity
+@Table(name = "tb_regra")
+public class Regra implements Serializable {
+
+	private static final Long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String descricao;
+
+	@Enumerated(EnumType.STRING)
 	private Permissao permissao;
-	
+
+	@ManyToMany(mappedBy = "regras")
+	private Set<Usuario> usuarios = new HashSet<Usuario>();
+
 	public Regra() {
 
 	}
@@ -41,6 +57,10 @@ public class Regra {
 
 	public void setPermissao(Permissao permissao) {
 		this.permissao = permissao;
+	}
+
+	public Set<Usuario> getUsuarios() {
+		return usuarios;
 	}
 
 	@Override
