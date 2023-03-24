@@ -1,15 +1,32 @@
 package br.com.melhoramentoshigieners.produtos_melhoramentos.entidades;
 
+import jakarta.persistence.*;
+
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Usuario {
-	
+import java.io.Serializable;
+
+
+@Entity
+@Table(name = "tb_usuario")
+public class Usuario implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
 	private String sobrenome;
 	private String email;
 	private String password;
+
+	@ManyToMany(fetch = FetchType.EAGER) // faz trazer as regras sempre que buscar um usuario no banco
+	@JoinTable(name= "tb_usuario_regra",
+			joinColumns = @JoinColumn(name = "usuario_id"),
+			inverseJoinColumns = @JoinColumn(name= "regra_id"))
 	private Set<Regra> regras = new HashSet<Regra> ();
 	
 	public Usuario () {

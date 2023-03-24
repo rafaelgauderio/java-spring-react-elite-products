@@ -39,4 +39,8 @@ INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (2,5);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (2,7);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (2,9);
 
+INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Rafael' , 'De Luca','rafaeldeluca@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
 
+INSERT INTO tb_regra (descricao, permissao) VALUES ('Tem todas as permissoes de CRUD. Acesso a todas as rotas.','ADMIN_USUARIOS');
+
+INSERT INTO tb_usuario_regra (usuario_id, regra_id) VALUES (1,1);
