@@ -34,6 +34,7 @@ public class UsuarioDTO implements Serializable {
         this.nome = entidade.getNome();
         this.sobrenome = entidade.getSobrenome();
         this.email = entidade.getEmail();
+        entidade.getRegras().forEach(regra -> this.regras.add(new RegraDTO(regra)));
     }
 
     public Long getId() {
