@@ -9,6 +9,7 @@ import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Usuario;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.RegraRepositorio;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.UsuarioRepositorio;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoEntidadeNaoEncontrada;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,7 +29,7 @@ public class UsuarioServico {
     @Transactional(readOnly = true)
     public Page<UsuarioDTO> buscarTodos(Pageable requisicaoPaginada) {
         Page<Usuario> listaPaginadaDeUsuarios = repositorioDeUsuario.findAll(requisicaoPaginada);
-        return listaPaginadaDeUsuarios.map( u -> new UsuarioDTO(u));
+        return listaPaginadaDeUsuarios.map(u -> new UsuarioDTO(u));
     }
 
     @Transactional(readOnly = true)
@@ -48,12 +49,37 @@ public class UsuarioServico {
         entidade.setSobrenome(usuarioDTO.getSobrenome());
         entidade.setEmail(usuarioDTO.getEmail());
 
-        for(RegraDTO regra : usuarioDTO.getRegras()) {
+        for (RegraDTO regra : usuarioDTO.getRegras()) {
             Regra entidadeRegra = regraRepositorio.getReferenceById(regra.getId());
             entidade.getRegras().add(entidadeRegra);
         }
 
         entidade = repositorioDeUsuario.save(entidade);
         return new UsuarioDTO(entidade);
+    }
+
+    @Transactional(readOnly = false)
+    public UsuarioDTO update(Long id, UsuarioDTO usuarioDTO) {
+        try {
+            Usuario entidade = repositorioDeUsuario.getReferenceById(id);
+            entidade.setNome(usuarioDTO.getNome());
+            entidade.setSobrenome(usuarioDTO.getSobrenome());
+            entidade.setEmail(usuarioDTO.getEmail());
+
+            entidade.getRegras().clear();
+
+            for (RegraDTO regra : usuarioDTO.getRegras()) {
+                Regra entidadeRegra = regraRepositorio.getReferenceById(regra.getId());
+                entidade.getRegras().add(entidadeRegra);
+            }
+
+            entidade = repositorioDeUsuario.save(entidade);
+            return new UsuarioDTO(entidade);
+
+        } catch (EntityNotFoundException erro) {
+            throw new ExcecaoEntidadeNaoEncontrada("Não foi encontrado usuário com o id de número " + id);
+        }
+
+
     }
 }

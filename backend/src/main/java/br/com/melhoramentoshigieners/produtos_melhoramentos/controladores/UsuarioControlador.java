@@ -42,8 +42,13 @@ public class UsuarioControlador {
         usuarioDTO = usuarioServico.inserir(usuarioDTO);
         URI identificador = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(
                 usuarioDTO.getId()).toUri();
-
         return ResponseEntity.created(identificador).body(usuarioDTO);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<UsuarioDTO> atualizarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
+        usuarioDTO = usuarioServico.update(id, usuarioDTO);
+        return ResponseEntity.ok().body(usuarioDTO);
     }
 
 }
