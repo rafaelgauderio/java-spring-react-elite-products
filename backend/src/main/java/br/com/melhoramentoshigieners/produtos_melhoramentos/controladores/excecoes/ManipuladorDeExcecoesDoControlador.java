@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoEntidadeNaoEncontrada;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoIntegridadeBancoDeDados;
-import jakarta.servlet.http.HttpServletRequest;
+
+
+import javax.servlet.http.HttpServletRequest;
 
 
 // annotation que possibilta a interceptacao que qualquer exceção disparada pelo controlador 

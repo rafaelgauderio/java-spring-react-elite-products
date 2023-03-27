@@ -3,7 +3,6 @@ package br.com.melhoramentoshigieners.produtos_melhoramentos.dto;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Categoria;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Embalagem;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Produto;
-import jakarta.persistence.Column;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -157,8 +156,5 @@ public class ProdutoDTO implements Serializable {
     public Set<CategoriaDTO> getCategorias() {
         return categorias;
     }
-
-
-
 
 }

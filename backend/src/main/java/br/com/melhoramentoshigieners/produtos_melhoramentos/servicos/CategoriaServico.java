@@ -1,8 +1,10 @@
 package br.com.melhoramentoshigieners.produtos_melhoramentos.servicos;
 
-import java.util.Optional;
-
-import jakarta.persistence.EntityNotFoundException;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.CategoriaDTO;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Categoria;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.CategoriaRepositorio;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoEntidadeNaoEncontrada;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoIntegridadeBancoDeDados;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -11,11 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.CategoriaDTO;
-import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Categoria;
-import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.CategoriaRepositorio;
-import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoEntidadeNaoEncontrada;
-import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoIntegridadeBancoDeDados;
+import javax.persistence.EntityNotFoundException;
+import java.util.Optional;
 
 
 @Service
@@ -52,7 +51,7 @@ public class CategoriaServico {
 	@Transactional(readOnly=false)
 	public CategoriaDTO atualizar(Long id, CategoriaDTO dto) {
 		try {
-			Categoria entidade = categoriaRepositorio.getReferenceById(id);
+			Categoria entidade = categoriaRepositorio.getOne(id);
 			entidade.setDescricao(dto.getDescricao());
 			entidade = categoriaRepositorio.save(entidade);
 			CategoriaDTO categoriaDTO = new CategoriaDTO(entidade);

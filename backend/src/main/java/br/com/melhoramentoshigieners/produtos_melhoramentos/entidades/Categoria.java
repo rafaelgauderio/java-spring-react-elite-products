@@ -5,7 +5,7 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name="tb_categoria")

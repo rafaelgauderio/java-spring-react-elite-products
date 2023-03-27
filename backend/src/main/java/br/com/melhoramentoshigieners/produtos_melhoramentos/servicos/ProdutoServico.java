@@ -11,7 +11,6 @@ import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.Embalag
 import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.ProdutoRepositorio;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoEntidadeNaoEncontrada;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoIntegridadeBancoDeDados;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -20,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service
@@ -64,14 +64,14 @@ public class ProdutoServico {
         // percorrendo toda a coleção de embalagens e adicionado no entidade Produto
         //entidade.getEmbalagens().clear();
         for (EmbalagemDTO embDTO : produtoDTO.getEmbalagens()) {
-            Embalagem embalagem = repositorioDeEmbalagens.getReferenceById(embDTO.getId());
+            Embalagem embalagem = repositorioDeEmbalagens.getOne(embDTO.getId());
             entidade.getEmbalagens().add(embalagem);
         }
 
         // percorrendo toda a coleção de categorias e adicionado no entidade Produto
         //entidade.getCategorias().clear();
         for (CategoriaDTO catDTO : produtoDTO.getCategorias()) {
-            Categoria categoria = repositorioDeCategorias.getReferenceById(catDTO.getId());
+            Categoria categoria = repositorioDeCategorias.getOne(catDTO.getId());
             entidade.getCategorias().add(categoria);
         }
 
@@ -83,7 +83,7 @@ public class ProdutoServico {
     public ProdutoDTO update(Long id, ProdutoDTO produtoDTO) {
 
         try {
-            Produto entidade = repositorioDeProdutos.getReferenceById(id);
+            Produto entidade = repositorioDeProdutos.getOne(id);
             entidade.setDescricao(produtoDTO.getDescricao());
             entidade.setDescricaoCompleta(produtoDTO.getDescricaoCompleta());
             entidade.setPreco(produtoDTO.getPreco());
@@ -96,13 +96,13 @@ public class ProdutoServico {
 
             entidade.getEmbalagens().clear();
             for (EmbalagemDTO embDTO : produtoDTO.getEmbalagens()) {
-                Embalagem embalagem = repositorioDeEmbalagens.getReferenceById(embDTO.getId());
+                Embalagem embalagem = repositorioDeEmbalagens.getOne(embDTO.getId());
                 entidade.getEmbalagens().add(embalagem);
             }
 
             entidade.getCategorias().clear();
             for (CategoriaDTO catDTO : produtoDTO.getCategorias()) {
-                Categoria categoria = repositorioDeCategorias.getReferenceById(catDTO.getId());
+                Categoria categoria = repositorioDeCategorias.getOne(catDTO.getId());
                 entidade.getCategorias().add(categoria);
             }
 

@@ -3,6 +3,7 @@ package br.com.melhoramentoshigieners.produtos_melhoramentos.controladores;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.ProdutoDTO;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.RegraDTO;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.UsuarioDTO;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.UsuarioPasswordDTO;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Regra;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Usuario;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.RegraRepositorio;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -37,9 +39,9 @@ public class UsuarioControlador {
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioDTO> inserirUsuario (@RequestBody UsuarioDTO usuarioDTO) {
+    public ResponseEntity<UsuarioDTO> inserirUsuario (@RequestBody UsuarioPasswordDTO usuarioPasswordDTO) {
 
-        usuarioDTO = usuarioServico.inserir(usuarioDTO);
+        UsuarioDTO usuarioDTO = usuarioServico.inserir(usuarioPasswordDTO);
         URI identificador = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(
                 usuarioDTO.getId()).toUri();
         return ResponseEntity.created(identificador).body(usuarioDTO);

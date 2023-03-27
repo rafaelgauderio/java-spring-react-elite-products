@@ -1,7 +1,8 @@
 package br.com.melhoramentoshigieners.produtos_melhoramentos.entidades;
 
-import jakarta.persistence.*;
 
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,7 +17,7 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
 	private String sobrenome;
