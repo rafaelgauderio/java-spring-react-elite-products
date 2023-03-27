@@ -1,8 +1,8 @@
 package br.com.melhoramentoshigieners.produtos_melhoramentos.entidades;
 
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.enumerados.Permissao;
-import jakarta.persistence.*;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;

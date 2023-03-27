@@ -15,7 +15,9 @@ import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Embalagem;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.EmbalagemRepositorio;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoEntidadeNaoEncontrada;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoIntegridadeBancoDeDados;
-import jakarta.persistence.EntityNotFoundException;
+
+import javax.persistence.EntityNotFoundException;
+
 
 @Service
 public class EmbalagemServico {
@@ -54,7 +56,7 @@ public class EmbalagemServico {
 	@Transactional(readOnly = false)
 	public EmbalagemDTO atualizar(Long id, EmbalagemDTO dto) {
 		try {
-			Embalagem entidade = embalagemRepositorio.getReferenceById(id);
+			Embalagem entidade = embalagemRepositorio.getOne(id);
 			entidade.setDescricao(dto.getDescricao());
 			entidade = embalagemRepositorio.save(entidade);
 			EmbalagemDTO embalagemDTO = new EmbalagemDTO(entidade);
