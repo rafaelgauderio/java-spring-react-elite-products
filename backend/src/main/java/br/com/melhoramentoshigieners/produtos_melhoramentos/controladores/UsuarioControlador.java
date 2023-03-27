@@ -1,7 +1,11 @@
 package br.com.melhoramentoshigieners.produtos_melhoramentos.controladores;
 
 import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.ProdutoDTO;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.RegraDTO;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.UsuarioDTO;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Regra;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Usuario;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.RegraRepositorio;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.ProdutoServico;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.UsuarioServico;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +13,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping(value ="/usuarios")
@@ -27,6 +34,16 @@ public class UsuarioControlador {
     public ResponseEntity<UsuarioDTO> buscarUsuarioPorId(@PathVariable Long id) {
         UsuarioDTO dto = usuarioServico.buscarPorId(id);
         return ResponseEntity.ok().body(dto);
+    }
+
+    @PostMapping
+    public ResponseEntity<UsuarioDTO> inserirUsuario (@RequestBody UsuarioDTO usuarioDTO) {
+
+        usuarioDTO = usuarioServico.inserir(usuarioDTO);
+        URI identificador = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(
+                usuarioDTO.getId()).toUri();
+
+        return ResponseEntity.created(identificador).body(usuarioDTO);
     }
 
 }
