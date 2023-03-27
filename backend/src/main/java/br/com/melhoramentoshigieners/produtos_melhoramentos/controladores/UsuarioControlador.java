@@ -51,4 +51,9 @@ public class UsuarioControlador {
         return ResponseEntity.ok().body(usuarioDTO);
     }
 
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deletarUsuario(@PathVariable Long id) {
+        usuarioServico.deletarPorId(id);
+        return ResponseEntity.noContent().build();
+    }
 }

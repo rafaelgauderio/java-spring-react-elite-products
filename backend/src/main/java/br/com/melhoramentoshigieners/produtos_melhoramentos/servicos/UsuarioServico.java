@@ -9,8 +9,11 @@ import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Usuario;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.RegraRepositorio;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.UsuarioRepositorio;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoEntidadeNaoEncontrada;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoIntegridadeBancoDeDados;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -79,7 +82,15 @@ public class UsuarioServico {
         } catch (EntityNotFoundException erro) {
             throw new ExcecaoEntidadeNaoEncontrada("Não foi encontrado usuário com o id de número " + id);
         }
+    }
 
-
+    public void deletarPorId(Long id) {
+        try  {
+            repositorioDeUsuario.deleteById(id);
+        } catch(EmptyResultDataAccessException errro) {
+            throw new ExcecaoEntidadeNaoEncontrada("Usuario não encontrado com id de número " + id);
+        } catch(DataIntegrityViolationException erro) {
+            throw new ExcecaoIntegridadeBancoDeDados("Violação de integridade de banco de dados");
+        }
     }
 }
