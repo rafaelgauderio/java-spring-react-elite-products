@@ -20,6 +20,8 @@ public class Usuario implements Serializable {
 	private Long id;
 	private String nome;
 	private String sobrenome;
+
+	@Column(unique = true)
 	private String email;
 	private String password;
 
