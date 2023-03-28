@@ -4,6 +4,7 @@ import java.time.Instant;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -34,6 +35,25 @@ public class ManipuladorDeExcecoesDoControlador {
 		return ResponseEntity.status(codigoHttp).body(excecaoCustomizada);		
 	}
 
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<ExcecaoDeValidacao> excecaoDeValidacao (MethodArgumentNotValidException mensagemErro, HttpServletRequest requisicao) {
+
+		HttpStatus codigoHttp = HttpStatus.UNPROCESSABLE_ENTITY; //codigo http 422 - sintaxe correta, mas não foi possível processar a requisição.
+		ExcecaoDeValidacao excecaoDeDeValidacao = new ExcecaoDeValidacao();
+		excecaoDeDeValidacao.setNomeDoErro("Exceção de validação. Verificar se todos os parâmetros informados estão corretos.");
+		excecaoDeDeValidacao.setMenssagemDeErro(mensagemErro.getMessage());
+		excecaoDeDeValidacao.setCaminho(requisicao.getRequestURI());
+		excecaoDeDeValidacao.setCodigoHttpDoErro(codigoHttp.value());
+		excecaoDeDeValidacao.setMomentoDoErro(Instant.now());
+
+		// adicionando do nome do campo e a mensagem de erro a um vetor de erros
+		for(FieldError campo : mensagemErro.getBindingResult().getFieldErrors()) {
+			excecaoDeDeValidacao.adicionarErro(campo.getField(), campo.getDefaultMessage());
+		}
+
+		return ResponseEntity.status(codigoHttp).body(excecaoDeDeValidacao);
+	}
+
 	
 	@ExceptionHandler(ExcecaoIntegridadeBancoDeDados.class)
 	public ResponseEntity<ExcecaoCustomizada> excecaoDeBancoDeDados (ExcecaoIntegridadeBancoDeDados mensagemErro, HttpServletRequest requisicao) {
@@ -49,7 +69,4 @@ public class ManipuladorDeExcecoesDoControlador {
 		
 		return ResponseEntity.status(codigoHttp).body(excecaoCustomizada);		
 	}
-
-
-
 }

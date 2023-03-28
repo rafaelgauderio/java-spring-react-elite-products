@@ -4,6 +4,7 @@ import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Categoria;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Embalagem;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Produto;
 
+import javax.persistence.Column;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
@@ -16,6 +17,7 @@ public class ProdutoDTO implements Serializable {
 
     private Long id;
 
+    @Column(unique=true)
     @NotBlank(message="Obrigatório preencher o nome do produto")
     @Size(min=5, max = 50, message="Campo produto deve ter entre 5 e 50 caracteres")
     private String descricao;
