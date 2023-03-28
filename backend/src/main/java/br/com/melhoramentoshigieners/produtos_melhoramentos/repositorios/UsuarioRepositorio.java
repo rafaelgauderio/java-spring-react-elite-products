@@ -13,5 +13,5 @@ import org.springframework.stereotype.Repository;
         Usuario buscarPorEmail(String email);
 
 
-        //Usuario findByEmail(String email);
+        Usuario findByEmail(String email);
 }
