@@ -3,11 +3,13 @@ package br.com.melhoramentoshigieners.produtos_melhoramentos.dto;
 import java.io.Serializable;
 
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Embalagem;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.validacoes.EmbalagemValidacaoDeInsercao;
 
 import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+@EmbalagemValidacaoDeInsercao
 public class EmbalagemDTO implements Serializable {	
 
 	private static final long serialVersionUID = 1L;
