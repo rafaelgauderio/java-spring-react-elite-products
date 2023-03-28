@@ -3,11 +3,13 @@ package br.com.melhoramentoshigieners.produtos_melhoramentos.dto;
 import java.io.Serializable;
 
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Categoria;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.validacoes.CategoriaValidacaoDeInsercao;
 
 import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+@CategoriaValidacaoDeInsercao
 public class CategoriaDTO implements Serializable {			
 	
 	private static final long serialVersionUID = 1L;
