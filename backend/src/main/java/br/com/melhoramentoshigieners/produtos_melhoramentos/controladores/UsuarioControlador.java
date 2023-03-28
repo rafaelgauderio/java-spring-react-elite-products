@@ -33,6 +33,12 @@ public class UsuarioControlador {
         return ResponseEntity.ok().body(listaPaginadaDeUsuarios);
     }
 
+    @GetMapping(value="/email")
+    public ResponseEntity<UsuarioDTO> buscarUSuarioPorEmail(@RequestBody UsuarioDTO dto) {
+       UsuarioDTO newDTO = usuarioServico.buscarUsuarioPorEmail(dto);
+       return ResponseEntity.ok().body(newDTO);
+    }
+
     @GetMapping(value="/{id}")
     public ResponseEntity<UsuarioDTO> buscarUsuarioPorId(@PathVariable Long id) {
         UsuarioDTO dto = usuarioServico.buscarPorId(id);

@@ -41,10 +41,17 @@ public class UsuarioServico {
     }
 
     @Transactional(readOnly = true)
+    public UsuarioDTO buscarUsuarioPorEmail(UsuarioDTO dto) {
+
+        Usuario entidade = repositorioDeUsuario.buscarPorEmail(dto.getEmail());
+        return new UsuarioDTO(entidade);
+    }
+
+    @Transactional(readOnly = true)
     public UsuarioDTO buscarPorId(Long id) {
         Optional<Usuario> optinalUsuario = repositorioDeUsuario.findById(id);
         Usuario entidade = optinalUsuario.orElseThrow(
-                () -> new ExcecaoEntidadeNaoEncontrada("Usupario não encontrado com o id de número " + id)
+                () -> new ExcecaoEntidadeNaoEncontrada("Usuário não encontrado com o id de número " + id)
         );
         return new UsuarioDTO(entidade);
     }
