@@ -21,6 +21,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.CategoriaDTO;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.CategoriaServico;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(value ="/categorias")
 public class CategoriaControlador {
@@ -43,14 +45,14 @@ public class CategoriaControlador {
 	}
 	
 	@PostMapping
-	public ResponseEntity<CategoriaDTO> inserirCategoria(@RequestBody CategoriaDTO categoriaDTO) {
+	public ResponseEntity<CategoriaDTO> inserirCategoria(@Valid @RequestBody CategoriaDTO categoriaDTO) {
 		categoriaDTO = servico.inserir(categoriaDTO);		
 		URI identificador = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(categoriaDTO.getId()).toUri();
 		return ResponseEntity.created(identificador).body(categoriaDTO);		
 	}
 	
 	@PutMapping(value ="/{id}")
-	public ResponseEntity<CategoriaDTO> atualizarCategoria(@PathVariable Long id, @RequestBody CategoriaDTO categoriaDTO) {
+	public ResponseEntity<CategoriaDTO> atualizarCategoria(@PathVariable Long id,@Valid @RequestBody CategoriaDTO categoriaDTO) {
 		categoriaDTO = servico.atualizar(id, categoriaDTO);
 		return ResponseEntity.ok().body(categoriaDTO);
 	}

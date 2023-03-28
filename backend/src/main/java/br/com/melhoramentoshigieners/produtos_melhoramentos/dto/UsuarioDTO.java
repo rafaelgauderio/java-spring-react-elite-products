@@ -2,6 +2,9 @@ package br.com.melhoramentoshigieners.produtos_melhoramentos.dto;
 
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Usuario;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,8 +16,16 @@ public class UsuarioDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
+
+    @Size(min=3, max=50, message = "Campo nome do usuário deve ter entre 3 e 50 caracteres")
+    @NotBlank(message ="Obrigatório preencher o nome do usuário")
     private String nome;
+
+    @Size(min=3, max=50, message = "Campo sobrenome do usuário deve ter entre 3 e 50 caracteres")
+    @NotBlank(message ="Obrigatório preencher o sobrenome do usuário")
     private String sobrenome;
+
+    @Email(message="Informar um email válido")
     private String email;
     private Set<RegraDTO> regras = new HashSet<RegraDTO>();
 

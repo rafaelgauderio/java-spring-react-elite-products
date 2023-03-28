@@ -4,6 +4,7 @@ import java.time.Instant;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -32,6 +33,7 @@ public class ManipuladorDeExcecoesDoControlador {
 		
 		return ResponseEntity.status(codigoHttp).body(excecaoCustomizada);		
 	}
+
 	
 	@ExceptionHandler(ExcecaoIntegridadeBancoDeDados.class)
 	public ResponseEntity<ExcecaoCustomizada> excecaoDeBancoDeDados (ExcecaoIntegridadeBancoDeDados mensagemErro, HttpServletRequest requisicao) {
@@ -47,5 +49,7 @@ public class ManipuladorDeExcecoesDoControlador {
 		
 		return ResponseEntity.status(codigoHttp).body(excecaoCustomizada);		
 	}
+
+
 
 }

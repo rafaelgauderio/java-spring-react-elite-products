@@ -3,6 +3,8 @@ package br.com.melhoramentoshigieners.produtos_melhoramentos.dto;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Regra;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.enumerados.Permissao;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 public class RegraDTO implements Serializable {
@@ -10,7 +12,12 @@ public class RegraDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
+
+    @NotBlank(message="Obrigatório preencher o nome da regra")
+    @Size(min=3, max = 20, message="Campo regra deve ter entre 3 e 20 caracteres")
     private String descricao;
+
+    @NotBlank(message="Obrigatório preencher o tipe de permissão da regra")
     private Permissao permissao;
 
     public RegraDTO () {

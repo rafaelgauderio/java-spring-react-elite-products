@@ -17,6 +17,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
@@ -39,7 +40,7 @@ public class UsuarioControlador {
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioDTO> inserirUsuario (@RequestBody UsuarioPasswordDTO usuarioPasswordDTO) {
+    public ResponseEntity<UsuarioDTO> inserirUsuario (@Valid @RequestBody UsuarioPasswordDTO usuarioPasswordDTO) {
 
         UsuarioDTO usuarioDTO = usuarioServico.inserir(usuarioPasswordDTO);
         URI identificador = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(
@@ -48,7 +49,7 @@ public class UsuarioControlador {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<UsuarioDTO> atualizarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
+    public ResponseEntity<UsuarioDTO> atualizarUsuario(@PathVariable Long id,@Valid @RequestBody UsuarioDTO usuarioDTO) {
         usuarioDTO = usuarioServico.update(id, usuarioDTO);
         return ResponseEntity.ok().body(usuarioDTO);
     }
