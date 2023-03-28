@@ -1,13 +1,6 @@
 package br.com.melhoramentoshigieners.produtos_melhoramentos.controladores;
 
-import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.ProdutoDTO;
-import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.RegraDTO;
-import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.UsuarioDTO;
-import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.UsuarioPasswordDTO;
-import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Regra;
-import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Usuario;
-import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.RegraRepositorio;
-import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.ProdutoServico;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.*;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.UsuarioServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -55,8 +48,8 @@ public class UsuarioControlador {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<UsuarioDTO> atualizarUsuario(@PathVariable Long id,@Valid @RequestBody UsuarioDTO usuarioDTO) {
-        usuarioDTO = usuarioServico.update(id, usuarioDTO);
+    public ResponseEntity<UsuarioDTO> atualizarUsuario(@PathVariable Long id,@Valid @RequestBody UsuarioUpdateDTO usuarioUpdateDTO) {
+        UsuarioDTO usuarioDTO = usuarioServico.update(id, usuarioUpdateDTO);
         return ResponseEntity.ok().body(usuarioDTO);
     }
 

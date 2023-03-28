@@ -4,11 +4,12 @@ import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.validacoes.
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 // Essa dto vai ter todos os dados do usuario e dto e também a senha.
 // vai ser usada apenas para inserir um usuário com uma senha criptografada (encode)
 @UsuarioValidacaoDeInsercao
-public class UsuarioPasswordDTO extends UsuarioDTO{
+public class UsuarioPasswordDTO extends UsuarioDTO implements Serializable {
 
     private static final long serialVersionUID =1L;
 
