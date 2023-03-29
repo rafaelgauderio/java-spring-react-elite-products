@@ -8,11 +8,15 @@ import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.RegraRe
 import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.UsuarioRepositorio;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoEntidadeNaoEncontrada;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoIntegridadeBancoDeDados;
+import org.hibernate.annotations.common.util.impl.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,7 +26,8 @@ import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service
-public class UsuarioServico {
+public class UsuarioServico implements UserDetailsService {
+
     @Autowired
     private UsuarioRepositorio repositorioDeUsuario;
 
@@ -31,6 +36,8 @@ public class UsuarioServico {
 
     @Autowired
     private BCryptPasswordEncoder senhaCriptografada;
+
+    private static Logger logDeUsuario;
 
     @Transactional(readOnly = true)
     public Page<UsuarioDTO> buscarTodos(Pageable requisicaoPaginada) {
@@ -42,7 +49,7 @@ public class UsuarioServico {
     public UsuarioDTO buscarUsuarioPorEmail(UsuarioDTO dto) {
 
         Usuario entidade = repositorioDeUsuario.buscarPorEmail(dto.getEmail());
-        if(entidade == null) {
+        if (entidade == null) {
             throw new UsernameNotFoundException("Não foi encontrado usuário para o email " + dto.getEmail());
         }
         return new UsuarioDTO(entidade);
@@ -99,12 +106,26 @@ public class UsuarioServico {
     }
 
     public void deletarPorId(Long id) {
-        try  {
+        try {
             repositorioDeUsuario.deleteById(id);
-        } catch(EmptyResultDataAccessException errro) {
+        } catch (EmptyResultDataAccessException errro) {
             throw new ExcecaoEntidadeNaoEncontrada("Usuario não encontrado com id de número " + id);
-        } catch(DataIntegrityViolationException erro) {
+        } catch (DataIntegrityViolationException erro) {
             throw new ExcecaoIntegridadeBancoDeDados("Violação de integridade de banco de dados");
         }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Usuario entidade = repositorioDeUsuario.buscarPorEmail(username);
+
+        if (entidade == null) {
+            logDeUsuario = (Logger) LoggerFactory.logger(UsuarioServico.class);
+            logDeUsuario.error("Usuário com o email " + username + "não foi encontrado no banco de dados do servidor");
+            throw new UsernameNotFoundException("Usuário não encontrado com o email " + username);
+
+        }
+        logDeUsuario.warn("Usuário encontrado");
+        return entidade;
     }
 }
