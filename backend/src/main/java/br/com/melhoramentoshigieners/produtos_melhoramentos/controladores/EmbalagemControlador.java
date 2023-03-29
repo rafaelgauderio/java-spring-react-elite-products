@@ -19,6 +19,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.EmbalagemDTO;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.EmbalagemServico;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/embalagens")
 public class EmbalagemControlador {
@@ -40,7 +42,7 @@ public class EmbalagemControlador {
 	
 	// retornar codigo http 201 Created
 	@PostMapping
-	public ResponseEntity<EmbalagemDTO> inserirEmbalagem(@RequestBody EmbalagemDTO embalagemDTO) {
+	public ResponseEntity<EmbalagemDTO> inserirEmbalagem(@Valid @RequestBody EmbalagemDTO embalagemDTO) {
 		embalagemDTO = embalagemServico.inserir(embalagemDTO);
 		// URI = Uniform Resource Identifier
 		URI identificador = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(embalagemDTO.getId()).toUri();
@@ -48,7 +50,7 @@ public class EmbalagemControlador {
 	}
 	
 	@PutMapping(value ="/{id}")
-	public ResponseEntity<EmbalagemDTO> atualizarEmgalagem(@PathVariable Long id, @RequestBody EmbalagemDTO embalagemDTO) {
+	public ResponseEntity<EmbalagemDTO> atualizarEmgalagem(@PathVariable Long id,@Valid @RequestBody EmbalagemDTO embalagemDTO) {
 		embalagemDTO = embalagemServico.atualizar(id, embalagemDTO);
 		return ResponseEntity.ok().body(embalagemDTO);
 	}

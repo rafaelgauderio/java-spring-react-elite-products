@@ -4,11 +4,11 @@ import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Categoria;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Embalagem;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Produto;
 
+import javax.persistence.Column;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class ProdutoDTO implements Serializable {
@@ -16,14 +16,29 @@ public class ProdutoDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
+
+    @Column(unique=true)
+    @NotBlank(message="Obrigatório preencher o nome do produto")
+    @Size(min=5, max = 50, message="Campo produto deve ter entre 5 e 50 caracteres")
     private String descricao;
+
+    @NotBlank(message="Obrigatório preencher a descrição detalhada do produto")
+    @Size(min=5, max=100, message="Campo produto deve ter entre 5 e 100 caracteres")
     private String descricaoCompleta;
+
+    @PositiveOrZero
     private Double preco;
+
     private Double largura;
     private Integer metragem;
     private Double peso;
     private String fragrancia;
+
+    @NotBlank(message="Obrigatório preencher o link da imagem")
+    @Size(min=5, max=100, message="link deve ter entre 5 e 100 caracteres")
     private String imgUrl;
+
+    @PastOrPresent(message="Não é possivel cadastrar um produto com data futura")
     private Instant dataCadastro;
     private Set<EmbalagemDTO> embalagens = new HashSet<>();
     private Set<CategoriaDTO> categorias = new HashSet<CategoriaDTO>();

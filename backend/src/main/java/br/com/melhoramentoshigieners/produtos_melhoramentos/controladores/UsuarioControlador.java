@@ -1,13 +1,6 @@
 package br.com.melhoramentoshigieners.produtos_melhoramentos.controladores;
 
-import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.ProdutoDTO;
-import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.RegraDTO;
-import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.UsuarioDTO;
-import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.UsuarioPasswordDTO;
-import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Regra;
-import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Usuario;
-import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.RegraRepositorio;
-import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.ProdutoServico;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.*;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.UsuarioServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
@@ -32,6 +26,12 @@ public class UsuarioControlador {
         return ResponseEntity.ok().body(listaPaginadaDeUsuarios);
     }
 
+    @GetMapping(value="/email")
+    public ResponseEntity<UsuarioDTO> buscarUSuarioPorEmail(@RequestBody UsuarioDTO dto) {
+       UsuarioDTO newDTO = usuarioServico.buscarUsuarioPorEmail(dto);
+       return ResponseEntity.ok().body(newDTO);
+    }
+
     @GetMapping(value="/{id}")
     public ResponseEntity<UsuarioDTO> buscarUsuarioPorId(@PathVariable Long id) {
         UsuarioDTO dto = usuarioServico.buscarPorId(id);
@@ -39,7 +39,7 @@ public class UsuarioControlador {
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioDTO> inserirUsuario (@RequestBody UsuarioPasswordDTO usuarioPasswordDTO) {
+    public ResponseEntity<UsuarioDTO> inserirUsuario (@Valid @RequestBody UsuarioPasswordDTO usuarioPasswordDTO) {
 
         UsuarioDTO usuarioDTO = usuarioServico.inserir(usuarioPasswordDTO);
         URI identificador = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(
@@ -48,8 +48,8 @@ public class UsuarioControlador {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<UsuarioDTO> atualizarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
-        usuarioDTO = usuarioServico.update(id, usuarioDTO);
+    public ResponseEntity<UsuarioDTO> atualizarUsuario(@PathVariable Long id,@Valid @RequestBody UsuarioUpdateDTO usuarioUpdateDTO) {
+        UsuarioDTO usuarioDTO = usuarioServico.update(id, usuarioUpdateDTO);
         return ResponseEntity.ok().body(usuarioDTO);
     }
 

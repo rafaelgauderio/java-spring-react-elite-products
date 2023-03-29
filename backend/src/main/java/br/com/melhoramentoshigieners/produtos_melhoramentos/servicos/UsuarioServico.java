@@ -1,9 +1,6 @@
 package br.com.melhoramentoshigieners.produtos_melhoramentos.servicos;
 
-import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.ProdutoDTO;
-import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.RegraDTO;
-import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.UsuarioDTO;
-import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.UsuarioPasswordDTO;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.*;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Produto;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Regra;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Usuario;
@@ -41,10 +38,17 @@ public class UsuarioServico {
     }
 
     @Transactional(readOnly = true)
+    public UsuarioDTO buscarUsuarioPorEmail(UsuarioDTO dto) {
+
+        Usuario entidade = repositorioDeUsuario.buscarPorEmail(dto.getEmail());
+        return new UsuarioDTO(entidade);
+    }
+
+    @Transactional(readOnly = true)
     public UsuarioDTO buscarPorId(Long id) {
         Optional<Usuario> optinalUsuario = repositorioDeUsuario.findById(id);
         Usuario entidade = optinalUsuario.orElseThrow(
-                () -> new ExcecaoEntidadeNaoEncontrada("Usupario não encontrado com o id de número " + id)
+                () -> new ExcecaoEntidadeNaoEncontrada("Usuário não encontrado com o id de número " + id)
         );
         return new UsuarioDTO(entidade);
     }
@@ -68,7 +72,7 @@ public class UsuarioServico {
     }
 
     @Transactional(readOnly = false)
-    public UsuarioDTO update(Long id, UsuarioDTO usuarioDTO) {
+    public UsuarioDTO update(Long id, UsuarioUpdateDTO usuarioDTO) {
         try {
             Usuario entidade = repositorioDeUsuario.getOne(id);
             entidade.setNome(usuarioDTO.getNome());

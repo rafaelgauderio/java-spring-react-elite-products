@@ -3,7 +3,13 @@ package br.com.melhoramentoshigieners.produtos_melhoramentos.dto;
 import java.io.Serializable;
 
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Embalagem;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.validacoes.EmbalagemValidacaoDeInsercao;
 
+import javax.persistence.Column;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+@EmbalagemValidacaoDeInsercao
 public class EmbalagemDTO implements Serializable {	
 
 	private static final long serialVersionUID = 1L;
@@ -12,6 +18,10 @@ public class EmbalagemDTO implements Serializable {
 	// objeto único
 	
 	private Long id;
+
+	@Column(unique=true)
+	@NotBlank(message="Obrigatório preencher o nome da embalagem")
+	@Size(min=3, max = 30, message="Campo embalagem deve ter entre 3 e 30 caracteres")
 	private String descricao;
 	
 	public EmbalagemDTO () {

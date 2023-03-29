@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -34,14 +35,14 @@ public class ProdutoControlador {
     }
 
     @PostMapping
-    public ResponseEntity<ProdutoDTO> inserirProduto(@RequestBody ProdutoDTO produtoDTO) {
+    public ResponseEntity<ProdutoDTO> inserirProduto(@Valid @RequestBody ProdutoDTO produtoDTO) {
         produtoDTO = servico.inserir(produtoDTO);
         URI identificador = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(produtoDTO.getId()).toUri();
         return ResponseEntity.created(identificador).body(produtoDTO);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ProdutoDTO> atualizarProduto(@PathVariable Long id, @RequestBody ProdutoDTO produtoDTO) {
+    public ResponseEntity<ProdutoDTO> atualizarProduto(@PathVariable Long id,@Valid @RequestBody ProdutoDTO produtoDTO) {
         produtoDTO = servico.update(id, produtoDTO);
         return ResponseEntity.ok().body(produtoDTO);
     }

@@ -6,7 +6,8 @@ import org.springframework.stereotype.Repository;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Categoria;
 
 @Repository
-public interface CategoriaRepositorio extends JpaRepository<Categoria, Long> {	
-	
+public interface CategoriaRepositorio extends JpaRepository<Categoria, Long> {
+
+    Categoria findByDescricao(String descricao);
 
 }
