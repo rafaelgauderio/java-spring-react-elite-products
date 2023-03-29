@@ -13,6 +13,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,6 +42,9 @@ public class UsuarioServico {
     public UsuarioDTO buscarUsuarioPorEmail(UsuarioDTO dto) {
 
         Usuario entidade = repositorioDeUsuario.buscarPorEmail(dto.getEmail());
+        if(entidade == null) {
+            throw new UsernameNotFoundException("Não foi encontrado usuário para o email " + dto.getEmail());
+        }
         return new UsuarioDTO(entidade);
     }
 

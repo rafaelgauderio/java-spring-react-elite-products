@@ -2,8 +2,10 @@ package br.com.melhoramentoshigieners.produtos_melhoramentos.controladores.excec
 
 import java.time.Instant;
 
+import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoUsuarioNaoEncontrado;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -12,9 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoEntidadeNaoEncontrada;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoIntegridadeBancoDeDados;
 
-
 import javax.servlet.http.HttpServletRequest;
-
 
 // annotation que possibilta a interceptacao que qualquer exceção disparada pelo controlador 
 @ControllerAdvice
@@ -68,5 +68,19 @@ public class ManipuladorDeExcecoesDoControlador {
 		excecaoCustomizada.setMomentoDoErro(Instant.now());
 		
 		return ResponseEntity.status(codigoHttp).body(excecaoCustomizada);		
+	}
+
+	@ExceptionHandler(UsernameNotFoundException.class)
+	public ResponseEntity<ExcecaoCustomizada> excecaoDeUsurioNaoEncontrado (UsernameNotFoundException mensagemErro, HttpServletRequest requisicao) {
+
+		HttpStatus codigoHttp = HttpStatus.NOT_FOUND;
+		ExcecaoCustomizada excecaoCustomizada = new ExcecaoCustomizada();
+		excecaoCustomizada.setNomeDoErro("Exceção de Usuário Não encontrado");
+		excecaoCustomizada.setMenssagemDeErro(mensagemErro.getMessage());
+		excecaoCustomizada.setCaminho(requisicao.getRequestURI());
+		excecaoCustomizada.setCodigoHttpDoErro(codigoHttp.value());
+		excecaoCustomizada.setMomentoDoErro(Instant.now());
+
+		return ResponseEntity.status(codigoHttp).body(excecaoCustomizada);
 	}
 }
