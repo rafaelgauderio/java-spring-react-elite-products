@@ -83,6 +83,10 @@ public class Usuario implements UserDetails, Serializable {
 		this.email = email;
 	}
 
+	public String getPassword() {
+		return this.password;
+	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -123,14 +127,11 @@ public class Usuario implements UserDetails, Serializable {
 		return true;
 	}
 
-	@Override
-	public String getPassword() {
-		return this.password;
-	}
+
 
 	@Override
 	public String getUsername() {
-		return this.email;
+		return email;
 	}
 
 	@Override

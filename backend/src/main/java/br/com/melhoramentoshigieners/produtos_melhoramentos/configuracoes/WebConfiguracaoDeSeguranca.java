@@ -29,12 +29,6 @@ public class WebConfiguracaoDeSeguranca extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/actuator/**");
     }
 
-    @Bean
-    public BCryptPasswordEncoder criptografarSenha() {
-        BCryptPasswordEncoder senhaCriptografada = new BCryptPasswordEncoder();
-        return senhaCriptografada;
-    }
-
     @Override
     protected void configure(AuthenticationManagerBuilder autenticador) throws Exception {
          autenticador.userDetailsService(servicoDeDetalhesDoUsuario).passwordEncoder(senhaCriptograda);

@@ -8,7 +8,7 @@ import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.RegraRe
 import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.UsuarioRepositorio;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoEntidadeNaoEncontrada;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoIntegridadeBancoDeDados;
-import org.hibernate.annotations.common.util.impl.LoggerFactory;
+import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -37,7 +37,7 @@ public class UsuarioServico implements UserDetailsService {
     @Autowired
     private BCryptPasswordEncoder senhaCriptografada;
 
-    private static Logger logDeUsuario;
+    private Logger logDeUsuario = LoggerFactory.getLogger(UsuarioServico.class);;
 
     @Transactional(readOnly = true)
     public Page<UsuarioDTO> buscarTodos(Pageable requisicaoPaginada) {
@@ -116,13 +116,13 @@ public class UsuarioServico implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usuario entidade = repositorioDeUsuario.buscarPorEmail(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Usuario entidade = repositorioDeUsuario.buscarPorEmail(email);
 
         if (entidade == null) {
-            logDeUsuario = (Logger) LoggerFactory.logger(UsuarioServico.class);
-            logDeUsuario.error("Usuário com o email " + username + "não foi encontrado no banco de dados do servidor");
-            throw new UsernameNotFoundException("Usuário não encontrado com o email " + username);
+
+            logDeUsuario.error("Usuário com o email " + email + "não foi encontrado no banco de dados do servidor");
+            throw new UsernameNotFoundException("Usuário não encontrado com o email " + email);
 
         }
         logDeUsuario.warn("Usuário encontrado");
