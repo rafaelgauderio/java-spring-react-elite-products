@@ -1,6 +1,7 @@
 package br.com.melhoramentoshigieners.produtos_melhoramentos.configuracoes;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,6 +29,16 @@ public class ServidorDeAutorizacaoConfiguracao extends AuthorizationServerConfig
     @Autowired
     private AuthenticationManager gerenciadoDeAutenticacao;
 
+
+    @Value("${security.oauth2.client.client-id}")
+    private String idCliente;
+
+    @Value("${security.oauth2.client.client-secret}")
+    private String senhaCliente;
+
+    @Value("${jwt.duration}")
+    private Integer tempoDuracaoJwt;
+
     @Override
     public void configure(AuthorizationServerSecurityConfigurer configuracaoDeSeguranca) throws Exception {
 
@@ -38,11 +49,11 @@ public class ServidorDeAutorizacaoConfiguracao extends AuthorizationServerConfig
     public void configure(ClientDetailsServiceConfigurer cliente) throws Exception {
 
         cliente.inMemory()
-                .withClient("melhoramentosId")
-                .secret(senhaCriptograda.encode("melhoramentosSecret"))
+                .withClient(idCliente)
+                .secret(senhaCriptograda.encode(senhaCliente))
                 .scopes("read","write")
                 .authorizedGrantTypes("password")
-                .accessTokenValiditySeconds(28800) //8 horas
+                .accessTokenValiditySeconds(tempoDuracaoJwt) //8 horas
                 ;
 
     }
