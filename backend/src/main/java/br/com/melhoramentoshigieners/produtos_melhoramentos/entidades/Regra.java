@@ -3,6 +3,7 @@ package br.com.melhoramentoshigieners.produtos_melhoramentos.entidades;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.enumerados.Permissao;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,8 +19,8 @@ public class Regra implements Serializable {
 	private Long id;
 	private String descricao;
 
-	@Enumerated(EnumType.STRING)
-	private Permissao permissao;
+	@NotBlank
+	private String permissao;
 
 	@ManyToMany(mappedBy = "regras")
 	private Set<Usuario> usuarios = new HashSet<Usuario>();
@@ -28,7 +29,7 @@ public class Regra implements Serializable {
 
 	}
 
-	public Regra(Long id, String descricao, Permissao permissao) {
+	public Regra(Long id, String descricao, String permissao) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
@@ -51,11 +52,11 @@ public class Regra implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Permissao getPermissao() {
+	public String getPermissao() {
 		return permissao;
 	}
 
-	public void setPermissao(Permissao permissao) {
+	public void setPermissao(String permissao) {
 		this.permissao = permissao;
 	}
 

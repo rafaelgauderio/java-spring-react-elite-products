@@ -29,8 +29,8 @@ public class PotenciadorDeTokenJwt implements TokenEnhancer {
         dadosUsuarioAutenticado.put("nome_usuario", entidade.getNome());
         dadosUsuarioAutenticado.put("sobrenome_usuario", entidade.getSobrenome());
 
-        DefaultOAuth2AccessToken dafaultTokenDeAcesso = (DefaultOAuth2AccessToken) tokenDeAcesso;
-        ((DefaultOAuth2AccessToken) tokenDeAcesso).setAdditionalInformation(dadosUsuarioAutenticado);
+        DefaultOAuth2AccessToken defaultTokenDeAcesso = (DefaultOAuth2AccessToken) tokenDeAcesso;
+        defaultTokenDeAcesso.setAdditionalInformation(dadosUsuarioAutenticado);
 
         // é o mesmo token que está retornado, apenas foi turbinado com  informações do usuario autenticado
         return  tokenDeAcesso;

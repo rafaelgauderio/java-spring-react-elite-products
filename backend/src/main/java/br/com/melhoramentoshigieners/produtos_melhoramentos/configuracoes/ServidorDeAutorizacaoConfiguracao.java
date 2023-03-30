@@ -17,6 +17,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Configuration
@@ -72,10 +73,12 @@ public class ServidorDeAutorizacaoConfiguracao extends AuthorizationServerConfig
 
         // atualizar o token de autorização com as informações adicionais
         TokenEnhancerChain cadeiaDoTokenTurbinado = new TokenEnhancerChain();
-        List<TokenEnhancer> dadosDoTokenTurbinado = new ArrayList<TokenEnhancer>();
-        dadosDoTokenTurbinado.add(potenciadorDeTokenJwt);
-        cadeiaDoTokenTurbinado.setTokenEnhancers(dadosDoTokenTurbinado);
 
+        List<TokenEnhancer> dadosDoTokenTurbinado = new ArrayList<TokenEnhancer>();
+        dadosDoTokenTurbinado.add(tokenDeAcessoJwtConvertido);
+        dadosDoTokenTurbinado.add(potenciadorDeTokenJwt);
+
+        cadeiaDoTokenTurbinado.setTokenEnhancers(dadosDoTokenTurbinado);
 
         endpoints.authenticationManager(gerenciadoDeAutenticacao)
                 .tokenStore(tokenstore)

@@ -18,13 +18,13 @@ public class RegraDTO implements Serializable {
     private String descricao;
 
     @NotBlank(message="Obrigatório preencher o tipe de permissão da regra")
-    private Permissao permissao;
+    private String permissao;
 
     public RegraDTO () {
 
     }
 
-    public RegraDTO(Long id, String descricao, Permissao permissao) {
+    public RegraDTO(Long id, String descricao, String permissao) {
         this.id = id;
         this.descricao = descricao;
         this.permissao = permissao;
@@ -52,11 +52,11 @@ public class RegraDTO implements Serializable {
         this.descricao = descricao;
     }
 
-    public Permissao getPermissao() {
+    public String getPermissao() {
         return permissao;
     }
 
-    public void setPermissao(Permissao permissao) {
+    public void setPermissao(String permissao) {
         this.permissao = permissao;
     }
 }
