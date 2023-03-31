@@ -8,29 +8,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
-@Configuration
+//@Configuration
 public class SegurancaConfiguracao {
 
     @Value("${jwt.secret}")
     private String senhaJwt;
 
-
-    @Bean
-    public BCryptPasswordEncoder criptografarSenha () {
-        BCryptPasswordEncoder senhaCriptografada = new BCryptPasswordEncoder();
-        return senhaCriptografada;
-    }
-
-    @Bean
-    public JwtAccessTokenConverter converterTokenDeAcesso() {
-        JwtAccessTokenConverter tokenDeAcessoJwtConvertido = new JwtAccessTokenConverter();
-        tokenDeAcessoJwtConvertido.setSigningKey(senhaJwt);
-        return tokenDeAcessoJwtConvertido;
-    }
-
-    @Bean
-    public JwtTokenStore tokenStore() {
-        return new JwtTokenStore(converterTokenDeAcesso());
-    }
 
 }

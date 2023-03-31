@@ -1,42 +1,44 @@
 package br.com.melhoramentoshigieners.produtos_melhoramentos.configuracoes;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @Configuration
 @EnableWebSecurity
-public class SegurancaWebConfiguracao extends WebSecurityConfigurerAdapter {
+public class SegurancaWebConfiguracao  {
 
-    @Autowired
-    private BCryptPasswordEncoder senhaCriptograda;
+    @Value("${jwt.secret}")
+    private String senhaJwt;
 
-    @Autowired
-    private UserDetailsService servicoDeDetalhesDoUsuario;
-
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/actuator/**");
-    }
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder autenticador) throws Exception {
-         autenticador.userDetailsService(servicoDeDetalhesDoUsuario).passwordEncoder(senhaCriptograda);
-    }
-
-    @Override
     @Bean
-    protected AuthenticationManager authenticationManager() throws Exception {
-        return super.authenticationManager();
+    public BCryptPasswordEncoder criptografarSenha () {
+        BCryptPasswordEncoder senhaCriptografada = new BCryptPasswordEncoder();
+        return senhaCriptografada;
+    }
+
+    @Bean
+    JwtAccessTokenConverter converterTokenDeAcesso() {
+        JwtAccessTokenConverter tokenJwtDeAcessoConvetido = new JwtAccessTokenConverter();
+        tokenJwtDeAcessoConvetido.setSigningKey(senhaJwt);
+        return tokenJwtDeAcessoConvetido;
+    }
+
+    @Bean
+    JwtTokenStore tokenStore() {
+        return new JwtTokenStore(converterTokenDeAcesso());
+    }
+
+    @Bean
+    AuthenticationManager authenticationManager(AuthenticationConfiguration configuracaoDeAutenticacao) throws Exception {
+        return configuracaoDeAutenticacao.getAuthenticationManager();
     }
 }
