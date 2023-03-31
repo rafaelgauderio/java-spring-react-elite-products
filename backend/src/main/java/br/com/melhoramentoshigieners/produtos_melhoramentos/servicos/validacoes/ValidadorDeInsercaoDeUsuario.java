@@ -29,7 +29,7 @@ public class ValidadorDeInsercaoDeUsuario implements ConstraintValidator<Usuario
         Usuario usuario = usuarioRepositorio.findByEmail(usuarioPasswordDTO.getEmail());
 
         if(usuario != null) {
-            vetorDeCamposDeValidacao.add(new CamposDeValidacao("Email", "Email: " + usuarioPasswordDTO.getEmail() + " já cadastrado no base de dados. Favor informar outro"));
+            vetorDeCamposDeValidacao.add(new CamposDeValidacao("Email", "Email: " + usuarioPasswordDTO.getEmail() + " já cadastrado na base de dados. Favor informar outro"));
         }
 
         for (CamposDeValidacao camposDeValicadao : vetorDeCamposDeValidacao) {
