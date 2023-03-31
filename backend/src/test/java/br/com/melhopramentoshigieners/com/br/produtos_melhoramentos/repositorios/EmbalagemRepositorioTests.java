@@ -30,7 +30,7 @@ public class EmbalagemRepositorioTests {
     @BeforeEach
     void setUp() throws Exception {
         this.idExistente = 1L;
-        this.idNaoCadastrada = 2L;
+        this.idNaoCadastrada = 100L;
     }
 
     @Test

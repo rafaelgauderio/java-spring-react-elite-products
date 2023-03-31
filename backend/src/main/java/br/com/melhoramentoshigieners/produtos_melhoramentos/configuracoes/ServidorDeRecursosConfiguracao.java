@@ -42,7 +42,6 @@ public class ServidorDeRecursosConfiguracao extends ResourceServerConfigurerAdap
 
     private static final String [] HOST_LIBERADOS={"http://localhost.com","http://127.0.0.1","https://minhaAplicacao.com.br"};
 
-
     @Autowired
     private JwtTokenStore armazenaTokenJwt;
 
@@ -119,6 +118,4 @@ public class ServidorDeRecursosConfiguracao extends ResourceServerConfigurerAdap
         configuracaoDaFonte.registerCorsConfiguration("/**", configuracaoDeCors);
         return configuracaoDaFonte;
     }
-
-
 }
