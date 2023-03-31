@@ -1,7 +1,13 @@
 package br.com.melhoramentoshigieners.produtos_melhoramentos.configuracoes;
 
-
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.core.Ordered;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.enumerados.Permissao;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +19,8 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 @Configuration
 @EnableResourceServer
@@ -31,6 +39,8 @@ public class ServidorDeRecursosConfiguracao extends ResourceServerConfigurerAdap
 
     // rotas liberadas para CRUD de entidades
     private static final String [] ROTA_ADMINTRADORES = {"/usuarios/**"};
+
+    private static final String [] HOST_LIBERADOS={"http://localhost.com","http://127.0.0.1","https://minhaAplicacao.com.br"};
 
 
     @Autowired
@@ -68,4 +78,47 @@ public class ServidorDeRecursosConfiguracao extends ResourceServerConfigurerAdap
                 .antMatchers(HttpMethod.HEAD,ROTA_CRUD_ENTIDADES).hasRole(String.valueOf(Permissao.GERENTE_LOJA))
                 .antMatchers(ROTA_ADMINTRADORES).hasRole(String.valueOf(Permissao.ADMIN_SISTEMA));
     }
+
+    // configuração de CORS
+    // Cross-origin resource sharing
+    // por padão os framework bloqueiam que o frontend hospeda em diferente host do backend faça requisições ao backend
+    // liberar aqui expliçadamente quais endereços podem fazer requisições ao backend
+
+    @Bean
+    public FilterRegistrationBean<CorsFilter> filtroDeCors() {
+        FilterRegistrationBean<CorsFilter> bean
+                = new FilterRegistrationBean<>(new CorsFilter(configuracaoDaFonteDeCors()));
+        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        return bean;
+    }
+
+    @Bean
+    public CorsConfigurationSource configuracaoDaFonteDeCors() {
+        CorsConfiguration configuracaoDeCors = new CorsConfiguration();
+
+        configuracaoDeCors.setAllowedOriginPatterns(Arrays.asList(HOST_LIBERADOS));
+
+        List<String> metodosHttp = new LinkedList<String>();
+        metodosHttp.add("GET");
+        metodosHttp.add("POST");
+        metodosHttp.add("PUT");
+        metodosHttp.add("DELETE");
+        metodosHttp.add("OPTIONS");
+        metodosHttp.add("COPY");
+        metodosHttp.add("HEAD");
+        metodosHttp.add("LINK");
+        metodosHttp.add("UNLINK");
+        metodosHttp.add("LOCK");
+        metodosHttp.add("UNLOCK");
+        metodosHttp.add("VIEW");
+
+        configuracaoDeCors.setAllowedMethods(metodosHttp);
+        configuracaoDeCors.setAllowCredentials(true);
+        configuracaoDeCors.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+        UrlBasedCorsConfigurationSource configuracaoDaFonte = new UrlBasedCorsConfigurationSource();
+        configuracaoDaFonte.registerCorsConfiguration("/**", configuracaoDeCors);
+        return configuracaoDaFonte;
+    }
+
+
 }
