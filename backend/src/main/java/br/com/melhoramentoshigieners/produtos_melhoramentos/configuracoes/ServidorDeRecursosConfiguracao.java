@@ -1,5 +1,6 @@
 package br.com.melhoramentoshigieners.produtos_melhoramentos.configuracoes;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.core.Ordered;
 import org.springframework.web.cors.CorsConfiguration;
@@ -40,13 +41,16 @@ public class ServidorDeRecursosConfiguracao extends ResourceServerConfigurerAdap
     // rotas liberadas para CRUD de entidades
     private static final String [] ROTA_ADMINTRADORES = {"/usuarios/**"};
 
-    private static final String [] HOST_LIBERADOS={"http://localhost.com","http://127.0.0.1","https://minhaAplicacao.com.br"};
+    private static final String [] HOST_LIBERADOS={"https://minhaAplicacao.com.br","http://locahost:8080","http://locahost:3000","http://localhost:5173"};
 
     @Autowired
     private JwtTokenStore armazenaTokenJwt;
 
     @Autowired
     private Environment ambiente;
+
+    @Value("${cors.origins")
+    private String origensCors;
 
 
     public ServidorDeRecursosConfiguracao() {
@@ -93,9 +97,12 @@ public class ServidorDeRecursosConfiguracao extends ResourceServerConfigurerAdap
 
     @Bean
     public CorsConfigurationSource configuracaoDaFonteDeCors() {
+
         CorsConfiguration configuracaoDeCors = new CorsConfiguration();
 
-        configuracaoDeCors.setAllowedOriginPatterns(Arrays.asList(HOST_LIBERADOS));
+        String [] hostLiberados = origensCors.split(",");
+        //configuracaoDeCors.setAllowedOriginPatterns(Arrays.asList(HOST_LIBERADOS));
+        configuracaoDeCors.setAllowedOriginPatterns(Arrays.asList(hostLiberados));
 
         List<String> metodosHttp = new LinkedList<String>();
         metodosHttp.add("GET");
@@ -114,6 +121,7 @@ public class ServidorDeRecursosConfiguracao extends ResourceServerConfigurerAdap
         configuracaoDeCors.setAllowedMethods(metodosHttp);
         configuracaoDeCors.setAllowCredentials(true);
         configuracaoDeCors.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+
         UrlBasedCorsConfigurationSource configuracaoDaFonte = new UrlBasedCorsConfigurationSource();
         configuracaoDaFonte.registerCorsConfiguration("/**", configuracaoDeCors);
         return configuracaoDaFonte;
