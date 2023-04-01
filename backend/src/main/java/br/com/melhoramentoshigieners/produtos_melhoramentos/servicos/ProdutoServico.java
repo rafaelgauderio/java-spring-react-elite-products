@@ -65,14 +65,14 @@ public class ProdutoServico {
         // percorrendo toda a coleção de embalagens e adicionado no entidade Produto
         //entidade.getEmbalagens().clear();
         for (EmbalagemDTO embDTO : produtoDTO.getEmbalagens()) {
-            Embalagem embalagem = repositorioDeEmbalagens.getOne(embDTO.getId());
+            Embalagem embalagem = repositorioDeEmbalagens.getReferenceById(embDTO.getId());
             entidade.getEmbalagens().add(embalagem);
         }
 
         // percorrendo toda a coleção de categorias e adicionado no entidade Produto
         //entidade.getCategorias().clear();
         for (CategoriaDTO catDTO : produtoDTO.getCategorias()) {
-            Categoria categoria = repositorioDeCategorias.getOne(catDTO.getId());
+            Categoria categoria = repositorioDeCategorias.getReferenceById(catDTO.getId());
             entidade.getCategorias().add(categoria);
         }
 
@@ -84,7 +84,7 @@ public class ProdutoServico {
     public ProdutoDTO update(Long id, ProdutoDTO produtoDTO) {
 
         try {
-            Produto entidade = repositorioDeProdutos.getOne(id);
+            Produto entidade = repositorioDeProdutos.getReferenceById(id);
             entidade.setDescricao(produtoDTO.getDescricao());
             entidade.setDescricaoCompleta(produtoDTO.getDescricaoCompleta());
             entidade.setPreco(produtoDTO.getPreco());
@@ -97,13 +97,13 @@ public class ProdutoServico {
 
             entidade.getEmbalagens().clear();
             for (EmbalagemDTO embDTO : produtoDTO.getEmbalagens()) {
-                Embalagem embalagem = repositorioDeEmbalagens.getOne(embDTO.getId());
+                Embalagem embalagem = repositorioDeEmbalagens.getReferenceById(embDTO.getId());
                 entidade.getEmbalagens().add(embalagem);
             }
 
             entidade.getCategorias().clear();
             for (CategoriaDTO catDTO : produtoDTO.getCategorias()) {
-                Categoria categoria = repositorioDeCategorias.getOne(catDTO.getId());
+                Categoria categoria = repositorioDeCategorias.getReferenceById(catDTO.getId());
                 entidade.getCategorias().add(categoria);
             }
 
