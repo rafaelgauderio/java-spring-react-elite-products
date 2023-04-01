@@ -35,8 +35,9 @@ public class ProdutoServico {
     private ProdutoRepositorio repositorioDeProdutos;
 
     @Transactional(readOnly = true)
-    public Page<ProdutoDTO> buscarTodos(Pageable requisicaoPaginada) {
-        Page<Produto> listaPaginadaDeProdutos = repositorioDeProdutos.findAll(requisicaoPaginada);
+    public Page<ProdutoDTO> buscarTodos(Long embalagemId, Pageable requisicaoPaginada) {
+        Embalagem embalagem = (embalagemId==0) ? null : repositorioDeEmbalagens.getReferenceById(embalagemId);
+        Page<Produto> listaPaginadaDeProdutos = repositorioDeProdutos.buscarProdutosPorEmbalagem(embalagem, requisicaoPaginada);
         return listaPaginadaDeProdutos.map(p -> new ProdutoDTO(p, p.getEmbalagens(), p.getCategorias()));
     }
 
