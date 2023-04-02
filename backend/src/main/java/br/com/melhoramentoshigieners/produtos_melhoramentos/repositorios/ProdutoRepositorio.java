@@ -14,7 +14,9 @@ public interface ProdutoRepositorio extends JpaRepository<Produto,Long> {
     // se não informar uma id de embalagem ou categoria, retornar todos os produtos
     @Query("SELECT DISTINCT objeto FROM Produto objeto " +
             "INNER JOIN objeto.embalagens embals " +
-            "WHERE (:embalagem IS NULL OR :embalagem IN embals)")
-    Page<Produto> buscarProdutosPorEmbalagem(Embalagem embalagem, Pageable requisicaoPaginada);
+            "WHERE (:embalagem IS NULL OR :embalagem IN embals) " +
+            "AND (LOWER(objeto.descricao) LIKE LOWER(CONCAT('%',:descricao,'%')) )"
+    )
+    Page<Produto> buscarProdutosPorEmbalagem(Embalagem embalagem,String descricao,Pageable requisicaoPaginada);
 
 }
