@@ -39,8 +39,8 @@ public class ProdutoServico {
     // funcao trim para tirar os espaços em brancos
     @Transactional(readOnly = true)
     public Page<ProdutoDTO> buscarTodos(Long embalagemId, String descricao, Pageable requisicaoPaginada) {
-        List<Embalagem> embalagens = (embalagemId==0) ? null : Arrays.asList(repositorioDeEmbalagens.getReferenceById(embalagemId));
-        Page<Produto> listaPaginadaDeProdutos = repositorioDeProdutos.buscarProdutosPorEmbalagem(embalagens, descricao.trim(),requisicaoPaginada);
+        List<Embalagem> listDeEmbalagens = (embalagemId==0) ? null : Arrays.asList(repositorioDeEmbalagens.getReferenceById(embalagemId));
+        Page<Produto> listaPaginadaDeProdutos = repositorioDeProdutos.buscarProdutosPorEmbalagem(listDeEmbalagens, descricao.trim(),requisicaoPaginada);
         return listaPaginadaDeProdutos.map(p -> new ProdutoDTO(p, p.getEmbalagens(), p.getCategorias()));
     }
 
