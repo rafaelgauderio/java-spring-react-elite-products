@@ -14,6 +14,7 @@ import java.util.List;
 public interface ProdutoRepositorio extends JpaRepository<Produto,Long> {
 
     // se não informar uma id de embalagem ou categoria, retornar todos os produtos
+    // essa primeira consulta não tras as embalagens e categorias para a memoria, o que acaba resultando em várias consultas ao banco
     @Query("SELECT DISTINCT objeto FROM Produto objeto " +
             "INNER JOIN objeto.embalagens embals " +
             "WHERE (:embalagens IS NULL OR embals IN :embalagens) " +
@@ -21,4 +22,14 @@ public interface ProdutoRepositorio extends JpaRepository<Produto,Long> {
     )
     Page<Produto> buscarProdutosPorEmbalagem(List<Embalagem> embalagens, String descricao, Pageable requisicaoPaginada);
 
+    // consulta para resolver o problema de várias consultas ao banco
+    // join fetch só funciona com List e não com Page
+    // join fetch faz com que os relacionamentos sejam carregados junto com a entidade.
+    // join desabilita o carregamento LAZY, assim não precisa ir tocar várias vezes no database
+    @Query("SELECT objeto " +
+            "FROM Produto objeto "
+            + "JOIN FETCH objeto.embalagens " +
+            "JOIN FETCH objeto.categorias "
+            + "WHERE objeto IN :produtos ")
+    List<Produto> buscarProdutosComEmbalgensECategorias(List<Produto> produtos);
 }

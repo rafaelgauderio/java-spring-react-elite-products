@@ -41,6 +41,7 @@ public class ProdutoServico {
     public Page<ProdutoDTO> buscarTodos(Long embalagemId, String descricao, Pageable requisicaoPaginada) {
         List<Embalagem> listDeEmbalagens = (embalagemId==0) ? null : Arrays.asList(repositorioDeEmbalagens.getReferenceById(embalagemId));
         Page<Produto> listaPaginadaDeProdutos = repositorioDeProdutos.buscarProdutosPorEmbalagem(listDeEmbalagens, descricao.trim(),requisicaoPaginada);
+        repositorioDeProdutos.buscarProdutosComEmbalgensECategorias(listaPaginadaDeProdutos.getContent());
         return listaPaginadaDeProdutos.map(p -> new ProdutoDTO(p, p.getEmbalagens(), p.getCategorias()));
     }
 
