@@ -51,7 +51,7 @@ public class CategoriaServico {
 	@Transactional(readOnly=false)
 	public CategoriaDTO atualizar(Long id, CategoriaDTO dto) {
 		try {
-			Categoria entidade = categoriaRepositorio.getOne(id);
+			Categoria entidade = categoriaRepositorio.getReferenceById(id);
 			entidade.setDescricao(dto.getDescricao());
 			entidade = categoriaRepositorio.save(entidade);
 			CategoriaDTO categoriaDTO = new CategoriaDTO(entidade);

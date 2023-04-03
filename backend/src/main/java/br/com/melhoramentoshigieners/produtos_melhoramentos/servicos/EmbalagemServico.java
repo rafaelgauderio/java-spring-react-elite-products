@@ -56,7 +56,7 @@ public class EmbalagemServico {
 	@Transactional(readOnly = false)
 	public EmbalagemDTO atualizar(Long id, EmbalagemDTO dto) {
 		try {
-			Embalagem entidade = embalagemRepositorio.getOne(id);
+			Embalagem entidade = embalagemRepositorio.getReferenceById(id);
 			entidade.setDescricao(dto.getDescricao());
 			entidade = embalagemRepositorio.save(entidade);
 			EmbalagemDTO embalagemDTO = new EmbalagemDTO(entidade);

@@ -74,7 +74,7 @@ public class UsuarioServico implements UserDetailsService {
         entidade.setPassword(senhaCriptografada.encode(usuarioPasswordDTO.getPassword()));
 
         for (RegraDTO regra : usuarioPasswordDTO.getRegras()) {
-            Regra entidadeRegra = regraRepositorio.getOne(regra.getId());
+            Regra entidadeRegra = regraRepositorio.getReferenceById(regra.getId());
             entidade.getRegras().add(entidadeRegra);
         }
 
@@ -85,7 +85,7 @@ public class UsuarioServico implements UserDetailsService {
     @Transactional(readOnly = false)
     public UsuarioDTO update(Long id, UsuarioUpdateDTO usuarioDTO) {
         try {
-            Usuario entidade = repositorioDeUsuario.getOne(id);
+            Usuario entidade = repositorioDeUsuario.getReferenceById(id);
             entidade.setNome(usuarioDTO.getNome());
             entidade.setSobrenome(usuarioDTO.getSobrenome());
             entidade.setEmail(usuarioDTO.getEmail());
@@ -93,7 +93,7 @@ public class UsuarioServico implements UserDetailsService {
             entidade.getRegras().clear();
 
             for (RegraDTO regra : usuarioDTO.getRegras()) {
-                Regra entidadeRegra = regraRepositorio.getOne(regra.getId());
+                Regra entidadeRegra = regraRepositorio.getReferenceById(regra.getId());
                 entidade.getRegras().add(entidadeRegra);
             }
 
