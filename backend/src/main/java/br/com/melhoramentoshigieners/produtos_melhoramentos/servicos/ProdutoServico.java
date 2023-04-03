@@ -20,6 +20,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,9 +38,11 @@ public class ProdutoServico {
 
     // funcao trim para tirar os espaços em brancos
     @Transactional(readOnly = true)
-    public Page<ProdutoDTO> buscarTodos(Long embalagemId, String descricao, Pageable requisicaoPaginada) {
-        Embalagem embalagem = (embalagemId==0) ? null : repositorioDeEmbalagens.getReferenceById(embalagemId);
-        Page<Produto> listaPaginadaDeProdutos = repositorioDeProdutos.buscarProdutosPorEmbalagem(embalagem, descricao.trim(),requisicaoPaginada);
+    public Page<ProdutoDTO> buscarTodos(Long embalagemId, Long categoriaId, String descricao, Pageable requisicaoPaginada) {
+        List<Embalagem> listaDeEmbalagens = (embalagemId==0) ? null : Arrays.asList(repositorioDeEmbalagens.getReferenceById(embalagemId));
+        List<Categoria> listaDeCategorias = (categoriaId==0) ? null : Arrays.asList(repositorioDeCategorias.getReferenceById(categoriaId));
+        Page<Produto> listaPaginadaDeProdutos = repositorioDeProdutos.buscarProdutosPorEmbalagem(listaDeEmbalagens, listaDeCategorias, descricao.trim(),requisicaoPaginada);
+        repositorioDeProdutos.buscarProdutosComEmbalgensECategorias(listaPaginadaDeProdutos.getContent());
         return listaPaginadaDeProdutos.map(p -> new ProdutoDTO(p, p.getEmbalagens(), p.getCategorias()));
     }
 

@@ -24,9 +24,10 @@ public class ProdutoControlador {
     @GetMapping
     public ResponseEntity<Page<ProdutoDTO>> buscarTodosProdutos (
             @RequestParam(value = "embalagemId", defaultValue = "0") Long embalagemId,
+            @RequestParam(value="categoriaId", defaultValue = "0") Long categoriaId,
             @RequestParam(value = "descricao", defaultValue = "") String descricao,
             Pageable requisicaoPaginada) {
-        Page listaPaginadaDeProdutos = servico.buscarTodos(embalagemId, descricao, requisicaoPaginada);
+        Page listaPaginadaDeProdutos = servico.buscarTodos(embalagemId, categoriaId,descricao, requisicaoPaginada);
         return ResponseEntity.ok().body(listaPaginadaDeProdutos);
     }
 
