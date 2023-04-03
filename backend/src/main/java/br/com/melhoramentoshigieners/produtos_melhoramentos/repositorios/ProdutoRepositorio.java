@@ -1,5 +1,6 @@
 package br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios;
 
+import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Categoria;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Embalagem;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Produto;
 import org.springframework.data.domain.Page;
@@ -17,10 +18,12 @@ public interface ProdutoRepositorio extends JpaRepository<Produto,Long> {
     // essa primeira consulta não tras as embalagens e categorias para a memoria, o que acaba resultando em várias consultas ao banco
     @Query("SELECT DISTINCT objeto FROM Produto objeto " +
             "INNER JOIN objeto.embalagens embals " +
+            "INNER JOIN objeto.categorias cats " +
             "WHERE (:embalagens IS NULL OR embals IN :embalagens) " +
+            "AND (:categorias IS NULL OR cats IN :categorias) " +
             "AND (LOWER(objeto.descricao) LIKE LOWER(CONCAT('%',:descricao,'%')) )"
     )
-    Page<Produto> buscarProdutosPorEmbalagem(List<Embalagem> embalagens, String descricao, Pageable requisicaoPaginada);
+    Page<Produto> buscarProdutosPorEmbalagem(List<Embalagem> embalagens, List<Categoria> categorias, String descricao, Pageable requisicaoPaginada);
 
     // consulta para resolver o problema de várias consultas ao banco
     // join fetch só funciona com List e não com Page

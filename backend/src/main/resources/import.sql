@@ -24,14 +24,13 @@ INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('Folha Quádrupla', n
 
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7127','Papel higiênico em rolo 100% fibras virgens, Folha Dupla, Super Macio, Folhas Brancas',10.0, 300, 'https://melhoramentoshigienrs.com.br/imagens/7127.jpg', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z');
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7111','Papel higiênico em rolo 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas',10.0, 500, 'https://melhoramentoshigienrs.com.br/imagens/7111.jpg', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z');
-INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Toalha Interfolhado 7224','Papel Toalha interfolhado 100% fibras virgens, Folha Quádrupla, Super Macio, Folhas Brancas, Tamanho da folha: 21 x 21 cm, Folhas por pacote: 150, Pacontes por caixa: 18',21.0, 2700, 'https://melhoramentoshigienrs.com.br/imagens/7234.jpg', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z');
+INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Toalha Interfolhado 7234','Papel Toalha interfolhado 100% fibras virgens, Folha Quádrupla, Super Macio, Folhas Brancas, Tamanho da folha: 21 x 21 cm, Folhas por pacote: 150, Pacontes por caixa: 18',21.0, 2700, 'https://melhoramentoshigienrs.com.br/imagens/7234.jpg', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z');
 
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (1,1);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (1,3);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (2,1);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (2,5);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (3,6);
-
 
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (1,2);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (1,5);
