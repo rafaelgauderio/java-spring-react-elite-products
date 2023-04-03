@@ -8,15 +8,17 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ProdutoRepositorio extends JpaRepository<Produto,Long> {
 
     // se não informar uma id de embalagem ou categoria, retornar todos os produtos
     @Query("SELECT DISTINCT objeto FROM Produto objeto " +
             "INNER JOIN objeto.embalagens embals " +
-            "WHERE (:embalagem IS NULL OR :embalagem IN embals) " +
+            "WHERE (:embalagens IS NULL OR embals IN :embalagens) " +
             "AND (LOWER(objeto.descricao) LIKE LOWER(CONCAT('%',:descricao,'%')) )"
     )
-    Page<Produto> buscarProdutosPorEmbalagem(Embalagem embalagem,String descricao,Pageable requisicaoPaginada);
+    Page<Produto> buscarProdutosPorEmbalagem(List<Embalagem> embalagens, String descricao, Pageable requisicaoPaginada);
 
 }
