@@ -41,7 +41,7 @@ public class ServidorDeRecursosConfiguracao extends ResourceServerConfigurerAdap
     // rotas liberadas para CRUD de entidades
     private static final String [] ROTA_ADMINTRADORES = {"/usuarios/**"};
 
-    private static final String [] HOST_LIBERADOS={"https://minhaAplicacao.com.br","http://locahost:8080","http://locahost:3000","http://localhost:5173"};
+    private static final String [] HOST_LIBERADOS={"https://minhaAplicacao.com.br","http://localhost:8080","http://localhost:3000","http://localhost:5173"};
 
     @Autowired
     private JwtTokenStore armazenaTokenJwt;
@@ -86,14 +86,7 @@ public class ServidorDeRecursosConfiguracao extends ResourceServerConfigurerAdap
     // Cross-origin resource sharing
     // por padão os framework bloqueiam que o frontend hospeda em diferente host do backend faça requisições ao backend
     // liberar aqui expliçadamente quais endereços podem fazer requisições ao backend
-
-    @Bean
-    public FilterRegistrationBean<CorsFilter> filtroDeCors() {
-        FilterRegistrationBean<CorsFilter> bean
-                = new FilterRegistrationBean<>(new CorsFilter(configuracaoDaFonteDeCors()));
-        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-        return bean;
-    }
+   
 
     @Bean
     public CorsConfigurationSource configuracaoDaFonteDeCors() {
@@ -101,8 +94,8 @@ public class ServidorDeRecursosConfiguracao extends ResourceServerConfigurerAdap
         CorsConfiguration configuracaoDeCors = new CorsConfiguration();
 
         String [] hostLiberados = origensCors.split(",");
-        //configuracaoDeCors.setAllowedOriginPatterns(Arrays.asList(HOST_LIBERADOS));
-        configuracaoDeCors.setAllowedOriginPatterns(Arrays.asList(hostLiberados));
+        configuracaoDeCors.setAllowedOriginPatterns(Arrays.asList(HOST_LIBERADOS));
+       // configuracaoDeCors.setAllowedOriginPatterns(Arrays.asList(hostLiberados));
 
         List<String> metodosHttp = new LinkedList<String>();
         metodosHttp.add("GET");
@@ -125,5 +118,13 @@ public class ServidorDeRecursosConfiguracao extends ResourceServerConfigurerAdap
         UrlBasedCorsConfigurationSource configuracaoDaFonte = new UrlBasedCorsConfigurationSource();
         configuracaoDaFonte.registerCorsConfiguration("/**", configuracaoDeCors);
         return configuracaoDaFonte;
+    }
+    
+    @Bean
+    public FilterRegistrationBean<CorsFilter> filtroDeCors() {
+        FilterRegistrationBean<CorsFilter> bean
+                = new FilterRegistrationBean<>(new CorsFilter(configuracaoDaFonteDeCors()));
+        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        return bean;
     }
 }
