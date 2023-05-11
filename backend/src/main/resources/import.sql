@@ -3,7 +3,7 @@ INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('Fardo com 4 rolos' ,
 INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('2.400 metros', now());
 INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('2.000 metros', now());
 INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('4.000 metros', now());
-INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('Caixa com 2.7OO Folhas', now());
+INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('Caixa com 2.700 Folhas', now());
 INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('Galão de 2 Litros', now());
 INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('Galão de 5 Litros', now());
 INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('Bombona de 20 Litros', now());
@@ -22,7 +22,7 @@ INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('Folha Dupla', now())
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('Folha Tripla', now());
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('Folha Quádrupla', now());
 
-INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7127','Papel higiênico em rolo 100% fibras virgens, Folha Dupla, Super Macio, Folhas Brancas',10.0, 300, 'https://melhoramentoshigieners.com.br/imagens/7127.jpg', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z');
+INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7127','Papel higiênico em rolo 100% fibras virgens, Folha Dupla, Super Macio, Folhas Brancas',10.0, 300, 'https://melhoramentoshigieners.com.br/imagens/7127.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z');
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7111','Papel higiênico em rolo 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas',10.0, 500, 'https://melhoramentoshigieners.com.br/imagens/7111.jpg', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z');
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Toalha Interfolhado 7234','Papel Toalha interfolhado 100% fibras virgens, Folha Quádrupla, Super Macio, Folhas Brancas, Tamanho da folha: 21 x 21 cm, Folhas por pacote: 150, Pacotes por caixa: 18',21.0, 2700, 'https://melhoramentoshigieners.com.br/imagens/7234.jpg', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z');
 
