@@ -1,6 +1,7 @@
 package br.com.melhoramentoshigieners.produtos_melhoramentos.servicos;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.DepartamentoDTO;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Departamento;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.DepartamentoRepositorio;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoEntidadeNaoEncontrada;
 
 @Service
 public class DepartamentoService {
@@ -25,6 +27,19 @@ public class DepartamentoService {
 		return listaDepartamento.stream().map(dep -> new DepartamentoDTO(dep)).collect(Collectors.toList());		
 	}
 	
+	@Transactional(readOnly=true)
+	public DepartamentoDTO findById (Long id) {
+		Optional<Departamento> optinal = repositorio.findById(id);
+		Departamento departamento = optinal.orElseThrow( ( )-> new ExcecaoEntidadeNaoEncontrada("Departamento não encontrado com a id informada!"));
+		return new DepartamentoDTO(departamento);
+	}
 	
+	@Transactional(readOnly=false)
+	public DepartamentoDTO insert (DepartamentoDTO dto) {
+		Departamento entidade = new Departamento ();
+		entidade.setNome(dto.getNome());
+		entidade = repositorio.save(entidade);
+		return new DepartamentoDTO(entidade);
+	}
 
 }
