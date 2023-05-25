@@ -23,6 +23,7 @@ public class DepartamentoDTO implements Serializable {
 	public DepartamentoDTO(Departamento entity) {
 		id = entity.getId();
 		nome = entity.getNome();
+		
 	}
 
 	public Long getId() {
