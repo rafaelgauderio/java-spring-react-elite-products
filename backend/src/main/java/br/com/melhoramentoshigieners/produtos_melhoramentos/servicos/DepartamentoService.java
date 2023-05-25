@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,6 +42,20 @@ public class DepartamentoService {
 		entidade.setNome(dto.getNome());
 		entidade = repositorio.save(entidade);
 		return new DepartamentoDTO(entidade);
+	}
+	
+	@Transactional(readOnly=false)
+	public DepartamentoDTO update(Long id, DepartamentoDTO dto) {
+		
+		try {
+			Departamento entidade = repositorio.getReferenceById(id);
+			entidade.setNome(dto.getNome());
+			entidade = repositorio.save(entidade);
+			return new DepartamentoDTO(entidade);
+		} catch (EntityNotFoundException erro) {
+			
+			throw new ExcecaoEntidadeNaoEncontrada("Departamento não encontrada com a id de número: " + id);
+		}
 	}
 
 }
