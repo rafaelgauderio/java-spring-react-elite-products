@@ -18,7 +18,6 @@ import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.Ex
 
 import javax.persistence.EntityNotFoundException;
 
-
 @Service
 public class EmbalagemServico {
 
@@ -27,7 +26,7 @@ public class EmbalagemServico {
 
 	@Transactional(readOnly = true)
 	public Page<EmbalagemDTO> buscarTodas(Pageable requisicaoPaginada) {
-		Page<Embalagem> listaPaginadaDeEmbalagem = embalagemRepositorio.findAll(requisicaoPaginada);		
+		Page<Embalagem> listaPaginadaDeEmbalagem = embalagemRepositorio.findAll(requisicaoPaginada);
 		return listaPaginadaDeEmbalagem.map(emb -> new EmbalagemDTO(emb));
 	}
 
@@ -65,7 +64,6 @@ public class EmbalagemServico {
 			throw new ExcecaoEntidadeNaoEncontrada("Embalagem não encontrada com o id de número " + id);
 		}
 	}
-
 
 	public void delete(Long id) {
 		// podem estourar 2 tipos e exceções.

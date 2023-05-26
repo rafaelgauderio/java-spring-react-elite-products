@@ -57,3 +57,19 @@ INSERT INTO tb_regra (descricao, permissao) VALUES ('Tem permissao de GET em tod
 INSERT INTO tb_usuario_regra (usuario_id, regra_id) VALUES (1,1);
 INSERT INTO tb_usuario_regra (usuario_id, regra_id) VALUES (1,2);
 INSERT INTO tb_usuario_regra (usuario_id, regra_id) VALUES (2,2);
+
+INSERT INTO tb_departamento (nome) VALUES ('Tecnologia da Informação');
+INSERT INTO tb_departamento (nome) VALUES ('Vendas Interno');
+INSERT INTO tb_departamento (nome) VALUES ('Vendas Externo');
+INSERT INTO tb_departamento (nome) VALUES ('Faturamento');
+INSERT INTO tb_departamento (nome) VALUES ('Compras');
+INSERT INTO tb_departamento (nome) VALUES ('Logística');
+INSERT INTO tb_departamento (nome) VALUES ('Financeiro');
+INSERT INTO tb_departamento (nome) VALUES ('Recursos Humanos');
+
+INSERT INTO tb_colaborador (nome, telefone, email, departamento_id) VALUES ('Rafael de Luca','5133376800','rafaeldeluca@melhoramentoshigieners.com.br', 1);
+INSERT INTO tb_colaborador (nome, telefone, email, departamento_id) VALUES ('Monica da Silva','5133376801','monica@melhoramentoshigieners.com.br', 2);
+
+
+
+
