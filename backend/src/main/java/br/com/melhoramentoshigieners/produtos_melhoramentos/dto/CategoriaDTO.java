@@ -26,14 +26,14 @@ public class CategoriaDTO implements Serializable {
 	}
 
 	public CategoriaDTO(Long id, String descricao) {
-		super();
-		this.id = id;
-		this.descricao = descricao;
+		super();		
+		this.id = id;	
+		this.descricao = descricao.toLowerCase();
 	}
 	
 	public CategoriaDTO(Categoria entidade) {
-		this.id = entidade.getId();
-		this.descricao = entidade.getDescricao();
+		this.id = entidade.getId();		
+		this.descricao = entidade.getDescricao().toLowerCase();
 	}
 
 	public Long getId() {
@@ -48,8 +48,8 @@ public class CategoriaDTO implements Serializable {
 		return descricao;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setDescricao(String descricao) {		
+		this.descricao = descricao.toLowerCase();
 	}
 	
 	

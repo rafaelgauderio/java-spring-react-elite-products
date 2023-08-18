@@ -29,14 +29,14 @@ public class EmbalagemDTO implements Serializable {
 	}
 
 	public EmbalagemDTO(Long id, String descricao) {
-		super();
+		super();		
 		this.id = id;
-		this.descricao = descricao;
+		this.descricao = descricao.toLowerCase();
 	}
 	
 	public EmbalagemDTO(Embalagem entidade) {
 		this.id = entidade.getId();
-		this.descricao = entidade.getDescricao();
+		this.descricao = entidade.getDescricao().toLowerCase();
 	}
 
 	public Long getId() {
@@ -48,10 +48,11 @@ public class EmbalagemDTO implements Serializable {
 	}
 
 	public String getDescricao() {
-		return descricao;
+		return descricao.toLowerCase();
 	}
 
 	public void setDescricao(String descricao) {
+		descricao = descricao.toLowerCase();
 		this.descricao = descricao;
 	}
 	
