@@ -83,16 +83,17 @@ public class UsuarioServico implements UserDetailsService {
     }
 
     @Transactional(readOnly = false)
-    public UsuarioDTO update(Long id, UsuarioUpdateDTO usuarioDTO) {
+    public UsuarioDTO update(Long id, UsuarioUpdateDTO usuarioPasswordDTO) {
         try {
             Usuario entidade = repositorioDeUsuario.getReferenceById(id);
-            entidade.setNome(usuarioDTO.getNome());
-            entidade.setSobrenome(usuarioDTO.getSobrenome());
-            entidade.setEmail(usuarioDTO.getEmail());
-
+            entidade.setNome(usuarioPasswordDTO.getNome());
+            entidade.setSobrenome(usuarioPasswordDTO.getSobrenome());
+            entidade.setEmail(usuarioPasswordDTO.getEmail());
+            entidade.setPassword(senhaCriptografada.encode(usuarioPasswordDTO.getPassword()));
+            
             entidade.getRegras().clear();
 
-            for (RegraDTO regra : usuarioDTO.getRegras()) {
+            for (RegraDTO regra : usuarioPasswordDTO.getRegras()) {
                 Regra entidadeRegra = regraRepositorio.getReferenceById(regra.getId());
                 entidade.getRegras().add(entidadeRegra);
             }
