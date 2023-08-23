@@ -37,14 +37,14 @@ public class UsuarioDTO implements Serializable {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
-        this.email = email;
+        this.email = email.toLowerCase();
     }
 
     public UsuarioDTO(Usuario entidade) {
         this.id = entidade.getId();
         this.nome = entidade.getNome();
         this.sobrenome = entidade.getSobrenome();
-        this.email = entidade.getEmail();
+        this.email = entidade.getEmail().toLowerCase();
         entidade.getRegras().forEach(
                 regra -> this.regras.add(new RegraDTO(regra))
         );
@@ -75,11 +75,11 @@ public class UsuarioDTO implements Serializable {
     }
 
     public String getEmail() {
-        return email;
+        return email.toLowerCase();
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email.toLowerCase();
     }
 
     public Set<RegraDTO> getRegras() {

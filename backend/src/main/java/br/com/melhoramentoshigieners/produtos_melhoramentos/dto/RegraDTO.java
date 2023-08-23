@@ -17,7 +17,7 @@ public class RegraDTO implements Serializable {
     @Size(min=3, max = 20, message="Campo regra deve ter entre 3 e 20 caracteres")
     private String descricao;
 
-    @NotBlank(message="Obrigatório preencher o tipe de permissão da regra")
+    @NotBlank(message="Obrigatório preencher o tipo de permissão da regra")
     private String permissao;
 
     public RegraDTO () {

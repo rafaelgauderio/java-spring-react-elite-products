@@ -49,6 +49,8 @@ INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (3,12);
 
 INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Rafael' , 'De Luca','rafaeldeluca@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
 INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Maria' , 'da Silva','mariadasilva@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
+INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Juliana' , 'de Luca','julianadeluca@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
+INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Claudia' , 'Moreira','claudiamoreira@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
 
 INSERT INTO tb_regra (descricao, permissao) VALUES ('Tem todas as permissoes de CRUD. Acesso a todas as rotas.','ROLE_ADMIN_SISTEMA');
 INSERT INTO tb_regra (descricao, permissao) VALUES ('Tem permissao de CRUD em algumas entidades. Não tem permissao de CRUD de usuarios e regras de acesso.','ROLE_GERENTE_LOJA');
@@ -57,6 +59,9 @@ INSERT INTO tb_regra (descricao, permissao) VALUES ('Tem permissao de GET em tod
 INSERT INTO tb_usuario_regra (usuario_id, regra_id) VALUES (1,1);
 INSERT INTO tb_usuario_regra (usuario_id, regra_id) VALUES (1,2);
 INSERT INTO tb_usuario_regra (usuario_id, regra_id) VALUES (2,2);
+INSERT INTO tb_usuario_regra (usuario_id, regra_id) VALUES (3,2);
+INSERT INTO tb_usuario_regra (usuario_id, regra_id) VALUES (4,2);
+
 
 INSERT INTO tb_departamento (nome) VALUES ('Tecnologia da Informação');
 INSERT INTO tb_departamento (nome) VALUES ('Vendas Interno');

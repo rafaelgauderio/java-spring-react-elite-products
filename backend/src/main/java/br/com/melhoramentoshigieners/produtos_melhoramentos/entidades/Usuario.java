@@ -47,7 +47,7 @@ public class Usuario implements UserDetails, Serializable {
 		this.id = id;
 		this.nome = nome;
 		this.sobrenome = sobrenome;
-		this.email = email;
+		this.email = email.toLowerCase();
 		this.password = password;
 	}
 
@@ -76,11 +76,11 @@ public class Usuario implements UserDetails, Serializable {
 	}
 
 	public String getEmail() {
-		return email;
+		return email.toLowerCase();
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		this.email = email.toLowerCase();
 	}
 
 	public String getPassword() {
