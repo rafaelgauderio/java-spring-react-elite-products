@@ -36,7 +36,8 @@ public class UsuarioControlador {
     public ResponseEntity<UsuarioDTO> buscarUsuarioPorId(@PathVariable Long id) {
         UsuarioDTO dto = usuarioServico.buscarPorId(id);
         return ResponseEntity.ok().body(dto);
-    }
+    }    
+    
 
     @PostMapping
     public ResponseEntity<UsuarioDTO> inserirUsuario (@Valid @RequestBody UsuarioPasswordDTO usuarioPasswordDTO) {

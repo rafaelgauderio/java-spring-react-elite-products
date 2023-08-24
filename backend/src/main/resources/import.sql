@@ -21,6 +21,7 @@ INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('folha simples', now(
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('folha dupla', now());
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('folha tripla', now());
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('folha quádrupla', now());
+INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('Amaciante', now());
 
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7127','Papel higiênico em rolo 100% fibras virgens, Folha Dupla, Super Macio, Folhas Brancas',10.0, 300, 'https://melhoramentoshigieners.com.br/imagens/7127.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z');
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7111','Papel higiênico em rolo 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas',10.0, 500, 'https://melhoramentoshigieners.com.br/imagens/7111.jpg', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z');
@@ -31,6 +32,8 @@ INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (1,3);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (2,1);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (2,5);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (3,6);
+
+
 
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (1,2);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (1,5);
@@ -47,8 +50,12 @@ INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (3,4);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (3,6);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (3,12);
 
+
+
 INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Rafael' , 'De Luca','rafaeldeluca@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
 INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Maria' , 'da Silva','mariadasilva@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
+INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Juliana' , 'de Luca','julianadeluca@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
+INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Claudia' , 'Moreira','claudiamoreira@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
 
 INSERT INTO tb_regra (descricao, permissao) VALUES ('Tem todas as permissoes de CRUD. Acesso a todas as rotas.','ROLE_ADMIN_SISTEMA');
 INSERT INTO tb_regra (descricao, permissao) VALUES ('Tem permissao de CRUD em algumas entidades. Não tem permissao de CRUD de usuarios e regras de acesso.','ROLE_GERENTE_LOJA');
@@ -57,6 +64,9 @@ INSERT INTO tb_regra (descricao, permissao) VALUES ('Tem permissao de GET em tod
 INSERT INTO tb_usuario_regra (usuario_id, regra_id) VALUES (1,1);
 INSERT INTO tb_usuario_regra (usuario_id, regra_id) VALUES (1,2);
 INSERT INTO tb_usuario_regra (usuario_id, regra_id) VALUES (2,2);
+INSERT INTO tb_usuario_regra (usuario_id, regra_id) VALUES (3,2);
+INSERT INTO tb_usuario_regra (usuario_id, regra_id) VALUES (4,2);
+
 
 INSERT INTO tb_departamento (nome) VALUES ('Tecnologia da Informação');
 INSERT INTO tb_departamento (nome) VALUES ('Vendas Interno');
