@@ -5,6 +5,8 @@ import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.ProdutoServ
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -21,13 +23,17 @@ public class ProdutoControlador {
     @Autowired
     private ProdutoServico servico;
 
-    @GetMapping
+    @SuppressWarnings("unchecked")
+	@GetMapping
     public ResponseEntity<Page<ProdutoDTO>> buscarTodosProdutos (
             @RequestParam(value = "embalagemId", defaultValue = "0") Long embalagemId,
             @RequestParam(value="categoriaId", defaultValue = "0") Long categoriaId,
             @RequestParam(value = "descricao", defaultValue = "") String descricao,
+            @PageableDefault(sort= "descricao", direction= Sort.Direction.ASC
+            )
             Pageable requisicaoPaginada) {
-        Page listaPaginadaDeProdutos = servico.buscarTodos(embalagemId, categoriaId,descricao, requisicaoPaginada);
+        @SuppressWarnings("rawtypes")
+		Page listaPaginadaDeProdutos = servico.buscarTodos(embalagemId, categoriaId,descricao, requisicaoPaginada);
         return ResponseEntity.ok().body(listaPaginadaDeProdutos);
     }
 
