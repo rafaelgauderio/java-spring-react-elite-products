@@ -1,8 +1,6 @@
 package br.com.melhoramentoshigieners.produtos_melhoramentos.dto;
 
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Regra;
-import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.enumerados.Permissao;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
