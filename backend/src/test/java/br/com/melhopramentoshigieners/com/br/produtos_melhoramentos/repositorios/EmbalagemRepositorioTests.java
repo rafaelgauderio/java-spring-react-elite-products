@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -26,25 +27,38 @@ public class EmbalagemRepositorioTests {
 
     private Long idNaoCadastrada;
     private Long idExistente;
+    private Long idDependente;
 
     @BeforeEach
     void setUp() throws Exception {
-        this.idExistente = 1L;
-        this.idNaoCadastrada = 100L;
+        idExistente = 2L; // pode deletar, não existe no banco um id com esse valor
+        idDependente = 6L;  // já existe no banco um dia com esse código de embalgem      
+        idNaoCadastrada = 100L;
     }
 
     @Test
     public void deletarPorIdDeveDeletarObjetoSeIdExistir() {
-        embalagemRepositorio.deleteById(2L);
+        embalagemRepositorio.deleteById(idExistente);
         Optional<Embalagem> optionalEmbalagem = embalagemRepositorio.findById(idExistente);
-
-        Assertions.assertFalse(optionalEmbalagem.isEmpty());
+        Assertions.assertTrue(optionalEmbalagem.isEmpty());
+        Assertions.assertFalse(optionalEmbalagem.isPresent());
     }
 
+    // codigo 404 Not found
     @Test
     public void deleterPorIdDeveEstourourExcecaoSeIdNaoCadastradaNoDataBase () {
         Assertions.assertThrows(EmptyResultDataAccessException.class, () -> {
             embalagemRepositorio.deleteById(idNaoCadastrada);
         });
+    }
+    
+    // se já existir um produto com essa embalagem deve dar erro 400.
+    @Test
+    public void deleteShouldReturnBadRequestWhenIdDepends () {
+    	
+    	Assertions.assertThrows(DataIntegrityViolationException.class, () -> {
+    		embalagemRepositorio.deleteById(idDependente);
+    	});
+    	
     }
 }
