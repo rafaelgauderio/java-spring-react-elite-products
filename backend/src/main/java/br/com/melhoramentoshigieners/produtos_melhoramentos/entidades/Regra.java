@@ -3,6 +3,9 @@ package br.com.melhoramentoshigieners.produtos_melhoramentos.entidades;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+
+import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.enumerados.Permissao;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,11 +31,11 @@ public class Regra implements Serializable {
 
 	}
 
-	public Regra(Long id, String descricao, String permissao) {
+	public Regra(Long id, String descricao, Permissao permissao) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
-		this.permissao = permissao;
+		this.permissao = permissao.getValue();
 	}
 
 	public Long getId() {
@@ -47,16 +50,16 @@ public class Regra implements Serializable {
 		return descricao;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setDescricao(Permissao descricao) {
+		this.descricao = descricao.getValue();
 	}
 
 	public String getPermissao() {
 		return permissao;
 	}
 
-	public void setPermissao(String permissao) {
-		this.permissao = permissao;
+	public void setPermissao(Permissao permissao) {
+		this.permissao = permissao.getValue();
 	}
 
 	public Set<Usuario> getUsuarios() {

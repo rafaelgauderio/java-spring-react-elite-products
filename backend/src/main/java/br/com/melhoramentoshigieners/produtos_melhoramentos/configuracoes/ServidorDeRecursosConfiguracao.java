@@ -33,13 +33,16 @@ public class ServidorDeRecursosConfiguracao extends ResourceServerConfigurerAdap
     private static final String ROTA_BANCO_H2 = "/console-h2-database/**";
 
     // rotas liberadas consultar o catálogo
-    private static final String [] ROTA_CONSULTAR_CATALOGO = {"/produtos/**","/categorias/**","/embalagens/**"};
+    private static final String [] ROTA_CONSULTAR_CATALOGO = {"/produtos/**","/categorias/**","/embalagens/**","/colaboradores/**","/departamentos/**"};
 
     // rotas liberadas para CRUD de entidades
     private static final String [] ROTA_CRUD_ENTIDADES = {"/produtos/**","/categorias/**","/embalagens/**"};
+    
+    // rotas liberadas para CRUD de colaboradores e departamentos
+    private static final String [] ROTA_CRUD_COLABORADORES = {"/colaboradores/**","/departamentos/**"};
 
     // rotas liberadas para CRUD de entidades
-    private static final String [] ROTA_ADMINTRADORES = {"/usuarios/**"};
+    private static final String [] ROTA_ADMINTRADORES = {"/usuarios/**","/regras/**"};
 
     private static final String [] HOST_LIBERADOS={"https://minhaAplicacao.com.br","http://localhost:8080","http://localhost:3000","http://localhost:5173"};
 
@@ -79,6 +82,9 @@ public class ServidorDeRecursosConfiguracao extends ResourceServerConfigurerAdap
                 .antMatchers(HttpMethod.DELETE,ROTA_CRUD_ENTIDADES).hasRole(String.valueOf(Permissao.GERENTE_LOJA))
                 .antMatchers(HttpMethod.OPTIONS,ROTA_CRUD_ENTIDADES).hasRole(String.valueOf(Permissao.GERENTE_LOJA))
                 .antMatchers(HttpMethod.HEAD,ROTA_CRUD_ENTIDADES).hasRole(String.valueOf(Permissao.GERENTE_LOJA))
+                .antMatchers(HttpMethod.POST,ROTA_CRUD_COLABORADORES).hasRole(String.valueOf(Permissao.ADMIN_SISTEMA))
+                .antMatchers(HttpMethod.PUT,ROTA_CRUD_COLABORADORES).hasRole(String.valueOf(Permissao.ADMIN_SISTEMA))
+                .antMatchers(HttpMethod.DELETE,ROTA_CRUD_COLABORADORES).hasRole(String.valueOf(Permissao.ADMIN_SISTEMA))
                 .antMatchers(ROTA_ADMINTRADORES).hasRole(String.valueOf(Permissao.ADMIN_SISTEMA));
     }
 

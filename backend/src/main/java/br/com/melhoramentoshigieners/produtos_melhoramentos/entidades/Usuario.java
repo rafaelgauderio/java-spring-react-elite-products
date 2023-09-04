@@ -156,7 +156,7 @@ public class Usuario implements UserDetails, Serializable {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return this.regras.stream().map((regra) -> new SimpleGrantedAuthority(regra.getPermissao()))
+		return this.regras.stream().map((regra) -> new SimpleGrantedAuthority(regra.getPermissao().toString()))
 				.collect(Collectors.toList());
 	}
 
