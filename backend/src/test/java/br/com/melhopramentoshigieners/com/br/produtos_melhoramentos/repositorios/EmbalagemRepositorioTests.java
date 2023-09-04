@@ -1,5 +1,6 @@
 package br.com.melhopramentoshigieners.com.br.produtos_melhoramentos.repositorios;
 
+import br.com.melhopramentoshigieners.com.br.produtos_melhoramentos.tests.EmbalagemFactory;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.ProdutosMelhoramentosApplication;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Embalagem;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.EmbalagemRepositorio;
@@ -27,12 +28,10 @@ public class EmbalagemRepositorioTests {
 
     private Long idNaoCadastrada;
     private Long idExistente;
-    private Long idDependente;
-
+  
     @BeforeEach
     void setUp() throws Exception {
-        idExistente = 2L; // pode deletar, não existe no banco um id com esse valor
-        idDependente = 1L;  // já existe no banco um dia com esse código de embalgem      
+        idExistente = 2L; 
         idNaoCadastrada = 100L;
     }
     
@@ -52,7 +51,7 @@ public class EmbalagemRepositorioTests {
 	}
 
     @Test
-    public void deletarPorIdDeveDeletarObjetoSeIdExistir() {
+    public void deleteEmbalagemShoudlDeteteObjectWhenIdExists() {
         embalagemRepositorio.deleteById(idExistente);
         Optional<Embalagem> optionalEmbalagem = embalagemRepositorio.findById(idExistente);
         Assertions.assertTrue(optionalEmbalagem.isEmpty());
@@ -61,12 +60,23 @@ public class EmbalagemRepositorioTests {
 
     // codigo 404 Not found
     @Test
-    public void deleterPorIdDeveEstourourExcecaoSeIdNaoCadastradaNoDataBase () {
+    public void deteteShoudlThrowEmptResultDataEccessExceptionWhenIdDoesNotExists () {
         Assertions.assertThrows(EmptyResultDataAccessException.class, () -> {
             embalagemRepositorio.deleteById(idNaoCadastrada);
         });
     }
     
-    
+    @Test
+    public void saveEmbalagemShouldPersistWithAutoIncrementId () {
+    	Embalagem embalagem = EmbalagemFactory.criarEmbalagem();
+    	embalagem.setId(null);
+    	
+    	Assertions.assertNull(embalagem.getId()); // null antes de salvar no banco
+    	
+    	embalagem = embalagemRepositorio.save(embalagem);
+    	Assertions.assertNotNull(embalagem.getId()); // agora id da embalagem não é mais nula depois de salvar no banco
+    	// coomo é aunto incremente o proximo número de id de embalagem é o número total de embalagens do banco, por foi inserida por último
+    	Assertions.assertEquals(embalagemRepositorio.findAll().size(), embalagem.getId()); 
+    }      
     
 }
