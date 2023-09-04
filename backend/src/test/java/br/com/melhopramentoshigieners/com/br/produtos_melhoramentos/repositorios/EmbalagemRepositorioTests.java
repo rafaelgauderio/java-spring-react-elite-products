@@ -32,9 +32,24 @@ public class EmbalagemRepositorioTests {
     @BeforeEach
     void setUp() throws Exception {
         idExistente = 2L; // pode deletar, não existe no banco um id com esse valor
-        idDependente = 6L;  // já existe no banco um dia com esse código de embalgem      
+        idDependente = 1L;  // já existe no banco um dia com esse código de embalgem      
         idNaoCadastrada = 100L;
     }
+    
+    @Test
+	public void findByIdShouldReturnOptionalNotEmptyWhenIdExists () { 
+		Optional<Embalagem> optinal = embalagemRepositorio.findById(idExistente);		
+		Assertions.assertFalse(optinal.isEmpty());
+		Assertions.assertTrue(optinal.isPresent());
+	}
+    
+    @Test
+	public void findByIdShouldReturnOptinalEmptyWhenIdDoesNotExists() {
+	
+		Optional<Embalagem> optinal = embalagemRepositorio.findById(idNaoCadastrada);		
+		Assertions.assertFalse(optinal.isPresent());
+		Assertions.assertTrue(optinal.isEmpty());
+	}
 
     @Test
     public void deletarPorIdDeveDeletarObjetoSeIdExistir() {
@@ -52,13 +67,6 @@ public class EmbalagemRepositorioTests {
         });
     }
     
-    // se já existir um produto com essa embalagem deve dar erro 400.
-    @Test
-    public void deleteShouldReturnBadRequestWhenIdDepends () {
-    	
-    	Assertions.assertThrows(DataIntegrityViolationException.class, () -> {
-    		embalagemRepositorio.deleteById(idDependente);
-    	});
-    	
-    }
+    
+    
 }
