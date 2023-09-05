@@ -21,7 +21,7 @@ public interface ProdutoRepositorio extends JpaRepository<Produto, Long> {
 			+ "INNER JOIN objeto.categorias cats " + "WHERE (:embalagens IS NULL OR embals IN :embalagens) "
 			+ "AND (:categorias IS NULL OR cats IN :categorias) "
 			+ "AND (LOWER(objeto.descricao) LIKE LOWER(CONCAT('%',:descricao,'%')) )")
-	Page<Produto> buscarProdutosPorEmbalagem(List<Embalagem> embalagens, List<Categoria> categorias, String descricao,
+	Page<Produto> buscarProdutosPorEmbalagemECategoria(List<Embalagem> embalagens, List<Categoria> categorias, String descricao,
 			Pageable requisicaoPaginada);
 
 	// consulta para resolver o problema de várias consultas ao banco
