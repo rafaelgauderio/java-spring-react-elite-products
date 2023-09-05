@@ -19,7 +19,7 @@ public class ProdutoFactory {
 	}
 	
 	public static ProdutoDTO criarProdutoDTO() {
-		Produto produto = criarProduto();	
+		Produto produto = criarProduto();			
 		return new ProdutoDTO(produto, produto.getEmbalagens(),produto.getCategorias());
 	}
 }

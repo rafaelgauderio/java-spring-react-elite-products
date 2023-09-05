@@ -51,21 +51,21 @@ public class ProdutoServicosTests {
 	private Long idProdutoExistente, idProdutoInexistente;
 	private Produto produto;
 	private ProdutoDTO produtoDTO;
-	//private Embalagem embalagem;
-	//private Categoria categoria;
+	private Embalagem embalagem;
+	private Categoria categoria;
 	private PageImpl<Produto> paginaDeDados;
 
 	@BeforeEach
 	void setUp() throws Exception {
 
-		idProdutoExistente = 2L;
+		idProdutoExistente = 1L;
 		idProdutoInexistente = 100L;
 
 		produto = ProdutoFactory.criarProduto();
 		produtoDTO = ProdutoFactory.criarProdutoDTO();
-		//embalagem = EmbalagemFactory.criarEmbalagem();
-		//categoria = CategoriaFactory.criarCategoria();
-		
+		embalagem = EmbalagemFactory.criarEmbalagem();
+		categoria = CategoriaFactory.criarCategoria();
+
 		paginaDeDados = new PageImpl<>(List.of(produto));
 
 		Mockito.when(produtoRepositorio.findAll((Pageable) ArgumentMatchers.any())).thenReturn(paginaDeDados);
@@ -74,11 +74,19 @@ public class ProdutoServicosTests {
 
 		Mockito.when(produtoRepositorio.findById(idProdutoExistente)).thenReturn(Optional.of(produto));
 		Mockito.when(produtoRepositorio.getReferenceById(idProdutoExistente)).thenReturn(produto);
-		
+
 		Mockito.when(produtoRepositorio.findById(idProdutoInexistente)).thenReturn(Optional.empty());
-		Mockito.when(produtoRepositorio.getReferenceById(idProdutoInexistente)).thenThrow(ExcecaoEntidadeNaoEncontrada.class);
-		
+		Mockito.when(produtoRepositorio.getReferenceById(idProdutoInexistente))
+				.thenThrow(ExcecaoEntidadeNaoEncontrada.class);
+
 		Mockito.when(produtoRepositorio.save(ArgumentMatchers.any())).thenReturn(produto);
+		
+		// mockando categorias e embalagens
+		Mockito.when(embalagemRepositorio.getReferenceById(idProdutoExistente)).thenReturn(embalagem);
+		Mockito.when(embalagemRepositorio.getReferenceById(idProdutoInexistente)).thenThrow(ExcecaoEntidadeNaoEncontrada.class);
+		
+		Mockito.when(categoriaRepositorio.getReferenceById(idProdutoExistente)).thenReturn(categoria);
+		Mockito.when(categoriaRepositorio.getReferenceById(idProdutoInexistente)).thenThrow(ExcecaoEntidadeNaoEncontrada.class);
 
 	}
 
@@ -90,7 +98,8 @@ public class ProdutoServicosTests {
 		// retornar tudo
 		Page<ProdutoDTO> paginaDeProdutos = produtoServico.buscarTodos(0L, 0L, "", listaPaginada);
 		Assertions.assertNotNull(paginaDeProdutos);
-		Mockito.verify(produtoRepositorio,Mockito.times(1)).buscarProdutosPorEmbalagemECategoria(null, null, "", listaPaginada);
+		Mockito.verify(produtoRepositorio, Mockito.times(1)).buscarProdutosPorEmbalagemECategoria(null, null, "",
+				listaPaginada);
 
 	}
 
@@ -104,32 +113,38 @@ public class ProdutoServicosTests {
 	}
 
 	@Test
-	void findProdutoByIdShouldThrowResourceNotFoundExceptionWhenProductIdDoesNotExist () {
+	void findProdutoByIdShouldThrowResourceNotFoundExceptionWhenProductIdDoesNotExist() {
 		Assertions.assertThrows(ExcecaoEntidadeNaoEncontrada.class, () -> {
 			produtoServico.buscarPorId(idProdutoInexistente);
 		});
-		
+
 	}
-	
+
 	@Test
-	void insertProdutoShouldAutoIncrementProdutoIdWhenNewProductIsCreated () {
-		
+	void insertProdutoShouldAutoIncrementProdutoIdWhenNewProductIsCreated() {
+
 		produtoDTO.setId(null);
-		Assertions.assertNull(produtoDTO.getId());	
-		
+		Assertions.assertNull(produtoDTO.getId());
+
 		ProdutoDTO resultadoProdutoDTO = produtoServico.inserir(produtoDTO);
 		Assertions.assertNotNull(resultadoProdutoDTO.getId());
-		
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	@Test
+	void updateProdutoShouldReturnProductDTOWhenIdExists() {
+
+		
+		ProdutoDTO resultadoProdutoDTO = produtoServico.update(idProdutoExistente, produtoDTO);
+		Assertions.assertNotNull(resultadoProdutoDTO);
+	}
+
+	@Test
+	void updateProdutoShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist() {
+
+		Assertions.assertThrows(ExcecaoEntidadeNaoEncontrada.class, () -> {
+			produtoServico.update(idProdutoInexistente, produtoDTO);
+		});
+	}
+
 }
