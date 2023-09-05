@@ -42,7 +42,7 @@ public class ServidorDeRecursosConfiguracao extends ResourceServerConfigurerAdap
     private static final String [] ROTA_CRUD_COLABORADORES = {"/colaboradores/**","/departamentos/**"};
 
     // rotas liberadas para CRUD de entidades
-    private static final String [] ROTA_ADMINTRADORES = {"/usuarios/**","/regras/**"};
+    private static final String [] ROTA_ADMINTRADORES = {"/usuarios/**"};
 
     private static final String [] HOST_LIBERADOS={"https://minhaAplicacao.com.br","http://localhost:8080","http://localhost:3000","http://localhost:5173"};
 

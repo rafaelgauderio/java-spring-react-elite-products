@@ -1,6 +1,10 @@
 package br.com.melhopramentoshigieners.com.br.produtos_melhoramentos.servicos;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +35,7 @@ import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.Embalag
 import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.ProdutoRepositorio;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.ProdutoServico;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoEntidadeNaoEncontrada;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoIntegridadeBancoDeDados;
 
 @ExtendWith(SpringExtension.class)
 public class ProdutoServicosTests {
@@ -48,7 +53,7 @@ public class ProdutoServicosTests {
 	@Mock
 	private EmbalagemRepositorio embalagemRepositorio;
 
-	private Long idProdutoExistente, idProdutoInexistente;
+	private Long idProdutoExistente, idProdutoInexistente, idProdutoDependente;
 	private Produto produto;
 	private ProdutoDTO produtoDTO;
 	private Embalagem embalagem;
@@ -58,8 +63,9 @@ public class ProdutoServicosTests {
 	@BeforeEach
 	void setUp() throws Exception {
 
-		idProdutoExistente = 1L;
-		idProdutoInexistente = 100L;
+		this.idProdutoExistente = 1L;
+		this.idProdutoInexistente = 100L;
+		this.idProdutoDependente = 2L;
 
 		produto = ProdutoFactory.criarProduto();
 		produtoDTO = ProdutoFactory.criarProdutoDTO();
@@ -80,13 +86,25 @@ public class ProdutoServicosTests {
 				.thenThrow(ExcecaoEntidadeNaoEncontrada.class);
 
 		Mockito.when(produtoRepositorio.save(ArgumentMatchers.any())).thenReturn(produto);
-		
+
 		// mockando categorias e embalagens
 		Mockito.when(embalagemRepositorio.getReferenceById(idProdutoExistente)).thenReturn(embalagem);
-		Mockito.when(embalagemRepositorio.getReferenceById(idProdutoInexistente)).thenThrow(ExcecaoEntidadeNaoEncontrada.class);
-		
+		Mockito.when(embalagemRepositorio.getReferenceById(idProdutoInexistente))
+				.thenThrow(ExcecaoEntidadeNaoEncontrada.class);
+
 		Mockito.when(categoriaRepositorio.getReferenceById(idProdutoExistente)).thenReturn(categoria);
-		Mockito.when(categoriaRepositorio.getReferenceById(idProdutoInexistente)).thenThrow(ExcecaoEntidadeNaoEncontrada.class);
+		Mockito.when(categoriaRepositorio.getReferenceById(idProdutoInexistente))
+				.thenThrow(ExcecaoEntidadeNaoEncontrada.class);
+
+		// mockando repositirios para exclusao de produtos
+		Mockito.doNothing().when(produtoRepositorio).deleteById(idProdutoExistente);
+		doNothing().when(produtoRepositorio).deleteById(idProdutoExistente);
+
+		Mockito.doThrow(ExcecaoEntidadeNaoEncontrada.class).when(produtoRepositorio).deleteById(idProdutoInexistente);
+		doThrow(ExcecaoEntidadeNaoEncontrada.class).when(produtoRepositorio).deleteById(idProdutoExistente);
+
+		Mockito.doThrow(ExcecaoIntegridadeBancoDeDados.class).when(produtoRepositorio).deleteById(idProdutoDependente);
+		doThrow(ExcecaoIntegridadeBancoDeDados.class).when(produtoRepositorio).deleteById(idProdutoDependente);
 
 	}
 
@@ -134,7 +152,6 @@ public class ProdutoServicosTests {
 	@Test
 	void updateProdutoShouldReturnProductDTOWhenIdExists() {
 
-		
 		ProdutoDTO resultadoProdutoDTO = produtoServico.update(idProdutoExistente, produtoDTO);
 		Assertions.assertNotNull(resultadoProdutoDTO);
 	}
@@ -144,6 +161,31 @@ public class ProdutoServicosTests {
 
 		Assertions.assertThrows(ExcecaoEntidadeNaoEncontrada.class, () -> {
 			produtoServico.update(idProdutoInexistente, produtoDTO);
+		});
+	}
+
+	@Test
+	void deleteProdutoShouldDoNothingWhenProdutoIdExists() {
+		
+		Assertions.assertDoesNotThrow(() -> {
+			produtoServico.deleteById(idProdutoExistente);
+		});
+		Mockito.verify(produtoRepositorio, Mockito.times(1)).deleteById(idProdutoExistente);
+		verify(produtoRepositorio).deleteById(idProdutoExistente);;
+
+	}
+
+	@Test
+	void deteteShouldThrowsExcecaoEntidadeNaoEncontradaWhenProdutoIdDoesNotExist() {
+		Assertions.assertThrows(ExcecaoEntidadeNaoEncontrada.class, () -> {
+			produtoServico.buscarPorId(idProdutoInexistente);
+		});
+	}
+
+	@Test
+	void deteleShouldThrowsExcecaoIntegridadeBancoDeDadosWhenProdutoIdDepends() {
+		Assertions.assertThrows(ExcecaoIntegridadeBancoDeDados.class, () -> {
+			produtoServico.deleteById(idProdutoDependente);
 		});
 	}
 
