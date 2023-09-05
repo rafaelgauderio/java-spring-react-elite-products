@@ -5,8 +5,6 @@ import static org.mockito.ArgumentMatchers.any;
 import java.util.List;
 import java.util.Optional;
 
-import javax.persistence.EntityNotFoundException;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,8 +19,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import br.com.melhopramentoshigieners.com.br.produtos_melhoramentos.tests.CategoriaFactory;
+import br.com.melhopramentoshigieners.com.br.produtos_melhoramentos.tests.EmbalagemFactory;
 import br.com.melhopramentoshigieners.com.br.produtos_melhoramentos.tests.ProdutoFactory;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.ProdutoDTO;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Categoria;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Embalagem;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Produto;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.CategoriaRepositorio;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.EmbalagemRepositorio;
@@ -49,16 +51,21 @@ public class ProdutoServicosTests {
 	private Long idProdutoExistente, idProdutoInexistente;
 	private Produto produto;
 	private ProdutoDTO produtoDTO;
+	//private Embalagem embalagem;
+	//private Categoria categoria;
 	private PageImpl<Produto> paginaDeDados;
 
 	@BeforeEach
 	void setUp() throws Exception {
 
-		idProdutoExistente = 1L;
+		idProdutoExistente = 2L;
 		idProdutoInexistente = 100L;
 
 		produto = ProdutoFactory.criarProduto();
 		produtoDTO = ProdutoFactory.criarProdutoDTO();
+		//embalagem = EmbalagemFactory.criarEmbalagem();
+		//categoria = CategoriaFactory.criarCategoria();
+		
 		paginaDeDados = new PageImpl<>(List.of(produto));
 
 		Mockito.when(produtoRepositorio.findAll((Pageable) ArgumentMatchers.any())).thenReturn(paginaDeDados);
@@ -69,7 +76,9 @@ public class ProdutoServicosTests {
 		Mockito.when(produtoRepositorio.getReferenceById(idProdutoExistente)).thenReturn(produto);
 		
 		Mockito.when(produtoRepositorio.findById(idProdutoInexistente)).thenReturn(Optional.empty());
-		Mockito.when(produtoRepositorio.findById(idProdutoInexistente)).thenThrow(ExcecaoEntidadeNaoEncontrada.class);
+		Mockito.when(produtoRepositorio.getReferenceById(idProdutoInexistente)).thenThrow(ExcecaoEntidadeNaoEncontrada.class);
+		
+		Mockito.when(produtoRepositorio.save(ArgumentMatchers.any())).thenReturn(produto);
 
 	}
 
@@ -81,6 +90,7 @@ public class ProdutoServicosTests {
 		// retornar tudo
 		Page<ProdutoDTO> paginaDeProdutos = produtoServico.buscarTodos(0L, 0L, "", listaPaginada);
 		Assertions.assertNotNull(paginaDeProdutos);
+		Mockito.verify(produtoRepositorio,Mockito.times(1)).buscarProdutosPorEmbalagemECategoria(null, null, "", listaPaginada);
 
 	}
 
@@ -100,4 +110,26 @@ public class ProdutoServicosTests {
 		});
 		
 	}
+	
+	@Test
+	void insertProdutoShouldAutoIncrementProdutoIdWhenNewProductIsCreated () {
+		
+		produtoDTO.setId(null);
+		Assertions.assertNull(produtoDTO.getId());	
+		
+		ProdutoDTO resultadoProdutoDTO = produtoServico.inserir(produtoDTO);
+		Assertions.assertNotNull(resultadoProdutoDTO.getId());
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
