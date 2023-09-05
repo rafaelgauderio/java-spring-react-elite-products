@@ -24,11 +24,13 @@ public class ProdutoRepositorioTests {
 
     private Long idNaoExistente;
     private Long idExistente;
+    private int numeroDeProdutos;
   
     @BeforeEach
     void setUp() throws Exception {
         idExistente = 1L; 
         idNaoExistente = 200L;
+        numeroDeProdutos = produtoRepositorio.findAll().size();
     }
     
     @Test
@@ -66,13 +68,35 @@ public class ProdutoRepositorioTests {
     	Produto produto = ProdutoFactory.criarProduto();
     	produto.setId(null);
     	
-    	Assertions.assertNull(produto.getId()); 
+    	Assertions.assertNull(produto.getId());    	
+    	produto = produtoRepositorio.save(produto);    	
     	
-    	produto = produtoRepositorio.save(produto);
+    
     	Assertions.assertNotNull(produto.getId()); 
-    	Assertions.assertEquals(produtoRepositorio.findAll().size(), produto.getId()); 
+    	Assertions.assertEquals(numeroDeProdutos + 2 , produto.getId()); 
     	Assertions.assertEquals(produto.getCategorias().size(),1);
     	Assertions.assertEquals(produto.getEmbalagens().size(),1);
-    }      
+    }    
+    
+    
+    @Test
+    public void updateProductShouldUpdateDataOfProdutoWhenIdExist () {
+    	
+    	Produto produto = ProdutoFactory.criarProduto();
+    	produto = produtoRepositorio.save(produto);
+    	produto = produtoRepositorio.getReferenceById(produto.getId());    	
+    	produto.setFragrancia("Pinho");
+    	produto.setDescricao("Sabonete Líquido Pinho");    
+    	produto = produtoRepositorio.save(produto);     	
+    
+    	
+    	Assertions.assertNotNull(produto.getId());     	 
+    	Assertions.assertEquals(produto.getCategorias().size(),1);
+    	Assertions.assertEquals(produto.getEmbalagens().size(),1);
+    	Assertions.assertEquals(numeroDeProdutos + 1 , produto.getId()); 
+    	Assertions.assertEquals("Pinho", produto.getFragrancia());
+    	Assertions.assertEquals("Sabonete Líquido Pinho", produto.getDescricao());
+    }  
+     
     
 }
