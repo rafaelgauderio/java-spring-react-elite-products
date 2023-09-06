@@ -3,7 +3,6 @@ package br.com.melhopramentoshigieners.com.br.produtos_melhoramentos.servicos;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import java.util.List;
@@ -37,6 +36,7 @@ import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.ProdutoServ
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoEntidadeNaoEncontrada;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoIntegridadeBancoDeDados;
 
+
 @ExtendWith(SpringExtension.class)
 public class ProdutoServicosTests {
 
@@ -65,7 +65,7 @@ public class ProdutoServicosTests {
 
 		this.idProdutoExistente = 1L;
 		this.idProdutoInexistente = 100L;
-		this.idProdutoDependente = 2L;
+		this.idProdutoDependente = 3L;
 
 		produto = ProdutoFactory.criarProduto();
 		produtoDTO = ProdutoFactory.criarProdutoDTO();
@@ -101,7 +101,7 @@ public class ProdutoServicosTests {
 		doNothing().when(produtoRepositorio).deleteById(idProdutoExistente);
 
 		Mockito.doThrow(ExcecaoEntidadeNaoEncontrada.class).when(produtoRepositorio).deleteById(idProdutoInexistente);
-		doThrow(ExcecaoEntidadeNaoEncontrada.class).when(produtoRepositorio).deleteById(idProdutoExistente);
+		doThrow(ExcecaoEntidadeNaoEncontrada.class).when(produtoRepositorio).deleteById(idProdutoInexistente);
 
 		Mockito.doThrow(ExcecaoIntegridadeBancoDeDados.class).when(produtoRepositorio).deleteById(idProdutoDependente);
 		doThrow(ExcecaoIntegridadeBancoDeDados.class).when(produtoRepositorio).deleteById(idProdutoDependente);
