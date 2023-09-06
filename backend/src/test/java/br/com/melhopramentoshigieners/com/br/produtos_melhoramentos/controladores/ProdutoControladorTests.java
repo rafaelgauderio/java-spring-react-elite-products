@@ -1,13 +1,14 @@
 package br.com.melhopramentoshigieners.com.br.produtos_melhoramentos.controladores;
 
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -16,7 +17,6 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -26,8 +26,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -37,6 +35,7 @@ import br.com.melhoramentoshigieners.produtos_melhoramentos.ProdutosMelhoramento
 import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.ProdutoDTO;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.ProdutoServico;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoEntidadeNaoEncontrada;
+import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoIntegridadeBancoDeDados;
 
 //@WebMvcTest(ProdutoControlador.class)
 @ContextConfiguration(classes = ProdutosMelhoramentosApplication.class)
@@ -86,6 +85,10 @@ public class ProdutoControladorTests {
 
 		when(produtoServico.update(eq(idExistente), any())).thenReturn(produtoDTO);
 		when(produtoServico.update(eq(idNaoExistente), any())).thenThrow(ExcecaoEntidadeNaoEncontrada.class);
+
+		doNothing().when(produtoServico).deleteById(idExistente);
+		doThrow(ExcecaoEntidadeNaoEncontrada.class).when(produtoServico).deleteById(idNaoExistente);
+		doThrow(ExcecaoIntegridadeBancoDeDados.class).when(produtoServico).deleteById(idDependente);
 	}
 
 	@Test
@@ -142,27 +145,26 @@ public class ProdutoControladorTests {
 		resultActions.andExpect(jsonPath("$.imgUrl").exists());
 
 	}
-	
-	@Test
-	public void insertShouldThrowUnauthorizedWhenUserIsNotLogged() throws Exception {
 
-				
+	@Test
+	void insertShouldThrowUnauthorizedWhenUserIsNotLogged() throws Exception {
+
 		String jsonBody = objetoMapper.writeValueAsString(produtoDTO);
 
-		ResultActions resultActions = mockMvc.perform(put("/produtos", idExistente).content(jsonBody)
+		ResultActions resultActions = mockMvc.perform(post("/produtos", idExistente).content(jsonBody)
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
 
 		resultActions.andExpect(status().isUnauthorized()); // erro codigo http 401
 	}
 
 	@Test
-	public void updateShouldReturnProductDTOWhenIdExists() throws Exception {
+	void updateShouldReturnProductDTOWhenIdExists() throws Exception {
 
-		String accessToken = tokenAcesso.obterTokenDeAcesso(mockMvc, username, password);
+		String stringTokenAcesso = tokenAcesso.obterTokenDeAcesso(mockMvc, username, password);
 		String jsonBody = objetoMapper.writeValueAsString(produtoDTO);
 
 		ResultActions resultActions = mockMvc
-				.perform(put("/produtos/{id}", idExistente).header("Authorization", "Bearer " + accessToken)
+				.perform(put("/produtos/{id}", idExistente).header("Authorization", "Bearer " + stringTokenAcesso)
 						.content(jsonBody).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
 
 		resultActions.andExpect(status().isOk());
@@ -173,14 +175,14 @@ public class ProdutoControladorTests {
 	}
 
 	@Test
-	public void updateShouldThrowExcecaoDeEntidadeNaoEncontradaWhenIdDoesNotExist() throws Exception {
+	void updateShouldThrowExcecaoDeEntidadeNaoEncontradaWhenIdDoesNotExist() throws Exception {
 
-		String accessToken = tokenAcesso.obterTokenDeAcesso(mockMvc, username, password);
+		String stringTokenAcesso = tokenAcesso.obterTokenDeAcesso(mockMvc, username, password);
 		produtoDTO.setId(idNaoExistente);
 		String jsonBody = objetoMapper.writeValueAsString(produtoDTO);
 
 		ResultActions resultActions = mockMvc
-				.perform(put("/produtos/{id}", idNaoExistente).header("Authorization", "Bearer " + accessToken)
+				.perform(put("/produtos/{id}", idNaoExistente).header("Authorization", "Bearer " + stringTokenAcesso)
 						.content(jsonBody).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
 
 		resultActions.andExpect(status().isNotFound()); // erro codigo http 404
@@ -188,10 +190,8 @@ public class ProdutoControladorTests {
 	}
 
 	@Test
-	public void updateShouldThrowUnauthorizedWhenUserIsNotLogged() throws Exception {
+	void updateShouldThrowUnauthorizedWhenUserIsNotLogged() throws Exception {
 
-		// String accessToken = tokenAcesso.obterTokenDeAcesso(mockMvc, username,
-		// password);
 		produtoDTO.setId(idNaoExistente);
 		String jsonBody = objetoMapper.writeValueAsString(produtoDTO);
 
@@ -199,6 +199,59 @@ public class ProdutoControladorTests {
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
 
 		resultActions.andExpect(status().isUnauthorized()); // erro codigo http 401
+	}
+
+	@Test
+	void deleteByIdShoudDoNothingAndReturnNoContentWhenIdExists() throws Exception {
+
+		String stringTokenAcesso = tokenAcesso.obterTokenDeAcesso(mockMvc, username, password);
+		String jsonBody = objetoMapper.writeValueAsString(produtoDTO);
+
+		ResultActions resultActions = mockMvc.perform(delete("/produtos/{id}", idExistente).content(jsonBody)
+				.header("Authorization", "Bearer " + stringTokenAcesso).contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON));
+
+		resultActions.andExpect(status().isNoContent()); // http 204
+	}
+	
+	@Test
+	void deleteByIdShouldThrowUnauthorizedWhenUserIsNotLogged () throws Exception {
+		
+		String jsonBody = objetoMapper.writeValueAsString(produtoDTO);
+
+		ResultActions resultActions = mockMvc.perform(delete("/produtos/{id}", idExistente).content(jsonBody)				
+				.accept(MediaType.APPLICATION_JSON));
+
+		resultActions.andExpect(status().isUnauthorized()); // http 401
+	}
+	
+	@Test
+	void deleteByIdShoudThrowExcecaoEntidadeNaoEncontradaWhenIdDoesNotExist () throws Exception {
+
+		String stringTokenAcesso = tokenAcesso.obterTokenDeAcesso(mockMvc, username, password);
+		String jsonBody = objetoMapper.writeValueAsString(produtoDTO);
+
+		ResultActions resultActions = mockMvc.perform(delete("/produtos/{id}", idNaoExistente).content(jsonBody)
+				.header("Authorization", "Bearer " + stringTokenAcesso).contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON));
+
+		resultActions.andExpect(status().isNotFound()); // http 404
+	}
+	
+	@Test
+	void deleteByIdShouldThrowExcecaoIntegridadeDeBancoDeDadosWhenIdDepends () throws Exception {
+		
+		String stringTokenAcesso = tokenAcesso.obterTokenDeAcesso(mockMvc, username, password);
+		String jsonBody = objetoMapper.writeValueAsString(produtoDTO);
+		
+		ResultActions resultActions = mockMvc.perform(delete("/produtos/{id}", idDependente)
+				.content(jsonBody)
+				.header("Authorization", "Bearer " + stringTokenAcesso)
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON));
+		
+		resultActions.andExpect(status().isBadRequest()); // http 400
+		// não é para excluir um produto que já está vinculado a outra entidade.
 	}
 
 }

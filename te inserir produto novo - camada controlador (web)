@@ -1,0 +1,129 @@
+[33m2374e18[m[33m ([m[1;36mHEAD -> [m[1;32mUS005/Testes[m[33m)[m Teste inserir produto novo - camada controlador (web)
+[33m0185813[m Teste buscar produto por id - camada controlador (web)
+[33m5c5ac94[m Teste buscar todos produtos - camada controlador (web)
+[33m2141d3c[m[33m ([m[1;31morigin/US005/Testes[m[33m)[m Reparando mockar dados para excluir produto com Id existente
+[33mecbe64a[m Testes unitarios com mockito - delete Produto - classe servico
+[33m22f64f2[m Testes unitarios com mockito - update Produto - classe servico
+[33mc82166c[m Corrigindo test do find all e teste de inserir Produto na camada de servico
+[33mf4606f3[m Testes unitarios com mockito - buscar produtos por id - classe servico
+[33m03f91c8[m Testes unitarios com mockito - buscar todos produtos - classe servico
+[33m857e646[m teste repositorio - update produto
+[33mc2755e7[m Testes produto camada de repositorio
+[33m3ca90f0[m Refatorando nome dos testes de repositorio de embalagens
+[33m8c7d86c[m Testes de repositorio buscando embalagem por id
+[33m5cd772d[m Teste deletando embalagem por id
+[33m388e5a4[m[33m ([m[1;31morigin/US004/Consultas[m[33m, [m[1;32mUS004/Consultas[m[33m)[m Reconfiguração permissao de acesso rota /regras
+[33m41466df[m Reconfigurando permissoes de rotas
+[33m991991b[m Convertendo parametro Permissao para enumerado
+[33me679ce0[m Ordenando produtos por descricao
+[33m0773fcd[m Fixing - método update usuario
+[33m7289544[m Criando endpoint regras e setando email como minusculo
+[33m785819b[m removendo case sensitive para embalagens e categorias dto
+[33maf622cd[m Método deletar Colaborador
+[33m891190d[m Metodo updade Colaborador
+[33m5547f4e[m metodo inserir Colaborador
+[33m91b8fc0[m Método buscar colaborador por Id
+[33m5fb8fb2[m Metodo listar todos Colaboradores
+[33mf07b0a3[m Metodo deletar um produto
+[33m4cc472c[m Metodo atualizar departamento
+[33m43874d5[m inserir departamento
+[33m67b6328[m Metodo lista todos os departamentos
+[33mda68946[m Repositorios de Colaborador e Departamento
+[33m1cc0c25[m DepartamentoDTO e ColaboradorDTO
+[33m21cbf57[m Relacionamento entre entidades e seed inicial
+[33mf6d2cfc[m Entidades Colaborador e Departamento
+[33m5101346[m Refatorando ProdutoDTO e dados sql
+[33mfab4bcd[m Ajuste configuração de CORS
+[33m66a92bc[m Filtando produtos por categoria
+[33mc67f062[m Otimizando a consulta com JOIN FETCH
+[33m94b1a65[m Refatorando insert.sql
+[33m08a213e[m[33m ([m[1;32mUS003/Validacao[m[33m)[m Buscando um produtos com uma lista de embalagens
+[33m4ce36eb[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Merge pull request #20 from rafaelgauderio/US004/Consultas
+[33ma2c90d0[m Buscar produtos por nome
+[33mec7449d[m Removendo método deprecated getOne
+[33m675ee08[m Buscar todos os produtos filtrando por codigo da embalagem
+[33m68c7c21[m Merge pull request #19 from rafaelgauderio/US003/Validacao
+[33m68507a6[m[33m ([m[1;31morigin/US003/Validacao[m[33m)[m Configuracao do Servidor de Recursos
+[33m9bc0058[m Configuracao servidor de autorizacao
+[33mc1fdad4[m Configuração de segurana web
+[33m105886d[m Atualizando versao do spring
+[33m4ed4ce3[m Adicionando configuracao de CORS e hosts liberados
+[33m2a112f4[m Configurando rotas que necessitam autenticação
+[33m94af367[m Servidor de Recursos com acesso público do método GET
+[33m4fe8a84[m Turbinado o token com informacoes do usuario autenticado
+[33m7cbc43b[m Merge pull request #18 from rafaelgauderio/US003/Validacao
+[33m400f7f2[m Configuração do arquivo application.properties
+[33m27e9242[m Configuracao de Servidor de Autorizacao
+[33m8ec588d[m Classe UserDetails e UserDetailsService
+[33m9152a14[m Excecao para buscar usuário inexistente com email inexistente
+[33me0b35b7[m Atualizacao de dependencias
+[33m3fdfb3b[m Merge pull request #17 from rafaelgauderio/US003/Validacao
+[33m0ad74ad[m Annotation personalizada do ConstraintValidator para atualizacao de usuario
+[33m589d103[m Annotation personalizada do ConstraintValidator para invalidar categoria com descricao igual
+[33m06601a8[m Annotation personalizada do ConstraintValidator para invalidar embalagem com descricao igual
+[33m09557ae[m Annotation personalizada do ConstraintValidator para invalidar email repetido no banco
+[33m1f7585e[m Buscar usuario por email
+[33mdd1b1a0[m Mensagem personalizada para erros de validacao
+[33mce52f70[m Bean Validation com a annotation @Valid
+[33mc903b41[m Merge pull request #16 from rafaelgauderio/US003/Validacao
+[33me9ad1fc[m Atualizando versão de spring e WebSecurityConfiguration
+[33meae7625[m Metodo DELETE - deletar usuario por Id
+[33m730e27d[m Metodo PUT - update Usuario
+[33md26d423[m Metodo POST - inserir usuario
+[33m23f1458[m Medodo GET - buscar usuario por id
+[33me27d8df[m Merge pull request #15 from rafaelgauderio/US003/Validacao
+[33m31ec241[m Endpoint usuarios - método GET - findAll
+[33m74aad5a[m UsuarioDTO e RegraDTO
+[33m0e47321[m Merge pull request #14 from rafaelgauderio/US003/Validacao
+[33m0e04291[m Reposirios de Usuario e Regra
+[33m9434a64[m Merge pull request #10 from rafaelgauderio/US003/Validacao
+[33mb151719[m Relacionamentos e Jpa table de usuario e regra
+[33mcd0638b[m Merge pull request #9 from rafaelgauderio/US002/DTO-repositorio-servico-controlador
+[33mda6a4b4[m[33m ([m[1;31morigin/US002/DTO-repositorio-servico-controlador[m[33m, [m[1;32mUS002/DTO-repositorio-servico-controlador[m[33m)[m Reparar metodos deletar. Remover annotation
+[33m7349493[m Configuracoes iniciais de teste
+[33me03938b[m Excluindo biblioteca antiga do junit
+[33mdec4fa4[m Data de insert e update para auditoria de alterações
+[33mf938421[m Merge pull request #8 from rafaelgauderio/US002/DTO-repositorio-servico-controlador
+[33m7b29d90[m Métoto DELETE - excluir um Produto pelo id do produto
+[33m49db4ad[m Método PUT - update um Produto
+[33m1c06ec8[m Merge pull request #7 from rafaelgauderio/US002/DTO-repositorio-servico-controlador
+[33mc145d99[m Método POST - inserir um Produto
+[33m9feb5ae[m Método POST - buscar Produto por id
+[33m42d11ce[m método GET buscar todos os produtos
+[33m5dad104[m Class ProdutoDTO
+[33m7ae13ce[m Editando parametros daEntidade Produto
+[33m28539b7[m[33m ([m[1;32mmain[m[33m)[m Merge pull request #6 from rafaelgauderio/US002/DTO-repositorio-servico-controlador
+[33m52eebcc[m Habilitando a consulta sql no console
+[33m92de71e[m Entidade Produtos e relacionamentos
+[33m2ba90ba[m Lista Paginada de Categorias
+[33m55f00cf[m Lista Paginada de Embalagens
+[33me69d7ea[m Merge pull request #5 from rafaelgauderio/US002/DTO-repositorio-servico-controlador
+[33md7758f4[m método DELETE deletar Categoria por id e corrigir erros de exceção
+[33m2b3fb77[m método DELETE deletar Embalagem por id
+[33m867ab29[m Exceçãode violação de integridade de banco de dados
+[33ma12fca4[m método PUT update Categoria
+[33ma325ddd[m método PUT update Embalagem
+[33m2ec3939[m método PUT insert Categoria
+[33mf624024[m método PUT insert Embalagem
+[33m6cc8aa6[m tratamento buscar Categoria por id inexistente
+[33m1358484[m tratamento buscar Embalagem por id inexistente
+[33mc58d4e8[m Excecao Customizada e excecao de entidade nao encontrada
+[33m101dc41[m método GET buscar Categoria por id
+[33m1794c1e[m método GET buscar Embalagem por id
+[33m0800422[m Merge pull request #4 from rafaelgauderio/US002/DTO-repositorio-servico-controlador
+[33m73393ad[m CategoriaDTO
+[33m623d86a[m class EmbalagemDTO - método get buscar todas embalagens
+[33mbb559b0[m médoto get de buscar todas categorias
+[33m4ae753b[m Método get buscar embalagens
+[33m4528bd0[m Merge pull request #3 from rafaelgauderio/US001/Criar-entidades
+[33m588cef7[m[33m ([m[1;31morigin/US001/Criar-entidades[m[33m)[m Habilitando bando de dados h2 em memória
+[33m9951919[m Entidade Usuario
+[33m78602e6[m Referência com a entidade Produto entre Embalagem e Categoria
+[33m93337d9[m Merge pull request #2 from rafaelgauderio/US001/Criar-entidades
+[33m7697f13[m Corrigindo pacotes e Entidade Permissao
+[33m9562253[m Entidade Produto
+[33mc9e53f0[m Merge pull request #1 from rafaelgauderio/US001/Criar-entidades
+[33m139a520[m Entidade Categoria
+[33m4405eb9[m Entidade Embalagem
+[33mb84165a[m Renomenado package
+[33m1449ce5[m Criando projeto e README.md
