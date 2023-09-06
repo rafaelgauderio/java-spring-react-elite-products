@@ -76,6 +76,7 @@ public class ServidorDeRecursosConfiguracao extends ResourceServerConfigurerAdap
         segurancaHttp.authorizeRequests()
                 .antMatchers(ROTA_PUBLICA).permitAll() // publica a rota para fazer autenticacação
                 .antMatchers(ROTA_BANCO_H2).permitAll()
+                //.anyRequest().permitAll();                
                 .antMatchers(HttpMethod.GET,ROTA_CONSULTAR_CATALOGO).permitAll()
                 .antMatchers(HttpMethod.POST,ROTA_CRUD_ENTIDADES).hasRole(String.valueOf(Permissao.GERENTE_LOJA))
                 .antMatchers(HttpMethod.PUT,ROTA_CRUD_ENTIDADES).hasRole(String.valueOf(Permissao.GERENTE_LOJA))
@@ -86,6 +87,7 @@ public class ServidorDeRecursosConfiguracao extends ResourceServerConfigurerAdap
                 .antMatchers(HttpMethod.PUT,ROTA_CRUD_COLABORADORES).hasRole(String.valueOf(Permissao.ADMIN_SISTEMA))
                 .antMatchers(HttpMethod.DELETE,ROTA_CRUD_COLABORADORES).hasRole(String.valueOf(Permissao.ADMIN_SISTEMA))
                 .antMatchers(ROTA_ADMINTRADORES).hasRole(String.valueOf(Permissao.ADMIN_SISTEMA));
+                
     }
 
     // configuração de CORS

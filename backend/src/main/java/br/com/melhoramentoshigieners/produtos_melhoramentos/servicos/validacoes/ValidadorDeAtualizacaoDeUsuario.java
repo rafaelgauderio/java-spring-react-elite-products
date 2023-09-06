@@ -28,7 +28,8 @@ public class ValidadorDeAtualizacaoDeUsuario implements ConstraintValidator<Usua
 
     @Override
     public boolean isValid(UsuarioUpdateDTO dto, ConstraintValidatorContext contexto) {
-
+    	
+    	@SuppressWarnings("unchecked")
         var variaveisIdentificadoras = (Map<String,String>) requisicoes.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
         Long idDoUsuarioDaRequesicao = Long.parseLong(variaveisIdentificadoras.get("id"));
 
