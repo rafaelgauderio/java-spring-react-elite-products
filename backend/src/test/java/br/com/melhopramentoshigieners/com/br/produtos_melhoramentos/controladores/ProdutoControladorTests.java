@@ -57,28 +57,12 @@ public class ProdutoControladorTests {
 	private ObjectMapper objetoMapper;
 
 	// não é possivel instanciar um entidade na classe controler
-	// se comunica com a classe de serviço via DTO	
+	// se comunica com a classe de serviço via DTO
 	private ProdutoDTO produtoDTO;
 	private PageImpl<ProdutoDTO> paginaDeProdutos;
 	private Long idExistente, idNaoExistente, idDependente;
 	private String username;
 	private String password;
-
-	public String obterTokenDeAcesso(MockMvc mockMvc, String username, String password) throws Exception {
-
-		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.add("grant_type", "password");
-		parameters.add("username", username);
-		parameters.add("password", password);
-
-		ResultActions resultActions = mockMvc.perform(post("/oauth2/token").params(parameters)
-				.with(httpBasic("melhoramentosId", "melhoramentosSecret")).accept("application/json;charset=UTF-8"))
-				.andExpect(status().isOk()).andExpect(content().contentType("application/json;charset=UTF-8"));
-
-		String resultString = resultActions.andReturn().getResponse().getContentAsString();
-		JacksonJsonParser jacksonJsonParser = new JacksonJsonParser();
-		return jacksonJsonParser.parseMap(resultString).get("access_token").toString();
-	}
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -89,7 +73,7 @@ public class ProdutoControladorTests {
 
 		username = "rafaeldeluca@gmail.com";
 		password = "123456";
-		
+
 		produtoDTO = ProdutoFactory.criarProdutoDTO();
 		paginaDeProdutos = new PageImpl<>(List.of(produtoDTO));
 
@@ -99,9 +83,9 @@ public class ProdutoControladorTests {
 		when(produtoServico.buscarPorId(idNaoExistente)).thenThrow(ExcecaoEntidadeNaoEncontrada.class);
 
 		when(produtoServico.inserir(any())).thenReturn(produtoDTO);
-		
-		when(produtoServico.update(eq(idExistente), any())).thenReturn(produtoDTO);
 
+		when(produtoServico.update(eq(idExistente), any())).thenReturn(produtoDTO);
+		when(produtoServico.update(eq(idNaoExistente), any())).thenThrow(ExcecaoEntidadeNaoEncontrada.class);
 	}
 
 	@Test
@@ -127,7 +111,6 @@ public class ProdutoControladorTests {
 		resultActions.andExpect(jsonPath("$.descricao").exists());
 		resultActions.andExpect(jsonPath("$.descricaoCompleta").exists());
 		resultActions.andExpect(jsonPath("$.imgUrl").exists());
-
 	}
 
 	@Test
@@ -143,44 +126,79 @@ public class ProdutoControladorTests {
 	void inserirShouldReturnProdutoDTOandIsCreatedStatus() throws Exception {
 
 		String tokenAcessoString = tokenAcesso.obterTokenDeAcesso(mockMvc, username, password);
-		//String tokenAcessoString = "";
+		// String tokenAcessoString = "";
 
 		String jsonBody = objetoMapper.writeValueAsString(produtoDTO);
 
-		ResultActions resultActions = mockMvc.perform(post("/produtos")
-				.header("Authorization", "Bearer " + tokenAcessoString)
-				.content(jsonBody).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
+		ResultActions resultActions = mockMvc
+				.perform(post("/produtos").header("Authorization", "Bearer " + tokenAcessoString).content(jsonBody)
+						.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
 		// codigo http 201 - criado com sucesso
 
 		resultActions.andExpect(status().isCreated());
 		resultActions.andExpect(jsonPath("$.id").exists());
 		resultActions.andExpect(jsonPath("$.descricao").exists());
 		resultActions.andExpect(jsonPath("$.descricaoCompleta").exists());
-		resultActions.andExpect(jsonPath("$.imgUrl").exists());		
-		
+		resultActions.andExpect(jsonPath("$.imgUrl").exists());
+
 	}
 	
 	@Test
-	public void updateShouldReturnProductDTOWhenIdExists () throws Exception {
-		
-		String accessToken = tokenAcesso.obterTokenDeAcesso(mockMvc, username, password);
+	public void insertShouldThrowUnauthorizedWhenUserIsNotLogged() throws Exception {
+
 				
 		String jsonBody = objetoMapper.writeValueAsString(produtoDTO);
-		
-		ResultActions resultActions = 
-				mockMvc.perform(put("/produtos/{id}", idExistente)
-						.header("Authorization", "Bearer " + accessToken)
-				.content(jsonBody)
-				.contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON));
-		
+
+		ResultActions resultActions = mockMvc.perform(put("/produtos", idExistente).content(jsonBody)
+				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
+
+		resultActions.andExpect(status().isUnauthorized()); // erro codigo http 401
+	}
+
+	@Test
+	public void updateShouldReturnProductDTOWhenIdExists() throws Exception {
+
+		String accessToken = tokenAcesso.obterTokenDeAcesso(mockMvc, username, password);
+		String jsonBody = objetoMapper.writeValueAsString(produtoDTO);
+
+		ResultActions resultActions = mockMvc
+				.perform(put("/produtos/{id}", idExistente).header("Authorization", "Bearer " + accessToken)
+						.content(jsonBody).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
+
 		resultActions.andExpect(status().isOk());
 		resultActions.andExpect(jsonPath("$.id").exists());
 		resultActions.andExpect(jsonPath("$.descricao").exists());
 		resultActions.andExpect(jsonPath("$.descricaoCompleta").exists());
 		resultActions.andExpect(jsonPath("$.imgUrl").exists());
-		
-	
-				
 	}
+
+	@Test
+	public void updateShouldThrowExcecaoDeEntidadeNaoEncontradaWhenIdDoesNotExist() throws Exception {
+
+		String accessToken = tokenAcesso.obterTokenDeAcesso(mockMvc, username, password);
+		produtoDTO.setId(idNaoExistente);
+		String jsonBody = objetoMapper.writeValueAsString(produtoDTO);
+
+		ResultActions resultActions = mockMvc
+				.perform(put("/produtos/{id}", idNaoExistente).header("Authorization", "Bearer " + accessToken)
+						.content(jsonBody).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
+
+		resultActions.andExpect(status().isNotFound()); // erro codigo http 404
+
+	}
+
+	@Test
+	public void updateShouldThrowUnauthorizedWhenUserIsNotLogged() throws Exception {
+
+		// String accessToken = tokenAcesso.obterTokenDeAcesso(mockMvc, username,
+		// password);
+		produtoDTO.setId(idNaoExistente);
+		String jsonBody = objetoMapper.writeValueAsString(produtoDTO);
+
+		ResultActions resultActions = mockMvc.perform(put("/produtos/{id}", idNaoExistente).content(jsonBody)
+				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
+
+		resultActions.andExpect(status().isUnauthorized()); // erro codigo http 401
+	}
+
 }

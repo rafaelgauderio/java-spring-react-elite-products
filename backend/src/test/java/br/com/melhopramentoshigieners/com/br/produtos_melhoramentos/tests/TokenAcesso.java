@@ -40,7 +40,7 @@ public class TokenAcesso {
 
 		String resultString = resultActions.andReturn().getResponse().getContentAsString();
 
-		JacksonJsonParser jsonParser = new JacksonJsonParser();
-		return jsonParser.parseMap(resultString).get("access_token").toString();
+		JacksonJsonParser jacksonJsonParser = new JacksonJsonParser();
+		return jacksonJsonParser.parseMap(resultString).get("access_token").toString();
 	}
 }
