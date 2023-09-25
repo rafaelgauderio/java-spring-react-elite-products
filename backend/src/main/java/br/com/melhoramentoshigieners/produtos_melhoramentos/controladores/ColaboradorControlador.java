@@ -1,9 +1,13 @@
 package br.com.melhoramentoshigieners.produtos_melhoramentos.controladores;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +34,7 @@ public class ColaboradorControlador {
 		List<ColaboradorDTO> listColaborador = servico.findAll();
 		return ResponseEntity.ok().body(listColaborador);
 	}
+	
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<ColaboradorDTO> buscarColaboradorPorId(@PathVariable Long id) {
@@ -40,7 +45,7 @@ public class ColaboradorControlador {
 	@PostMapping
 	public ResponseEntity<ColaboradorDTO> inserirColaborador(@RequestBody ColaboradorDTO dto) {
 		dto = servico.insert(dto);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getDepartamentoId())
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getDepartamentoNome())
 				.toUri();
 		return ResponseEntity.created(uri).body(dto);
 	}

@@ -12,17 +12,19 @@ public class ColaboradorDTO  implements Serializable{
 	private String nome;
 	private String telefone;
 	private String email;
+	private String departamentoNome;
 	private Long departamentoId;
 	
 	public ColaboradorDTO () {
 				
 	}
 
-	public ColaboradorDTO(Long id, String nome, String telefone, String email, Long departamentoId) {		
+	public ColaboradorDTO(Long id, String nome, String telefone, String email, Long departamentoId, String departamentoNome) {		
 		this.id = id;
 		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
+		this.departamentoNome = departamentoNome;
 		this.departamentoId = departamentoId;
 	}
 	
@@ -31,6 +33,7 @@ public class ColaboradorDTO  implements Serializable{
 		nome = entity.getNome();
 		telefone = entity.getTelefone();
 		email = entity.getEmail();
+		departamentoNome = entity.getDepartamento().getNome();
 		departamentoId = entity.getDepartamento().getId();
 	}
 
@@ -65,13 +68,21 @@ public class ColaboradorDTO  implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
 	public Long getDepartamentoId() {
 		return departamentoId;
 	}
 
 	public void setDepartamentoId(Long departamentoId) {
 		this.departamentoId = departamentoId;
+	}
+
+	public String getDepartamentoNome() {
+		return departamentoNome;
+	}
+
+	public void setDepartamentoNome(String departamentoNome) {
+		this.departamentoNome = departamentoNome;
 	}		
 	
 
