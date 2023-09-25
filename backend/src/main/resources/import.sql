@@ -74,11 +74,21 @@ INSERT INTO tb_departamento (nome) VALUES ('Vendas Externo');
 INSERT INTO tb_departamento (nome) VALUES ('Faturamento');
 INSERT INTO tb_departamento (nome) VALUES ('Compras');
 INSERT INTO tb_departamento (nome) VALUES ('Logística');
-INSERT INTO tb_departamento (nome) VALUES ('Financeiro');
+INSERT INTO tb_departamento (nome) VALUES ('Contas a Pagar');
+INSERT INTO tb_departamento (nome) VALUES ('Contas a Receber');
 INSERT INTO tb_departamento (nome) VALUES ('Recursos Humanos');
 
-INSERT INTO tb_colaborador (nome, telefone, email, departamento_id) VALUES ('Rafael de Luca','5133376800','rafaeldeluca@melhoramentoshigieners.com.br', 1);
-INSERT INTO tb_colaborador (nome, telefone, email, departamento_id) VALUES ('Monica da Silva','5133376801','monica@melhoramentoshigieners.com.br', 2);
+INSERT INTO tb_colaborador (nome, telefone, email, departamento_id) VALUES ('Rafael de Luca','5133736800','redes@melhoramentoshigieners.com.br', 1);
+INSERT INTO tb_colaborador (nome, telefone, email, departamento_id) VALUES ('Mylene','5133736801','vendas02@melhoramentoshigieners.com.br', 2)
+INSERT INTO tb_colaborador (nome, telefone, email, departamento_id) VALUES ('Alexandre','5133736805','vendas01@melhoramentoshigieners.com.br', 2);
+INSERT INTO tb_colaborador (nome, telefone, email, departamento_id) VALUES ('Angelo', '5133736802', 'vendas07@melhoramentoshigieners.com.br',2);
+INSERT INTO tb_colaborador (nome, telefone, email, departamento_id) VALUES ('Fernanda', '5133736813', 'compras@melhoramentoshigieners.com.br',5);
+INSERT INTO tb_colaborador (nome, telefone, email, departamento_id) VALUES ('Fernanda', '5133736813', 'controladoria@melhoramentoshigieners.com.br',7);
+INSERT INTO tb_colaborador (nome, telefone, email, departamento_id) VALUES ('Carolina', '5133736808', 'faturamento@melhoramentoshigieners.com.br',5);
+INSERT INTO tb_colaborador (nome, telefone, email, departamento_id) VALUES ('Carolina', '5133736809', 'cobranca@melhoramentoshigieners.com.br',8);
+INSERT INTO tb_colaborador (nome, telefone, email, departamento_id) VALUES ('Marco', '5133736812', 'rh@melhoramentoshigieners.com.br',9);
+INSERT INTO tb_colaborador (nome, telefone, email, departamento_id) VALUES ('Dênio', '5133736835', 'logistica@melhoramentoshigieners.com.br',6);
+
 
 
 
