@@ -19,31 +19,32 @@ INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('papel higiênico', n
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('guardanapo', now());
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('interfolhado', now());
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('rolo', now());
-INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('excellence', now());
-INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('plus', now());
-INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('classic', now());
+INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('excellence (luxo)', now());
+INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('plus (intermediária)', now());
+INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('classic (econômica)', now());
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('folha simples', now());
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('folha dupla', now());
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('folha tripla', now());
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('folha quádrupla', now());
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('Amaciante', now());
 
-INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7127','Papel higiênico em rolo 100% fibras virgens, Folha Dupla, Super Macio, Folhas Brancas',10.0, 300, 'https://melhoramentoshigieners.com.br/imagens/7127.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z');
-INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7111','Papel higiênico em rolo 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas',10.0, 500, 'https://melhoramentoshigieners.com.br/imagens/7111.jpg', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z');
+INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7127','Papel higiênico em rolo 100% fibras virgens, Folha Dupla, Super Macio, Folhas Brancas',10.0, 2400, 'https://melhoramentoshigieners.com.br/imagens/7127.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z');
+INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7111','Papel higiênico em rolo 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas',10.0, 4000, 'https://melhoramentoshigieners.com.br/imagens/7111.jpg', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z');
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Toalha Interfolhado 7234','Papel Toalha interfolhado 100% fibras virgens, Folha Quádrupla, Super Macio, Folhas Brancas, Tamanho da folha: 21 x 21 cm, Folhas por pacote: 150, Pacotes por caixa: 18',21.0, 2700, 'https://melhoramentoshigieners.com.br/imagens/7234.jpg', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z');
 
-INSERT INTO tb_produto(descricao, descricao_completa, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7129','Papel higiênico em rolo 100% fibras virgens, Folha Dupla, Super Macio, Folhas Brancas','https://melhoramentoshigieners.com.br/imagens/7127.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --4
-INSERT INTO tb_produto(descricao, descricao_completa, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7138','Papel higiênico em rolo 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas','https://melhoramentoshigieners.com.br/imagens/7111.jpg', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --5
-INSERT INTO tb_produto(descricao, descricao_completa, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7132','Papel higiênico em rolo 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas','https://melhoramentoshigieners.com.br/imagens/7111.jpg', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --6
-INSERT INTO tb_produto(descricao, descricao_completa, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7133','Papel higiênico em rolo 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas','https://melhoramentoshigieners.com.br/imagens/7111.jpg', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --7
-INSERT INTO tb_produto(descricao, descricao_completa, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7139','Papel higiênico em rolo 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas','https://melhoramentoshigieners.com.br/imagens/7111.jpg', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --8
-INSERT INTO tb_produto(descricao, descricao_completa, img_url, data_cadastro) VALUES ('Papel Higiênico Interfolhado 7124','Papel higiênico Interfolhado 100% fibras virgens, Folha Duplas, Super Macio, Folhas Brancas','https://melhoramentoshigieners.com.br/imagens/7127.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --9
+INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7129','Papel higiênico em rolo 100% fibras virgens, Folha Dupla, Super Macio, Folhas Brancas',10.0, 2400, 'https://melhoramentoshigieners.com.br/imagens/7127.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --4
+INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7138','Papel higiênico em rolo 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas',10.0, 2000, 'https://melhoramentoshigieners.com.br/imagens/7111.jpg', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --5
+INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7132','Papel higiênico em rolo 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas',10.0,2400,'https://melhoramentoshigieners.com.br/imagens/7111.jpg', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --6
+INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7133','Papel higiênico em rolo 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas',10.0,2400,'https://melhoramentoshigieners.com.br/imagens/7111.jpg', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --7
+INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7139','Papel higiênico em rolo 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas',10.0,2000,'https://melhoramentoshigieners.com.br/imagens/7111.jpg', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --8
+INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Interfolhado 7124','Papel higiênico Interfolhado 100% fibras virgens, Folha Duplas, Super Macio, Folhas Brancas',21.0, 12000, 'https://melhoramentoshigieners.com.br/imagens/7127.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --9
 
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Sublime rolinho 1826','Papel higiênico rolinho Sublime 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas', 10.0,30,'https://melhoramentoshigieners.com.br/imagens/7111.jpg', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --10
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Sublime rolinho 1710','Papel higiênico rolinho Sublime 100% fibras virgens, Folha Dupla, Super Macio, Folhas Brancas',10.0, 30,'https://melhoramentoshigieners.com.br/imagens/7127.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --11
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Sublime rolinho 1735','Papel higiênico rolinho Sublime 100% fibras virgens, Folha Dupla, Super Macio, Folhas Brancas',10.0, 30,'https://melhoramentoshigieners.com.br/imagens/7111.jpg', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --12
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Sublime rolinho 1510','Papel higiênico rolinho Sublime 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas',10.0, 30,'https://melhoramentoshigieners.com.br/imagens/7127.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --13
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Sublime rolinho 1545','Papel higiênico rolinho Sublime 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas',10.0, 30,'https://melhoramentoshigieners.com.br/imagens/7127.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --14
+INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Noble rolinho 1760','Papel higiênico rolinho Noble 100% fibras virgens, Folha Dupla, Super Macio, Folhas Brancas',10.0, 20,'https://melhoramentoshigieners.com.br/imagens/7127.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --15
 
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (1,1);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (1,3);
@@ -71,6 +72,8 @@ INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (13,12);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (13,2);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (14,11);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (14,8);
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (15,8);
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (15,11);
 
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (1,2);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (1,5);
@@ -141,6 +144,12 @@ INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (14,2);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (14,5);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (14,8);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (14,9);
+
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (15,2);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (15,5);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (15,7);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (15,10);
+
 
 INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Rafael' , 'De Luca','rafaeldeluca@gmail.com','$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
 INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Maria' , 'da Silva','mariadasilva@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
