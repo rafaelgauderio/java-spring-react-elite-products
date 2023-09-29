@@ -7,6 +7,8 @@ import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 
+import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.SmsDTO;
+
 @Service
 public class SmsServico {
 	
@@ -19,12 +21,15 @@ public class SmsServico {
 	@Value("${twilio.phone.from}")
 	private String twilioPhoneFrom;
 
-	@Value("${twilio.phone.to}")
+	//@Value("${twilio.phone.to}")
 	private String twilioPhoneTo;	
 	
-	public void sendSmsToClient( ) {	
+	public void sendSmsToClient(SmsDTO smsDTO) {	
 		
-		String message =  "Visite o nosso cátalogo em https://melhoramentoshigieners.com.br/catalogo";
+		//String message =  "Visite o nosso cátalogo em https://melhoramentoshigieners.com.br/catalogo";
+		String message = smsDTO.getMensagem();
+		String brazilCode = "+55";
+		twilioPhoneTo = brazilCode + smsDTO.getTelefone();		
 
 		Twilio.init(twilioSid, twilioKey);
 
