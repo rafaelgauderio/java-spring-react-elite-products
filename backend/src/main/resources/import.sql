@@ -17,6 +17,10 @@ INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('1.120 metros', now()
 INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('1.200 metros', now()); --17
 INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('1.600 metros', now()); --18
 INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('fardo com 6 rolos', now()); --19
+INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('caixa com 2.400 folhas', now()); --20
+INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('caixa com 4.800 folhas', now()); --21
+INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('caixa com 8.400 folhas', now()); --22
+INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('caixa com 5.250 folhas', now()); --23
 
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('papel toalha', now());
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('papel higiênico', now());
@@ -56,6 +60,13 @@ INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Toalha Rolo 7235','Papel Toalha Rolo 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas, Metragem de cada rolo: 200 metros',19.1,1200, 'https://melhoramentoshigieners.com.br/imagens/7235.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --19
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Toalha Rolo 7230','Papel Toalha Rolo 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas, Metragem de cada rolo: 250 metros',19.1,2000, 'https://melhoramentoshigieners.com.br/imagens/7230.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --20
 
+INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Toalha Interfolhado 7243','Papel Toalha interfolhado 100% fibras virgens, Folha Tripla, Super Macio, Folhas Brancas, Tamanho da folha: 21 x 21 cm, Folhas por pacote: 150, Pacotes por caixa: 18',21.0, 2700, 'https://melhoramentoshigieners.com.br/imagens/7243.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --21
+INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Toalha Interfolhado 7210','Papel Toalha interfolhado 100% fibras virgens, Folha Dupla, Super Macio, Folhas Brancas, Tamanho da folha: 21 x 21 cm, Folhas por pacote: 200, Pacotes por caixa: 12',21.0, 2400, 'https://melhoramentoshigieners.com.br/imagens/7210.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --22
+INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Toalha Interfolhado 7208','Papel Toalha interfolhado 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas, Tamanho da folha: 21 x 19 cm, Folhas por pacote: 320, Pacotes por caixa: 15',21.0, 4800, 'https://melhoramentoshigieners.com.br/imagens/7208.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --23
+INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Toalha Interfolhado 7216','Papel Toalha interfolhado 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas, Tamanho da folha: 21 x 29 cm, Folhas por pacote: 350, Pacotes por caixa: 24',21.0, 8400, 'https://melhoramentoshigieners.com.br/imagens/7216.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --24
+INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Toalha Interfolhado 7229','Papel Toalha interfolhado 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas, Tamanho da folha: 21 x 18.8 cm, Folhas por pacote: 350, Pacotes por caixa: 15',21.0, 5250, 'https://melhoramentoshigieners.com.br/imagens/7229.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --25
+INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Toalha Interfolhado 7240','Papel Toalha interfolhado 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas, Tamanho da folha: 20 x 21 cm, Folhas por pacote: 1000, Pacotes por caixa: 12',20.0, 12000, 'https://melhoramentoshigieners.com.br/imagens/7240.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --26
+
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (1,1);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (1,3);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (2,1);
@@ -94,7 +105,12 @@ INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (19,19);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (19,17);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (20,1);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (20,18);
-
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (21,6);
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (22,20);
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (23,21);
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (24,22);
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (25,23);
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (26,7);
 
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (1,2);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (1,5);
@@ -195,6 +211,38 @@ INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (20,1);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (20,5);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (20,8);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (20,9);
+
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (21,1);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (21,4);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (21,6);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (21,11);
+
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (22,1);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (22,4);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (22,7);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (22,10);
+
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (23,1);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (23,4);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (23,7);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (23,9);
+
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (24,1);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (24,4);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (24,7);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (24,9);
+
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (25,1);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (25,4);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (25,8);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (25,9);
+
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (26,1);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (26,4);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (26,8);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (26,9);
+
+
 
 
 INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Rafael' , 'De Luca','rafaeldeluca@gmail.com','$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
