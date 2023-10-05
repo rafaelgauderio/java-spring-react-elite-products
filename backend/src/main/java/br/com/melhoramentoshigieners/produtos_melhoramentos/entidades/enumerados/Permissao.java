@@ -2,7 +2,7 @@ package br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.enumerado
 
 public enum Permissao {
 
-	ADMIN_SISTEMA("ADMIN_SISTENA"), GERENTE_LOJA("GERENTE_LOJA"), CLIENTE("CLIENTE");
+	ADMIN_SISTEMA("ADMIN_SISTENA"), GERENTE_LOJA("GERENTE_LOJA"), CLIENTE("CONSULTOR");
 	
 	private String value;
 	

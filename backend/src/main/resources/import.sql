@@ -34,7 +34,7 @@ INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('folha simples', now(
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('folha dupla', now());
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('folha tripla', now());
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('folha quádrupla', now());
-INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('Amaciante', now());
+INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('amaciante', now());
 
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7127','Papel higiênico em rolo 100% fibras virgens, Folha Dupla, Super Macio, Folhas Brancas',10.0, 2400, 'https://melhoramentoshigieners.com.br/imagens/7127.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z');
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7111','Papel higiênico em rolo 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas',10.0, 4000, 'https://melhoramentoshigieners.com.br/imagens/7111.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z');
@@ -52,7 +52,7 @@ INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico rolinho Sublime 1735','Papel higiênico rolinho Sublime 100% fibras virgens, Folha Dupla, Super Macio, Folhas Brancas',10.0, 30,'https://melhoramentoshigieners.com.br/imagens/1735.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --12
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico rolinho Sublime 1510','Papel higiênico rolinho Sublime 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas',10.0, 30,'https://melhoramentoshigieners.com.br/imagens/1510.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --13
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico rolinho Sublime 1545','Papel higiênico rolinho Sublime 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas',10.0, 30,'https://melhoramentoshigieners.com.br/imagens/1545.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --14
-INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico rolinho Sublime 1760','Papel higiênico rolinho Noble 100% fibras virgens, Folha Dupla, Super Macio, Folhas Brancas',10.0, 20,'https://melhoramentoshigieners.com.br/imagens/1760.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --15
+INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico rolinho Noble 1760','Papel higiênico rolinho Noble 100% fibras virgens, Folha Dupla, Super Macio, Folhas Brancas',10.0, 20,'https://melhoramentoshigieners.com.br/imagens/1760.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --15
 
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Toalha Rolo 7242','Papel Toalha Rolo 100% fibras virgens, Folha Tripla, Super Macio, Folhas Brancas, Metragem de cada rolo: 140 metros',19.1,1120, 'https://melhoramentoshigieners.com.br/imagens/7242.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --16
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Toalha Rolo 7244','Papel Toalha Rolo 100% fibras virgens, Folha Dupla, Super Macio, Folhas Brancas, Metragem de cada rolo: 200 metros',19.1,1600, 'https://melhoramentoshigieners.com.br/imagens/7244.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --17
@@ -243,16 +243,14 @@ INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (26,8);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (26,9);
 
 
-
-
 INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Rafael' , 'De Luca','rafaeldeluca@gmail.com','$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
 INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Maria' , 'da Silva','mariadasilva@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
-INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Juliana' , 'de Silva','julianadesilva@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
+INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Juliana' , 'da Silva','julianadasilva@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
 INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Claudia' , 'da Silva','claudiadasilva@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
 
-INSERT INTO tb_regra (descricao, permissao) VALUES ('Tem todas as permissoes de CRUD. Acesso a todas as rotas.','ROLE_ADMIN_SISTEMA');
-INSERT INTO tb_regra (descricao, permissao) VALUES ('Tem permissao de CRUD em algumas entidades. Não tem permissao de CRUD de usuarios e regras de acesso.','ROLE_GERENTE_LOJA');
-INSERT INTO tb_regra (descricao, permissao) VALUES ('Tem permissao de GET em todos as rotas e envio de sms','ROLE_CLIENTE');
+INSERT INTO tb_regra (descricao, permissao) VALUES ('Tem permissao de CRUD em usuários','ROLE_ADMIN_SISTEMA');
+INSERT INTO tb_regra (descricao, permissao) VALUES ('Tem permissao de CRUD em produtos, embalagens e categorias.','ROLE_GERENTE_LOJA');
+INSERT INTO tb_regra (descricao, permissao) VALUES ('Tem permissao apenas de envias SMS','ROLE_CONSULTOR');
 
 INSERT INTO tb_usuario_regra (usuario_id, regra_id) VALUES (1,1);
 INSERT INTO tb_usuario_regra (usuario_id, regra_id) VALUES (1,2);
