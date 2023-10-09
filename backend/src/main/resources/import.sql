@@ -21,6 +21,9 @@ INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('caixa com 2.400 folh
 INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('caixa com 4.800 folhas', now()); --21
 INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('caixa com 8.400 folhas', now()); --22
 INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('caixa com 5.250 folhas', now()); --23
+INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('caixa com 5.400 folhas', now()); --24
+INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('caixa com 7.200 folhas', now()); --25
+INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('caixa com 18.000 folhas', now()); --26
 
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('papel toalha', now());
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('papel higiênico', now());
@@ -67,6 +70,11 @@ INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Toalha Interfolhado 7229','Papel Toalha interfolhado 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas, Tamanho da folha: 21 x 18.8 cm, Folhas por pacote: 350, Pacotes por caixa: 15',21.0, 5250, 'https://melhoramentoshigieners.com.br/imagens/7229.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --25
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Toalha Interfolhado 7240','Papel Toalha interfolhado 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas, Tamanho da folha: 20 x 21 cm, Folhas por pacote: 1000, Pacotes por caixa: 12',20.0, 12000, 'https://melhoramentoshigieners.com.br/imagens/7240.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --26
 
+INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Quardanapo Interfolhado 7306','Quardanapo Interfolhado 100% fibras virgens, Folha Dupla, Super Macio, Folhas Brancas, Tamanho da folha: 14.5 x 21 cm, Folhas por pacote: 300, Pacotes por caixa: 18',14.5, 5400, 'https://melhoramentoshigieners.com.br/imagens/7306.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --27
+INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Quardanapo Interfolhado 7308','Quardanapo Interfolhado 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas, Tamanho da folha: 14.5 x 21 cm, Folhas por pacote: 300, Pacotes por caixa: 18',14.5, 5400, 'https://melhoramentoshigieners.com.br/imagens/7308.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --28
+INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Quardanapo Interfolhado 7305','Quardanapo Interfolhado 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas, Tamanho da folha: 14.5 x 21 cm, Folhas por pacote: 300, Pacotes por caixa: 24',14.5, 7200, 'https://melhoramentoshigieners.com.br/imagens/7305.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --29
+INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Quardanapo Interfolhado 7532','Quardanapo Interfolhado 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas, Tamanho da folha: 10 x 21 cm, Folhas por pacote: 250, Pacotes por caixa: 72',10.0, 18000, 'https://melhoramentoshigieners.com.br/imagens/7532.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --30
+
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (1,1);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (1,3);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (2,1);
@@ -111,6 +119,10 @@ INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (23,21);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (24,22);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (25,23);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (26,7);
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (27,24);
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (28,24);
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (29,25);
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (30,26);
 
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (1,2);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (1,5);
@@ -241,6 +253,26 @@ INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (26,1);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (26,4);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (26,8);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (26,9);
+
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (27,3);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (27,4);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (27,6);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (27,10);
+
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (28,3);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (28,4);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (28,7);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (28,9);
+
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (29,3);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (29,4);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (29,7);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (29,9);
+
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (30,3);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (30,4);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (30,8);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (30,9);
 
 
 INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Rafael' , 'De Luca','rafaeldeluca@gmail.com','$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
