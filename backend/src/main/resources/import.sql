@@ -25,6 +25,7 @@ INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('caixa com 5.400 folh
 INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('caixa com 7.200 folhas', now()); --25
 INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('caixa com 18.000 folhas', now()); --26
 INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('blader com 800 ml', now()); --27
+INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('blader com 1000 ml', now()); --28
 
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('papel toalha', now());
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('papel higiênico', now());
@@ -40,7 +41,7 @@ INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('folha tripla', now()
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('folha quádrupla', now());
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('amaciante', now());
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('sabonete espuma', now());
-INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('sabonete líquido', now());
+INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('sabonete líquido', now()); --15
 
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7127','Papel higiênico em rolo 100% fibras virgens, Folha Dupla, Super Macio, Folhas Brancas',10.0, 2400, 'https://melhoramentoshigieners.com.br/imagens/7127.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z');
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7111','Papel higiênico em rolo 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas',10.0, 4000, 'https://melhoramentoshigieners.com.br/imagens/7111.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z');
@@ -83,6 +84,13 @@ INSERT INTO tb_produto(descricao, descricao_completa, fragrancia, img_url, data_
 INSERT INTO tb_produto(descricao, descricao_completa, fragrancia, img_url, data_cadastro) VALUES ('Sabonete Espuma Antisséptico 7492','Sabonete Espuma Antisséptico biguanida polimérica, blader por caixa: 6','Odor Alcoólico', 'https://melhoramentoshigieners.com.br/imagens/7492.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --32
 INSERT INTO tb_produto(descricao, descricao_completa, fragrancia, img_url, data_cadastro) VALUES ('Sabonete Espuma Bactericida 7467','Sabonete Espuma Bactericida quaternário de 5ª geração, blader por caixa: 6','Sem Fragrância', 'https://melhoramentoshigieners.com.br/imagens/7467.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --33
 INSERT INTO tb_produto(descricao, descricao_completa, fragrancia, img_url, data_cadastro) VALUES ('Sabonete Espuma Bactericida 7466','Sabonete Espuma Bactericida clorexidina, blader por caixa: 6','Sem Fragrância','https://melhoramentoshigieners.com.br/imagens/7466.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --34
+
+-- sabonete líquido
+INSERT INTO tb_produto(descricao, descricao_completa, fragrancia, img_url, data_cadastro) VALUES ('Sabonete Líquido Bactericida 7487', 'Sabonete Líquido Bactericida Triclosan, blader por caixa: 6','Sem Fragrância', 'https://melhoramentoshigieners.com.br/imagens/7487.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --35
+INSERT INTO tb_produto(descricao, descricao_completa, fragrancia, img_url, data_cadastro) VALUES ('Sabonete Líquido Floral 7488', 'Sabonete Líquido Floral, blader por caixa: 6','Floral', 'https://melhoramentoshigieners.com.br/imagens/7488.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --36
+INSERT INTO tb_produto(descricao, descricao_completa, fragrancia, img_url, data_cadastro) VALUES ('Sabonete Líquido Erva Doce 7471', 'Sabonete Líquido Erva Doce, blader por caixa: 6','Erva Doce', 'https://melhoramentoshigieners.com.br/imagens/7471.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --37
+INSERT INTO tb_produto(descricao, descricao_completa, fragrancia, img_url, data_cadastro) VALUES ('Sabonete Líquido Cereja e Avelã 7489', 'Sabonete Líquido Cereja e Avelã  blader por caixa: 6','Cereja e Avelã', 'https://melhoramentoshigieners.com.br/imagens/7489.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --38
+INSERT INTO tb_produto(descricao, descricao_completa, fragrancia, img_url, data_cadastro) VALUES ('Sabonete Líquido Ervas Finas 7490', 'Sabonete Líquido Ervas Finas, blader por caixa: 6','Ervas Finas', 'https://melhoramentoshigieners.com.br/imagens/7490.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --39
 
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (1,1);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (1,3);
@@ -136,6 +144,11 @@ INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (31,27);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (32,27);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (33,27);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (34,27);
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (35,27);
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (36,27);
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (37,28);
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (38,27);
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (39,27);
 
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (1,2);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (1,5);
@@ -291,6 +304,12 @@ INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (31,14);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (32,14);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (33,14);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (34,14);
+
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (35,15);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (36,15);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (37,15);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (38,15);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (39,15);
 
 INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Rafael' , 'De Luca','rafaeldeluca@gmail.com','$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
 INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Maria' , 'da Silva','mariadasilva@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
