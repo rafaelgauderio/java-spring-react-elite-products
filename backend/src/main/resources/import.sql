@@ -26,6 +26,8 @@ INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('caixa com 7.200 folh
 INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('caixa com 18.000 folhas', now()); --26
 INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('blader com 800 ml', now()); --27
 INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('blader com 1000 ml', now()); --28
+INSERT INTO tb_embalagem(descricao, data_insercao) VALUES ('frasco de 500 ml', now()); --29
+
 
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('papel toalha', now());
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('papel higiênico', now());
@@ -42,6 +44,7 @@ INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('folha quádrupla', n
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('amaciante', now());
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('sabonete espuma', now());
 INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('sabonete líquido', now()); --15
+INSERT INTO tb_categoria(descricao, data_insercao) VALUES ('álcool', now()); --16
 
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7127','Papel higiênico em rolo 100% fibras virgens, Folha Dupla, Super Macio, Folhas Brancas',10.0, 2400, 'https://melhoramentoshigieners.com.br/imagens/7127.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z');
 INSERT INTO tb_produto(descricao, descricao_completa, largura, metragem, img_url, data_cadastro) VALUES ('Papel Higiênico Rolo 7111','Papel higiênico em rolo 100% fibras virgens, Folha Simples, Super Macio, Folhas Brancas',10.0, 4000, 'https://melhoramentoshigieners.com.br/imagens/7111.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z');
@@ -91,6 +94,22 @@ INSERT INTO tb_produto(descricao, descricao_completa, fragrancia, img_url, data_
 INSERT INTO tb_produto(descricao, descricao_completa, fragrancia, img_url, data_cadastro) VALUES ('Sabonete Líquido Erva Doce 7471', 'Sabonete Líquido Erva Doce, blader por caixa: 6','Erva Doce', 'https://melhoramentoshigieners.com.br/imagens/7471.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --37
 INSERT INTO tb_produto(descricao, descricao_completa, fragrancia, img_url, data_cadastro) VALUES ('Sabonete Líquido Cereja e Avelã 7489', 'Sabonete Líquido Cereja e Avelã  blader por caixa: 6','Cereja e Avelã', 'https://melhoramentoshigieners.com.br/imagens/7489.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --38
 INSERT INTO tb_produto(descricao, descricao_completa, fragrancia, img_url, data_cadastro) VALUES ('Sabonete Líquido Ervas Finas 7490', 'Sabonete Líquido Ervas Finas, blader por caixa: 6','Ervas Finas', 'https://melhoramentoshigieners.com.br/imagens/7490.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --39
+
+-- alcool espuma e gel
+INSERT INTO tb_produto(descricao, descricao_completa, fragrancia, img_url, data_cadastro) VALUES ('Álcool Espuma 7493', 'Álcool Antisséptico de Mãos Espuma, blader por caixa: 6','Alcoólico', 'https://melhoramentoshigieners.com.br/imagens/7493.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --40
+INSERT INTO tb_produto(descricao, descricao_completa, fragrancia, img_url, data_cadastro) VALUES ('Álcool Espuma 7463', 'Espuma Higienizadora, blader por caixa: 6','Alcoólico', 'https://melhoramentoshigieners.com.br/imagens/7463.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --41
+INSERT INTO tb_produto(descricao, descricao_completa, fragrancia, img_url, data_cadastro) VALUES ('Álcool Gel 7494', 'Álcool Antisséptico de Mãos Gel, blader por caixa: 6','Alcoólico', 'https://melhoramentoshigieners.com.br/imagens/7494.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --42
+INSERT INTO tb_produto(descricao, descricao_completa, fragrancia, img_url, data_cadastro) VALUES ('Álcool Gel 7434', 'Álcool Gel Higienizador, blader por caixa: 6','Alcoólico', 'https://melhoramentoshigieners.com.br/imagens/7434.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --43
+
+-- sabonete galão
+INSERT INTO tb_produto(descricao, descricao_completa, fragrancia, img_url, data_cadastro) VALUES ('Sabonete Líquido Perfumado 7469', 'Sabonete Líquido Perfumado Fruta Floral, galão por caixa: 2','Frutal Floral', 'https://melhoramentoshigieners.com.br/imagens/7469.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --44
+INSERT INTO tb_produto(descricao, descricao_completa, fragrancia, img_url, data_cadastro) VALUES ('Sabonete Líquido Neutro 7449', 'Sabonete Líquido Neutro, galão por caixa: 2','Neutro', 'https://melhoramentoshigieners.com.br/imagens/7449.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --45
+INSERT INTO tb_produto(descricao, descricao_completa, fragrancia, img_url, data_cadastro) VALUES ('Sabonete Líquido Perfumado 7447', 'Sabonete Líquido Perfumado Erva Doce, galão por caixa: 2','Erva Doce', 'https://melhoramentoshigieners.com.br/imagens/7447.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --46
+INSERT INTO tb_produto(descricao, descricao_completa, fragrancia, img_url, data_cadastro) VALUES ('Sabonete Líquido Desengraxante 7439', 'Sabonete Líquido Desengraxante sem esferas, galão por caixa: 2','Sem Fragrância', 'https://melhoramentoshigieners.com.br/imagens/7439.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --47
+
+-- álcool gel
+INSERT INTO tb_produto(descricao, descricao_completa, fragrancia, img_url, data_cadastro) VALUES ('Álcool Gel 7443', 'Álcool Gel Higienizador de Mãos, frascos por caixa: 6','Odor Alcoólico', 'https://melhoramentoshigieners.com.br/imagens/7443.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --48
+INSERT INTO tb_produto(descricao, descricao_completa, fragrancia, img_url, data_cadastro) VALUES ('Álcool Gel 7464', 'Álcool Gel 70%, galão por caixa: 4','Odor Alcoólico', 'https://melhoramentoshigieners.com.br/imagens/7464.png', TIMESTAMP WITH TIME ZONE '2023-03-01T16:00:00.12345Z'); --49
 
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (1,1);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (1,3);
@@ -149,6 +168,16 @@ INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (36,27);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (37,28);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (38,27);
 INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (39,27);
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (40,27);
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (41,27);
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (42,27);
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (43,27);
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (44,14);
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (45,14);
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (46,14);
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (47,14);
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (48,29);
+INSERT INTO tb_produto_embalagem (produto_id, embalagem_id) VALUES (49,14);
 
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (1,2);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (1,5);
@@ -301,15 +330,63 @@ INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (30,8);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (30,9);
 
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (31,14);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (31,6);
+
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (32,14);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (32,6);
+
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (33,14);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (33,6);
+
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (34,14);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (34,6);
 
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (35,15);
-INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (36,15);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (35,7);
+
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (36,15)
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (36,7);
+
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (37,15);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (37,7);
+
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (38,15);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (38,8);
+
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (39,15);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (39,8);
+
+
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (40,16);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (40,6);
+
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (41,16);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (41,6);
+
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (42,16);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (42,7);
+
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (43,16);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (43,7);
+
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (44,15);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (44,7);
+
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (45,15);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (45,7);
+
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (46,15);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (46,8);
+
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (47,15);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (47,8);
+
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (48,16);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (48,6);
+
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (49,16);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (49,6);
+
 
 INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Rafael' , 'De Luca','rafaeldeluca@gmail.com','$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
 INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Maria' , 'da Silva','mariadasilva@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
