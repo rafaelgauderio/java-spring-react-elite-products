@@ -44,7 +44,7 @@ public class ServidorDeRecursosConfiguracao extends ResourceServerConfigurerAdap
     // rotas liberadas para CRUD de entidades
     private static final String [] ROTA_ADMINTRADORES = {"/usuarios/**"};
 
-    private static final String [] HOST_LIBERADOS={"https://minhaAplicacao.com.br","http://localhost:8080","http://localhost:3000","http://localhost:5173"};
+    private static final String [] HOST_LIBERADOS={"https://melhoramentoshigiene.netlify.app/produtos","http://localhost:8080","http://localhost:3000","http://localhost:5173"};
 
     @Autowired
     private JwtTokenStore armazenaTokenJwt;
