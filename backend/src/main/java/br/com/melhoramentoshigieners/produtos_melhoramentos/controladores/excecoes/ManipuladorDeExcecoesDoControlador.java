@@ -2,7 +2,6 @@ package br.com.melhoramentoshigieners.produtos_melhoramentos.controladores.excec
 
 import java.time.Instant;
 
-import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoUsuarioNaoEncontrado;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
