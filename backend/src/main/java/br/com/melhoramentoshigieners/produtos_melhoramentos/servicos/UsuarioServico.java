@@ -1,7 +1,6 @@
 package br.com.melhoramentoshigieners.produtos_melhoramentos.servicos;
 
 import br.com.melhoramentoshigieners.produtos_melhoramentos.dto.*;
-import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Produto;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Regra;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.entidades.Usuario;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.repositorios.RegraRepositorio;
