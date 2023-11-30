@@ -2,6 +2,8 @@ package br.com.melhoramentoshigieners.produtos_melhoramentos.controladores.excec
 
 import java.time.Instant;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,10 +12,11 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.amazonaws.AmazonClientException;
+import com.amazonaws.AmazonServiceException;
+
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoEntidadeNaoEncontrada;
 import br.com.melhoramentoshigieners.produtos_melhoramentos.servicos.excecoes.ExcecaoIntegridadeBancoDeDados;
-
-import javax.servlet.http.HttpServletRequest;
 
 // annotation que possibilta a interceptacao que qualquer exceção disparada pelo controlador 
 @ControllerAdvice
@@ -104,4 +107,31 @@ public class ManipuladorDeExcecoesDoControlador {
 
 		return ResponseEntity.status(codigoHttp).body(excecaoCustomizada);
 	}
+
+	@ExceptionHandler(AmazonServiceException.class)
+	public ResponseEntity<ExcecaoCustomizada> excecaoAmazonServico(AmazonServiceException mensagemErro,
+			HttpServletRequest requisicao) {
+		HttpStatus codigoHttp = HttpStatus.BAD_REQUEST;
+		ExcecaoCustomizada excecaoCustomizada = new ExcecaoCustomizada();
+		excecaoCustomizada.setNomeDoErro("AWS Service exception");
+		excecaoCustomizada.setMenssagemDeErro(mensagemErro.getMessage());
+		excecaoCustomizada.setCaminho(requisicao.getRequestURI());
+		excecaoCustomizada.setCodigoHttpDoErro(codigoHttp.value());
+
+		return ResponseEntity.status(codigoHttp).body(excecaoCustomizada);
+	}
+
+	@ExceptionHandler(AmazonClientException.class)
+	public ResponseEntity<ExcecaoCustomizada> excecaoAmazonCliente(AmazonClientException mensagemErro,
+			HttpServletRequest requisicao) {
+		HttpStatus codigoHttp = HttpStatus.BAD_REQUEST;
+		ExcecaoCustomizada excecaoCustomizada = new ExcecaoCustomizada();
+		excecaoCustomizada.setNomeDoErro("AWS Service exception");
+		excecaoCustomizada.setMenssagemDeErro(mensagemErro.getMessage());
+		excecaoCustomizada.setCaminho(requisicao.getRequestURI());
+		excecaoCustomizada.setCodigoHttpDoErro(codigoHttp.value());
+
+		return ResponseEntity.status(codigoHttp).body(excecaoCustomizada);
+	}
+
 }
