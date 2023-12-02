@@ -388,10 +388,10 @@ INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (49,16);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (49,6);
 
 
-INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Rafael' , 'De Luca','rafaeldeluca@gmail.com','$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
-INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Maria' , 'da Silva','mariadasilva@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
-INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Juliana' , 'da Silva','julianadasilva@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
-INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Claudia' , 'da Silva','claudiadasilva@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
+INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Rafael' , 'De Luca','rafaeldeluca@gmail.com','$2a$10$FsMAg5iBbgBNlCxkAqYUo.JywE3Xye5os2sJmZ9ybKosO9tHejzHS');
+INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Maria' , 'da Silva','mariadasilva@gmail.com', '$2a$10$FsMAg5iBbgBNlCxkAqYUo.JywE3Xye5os2sJmZ9ybKosO9tHejzHS');
+INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Juliana' , 'da Silva','julianadasilva@gmail.com', '$2a$10$FsMAg5iBbgBNlCxkAqYUo.JywE3Xye5os2sJmZ9ybKosO9tHejzHS');
+INSERT INTO tb_usuario(nome, sobrenome, email, password) VALUES ('Claudia' , 'da Silva','claudiadasilva@gmail.com', '$2a$10$FsMAg5iBbgBNlCxkAqYUo.JywE3Xye5os2sJmZ9ybKosO9tHejzHS');
 
 INSERT INTO tb_regra (descricao, permissao) VALUES ('Tem permissao de CRUD em usuários','ROLE_ADMIN_SISTEMA');
 INSERT INTO tb_regra (descricao, permissao) VALUES ('Tem permissao de CRUD em produtos, embalagens e categorias.','ROLE_GERENTE_LOJA');

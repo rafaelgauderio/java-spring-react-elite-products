@@ -28,9 +28,11 @@ public class AwsS3Servico {
 
 	public URL uploadFile(MultipartFile arquivo) {
 		try {
+			//String nomeOriginalArquivo = arquivo.getName();
 			String nomeOriginalArquivo = arquivo.getOriginalFilename();
+			String nomeSemExtensao = nomeOriginalArquivo.substring(0, nomeOriginalArquivo.length() - 4);
 			String extensao = FilenameUtils.getExtension(nomeOriginalArquivo);
-			String nomeFinalArquivo = nomeOriginalArquivo + "." + extensao;
+			String nomeFinalArquivo = nomeSemExtensao + "." + extensao;
 
 			InputStream inputStream = arquivo.getInputStream();
 			String contentType = arquivo.getContentType();
