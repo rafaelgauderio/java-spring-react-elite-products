@@ -35,7 +35,7 @@ public class ProdutoDTO implements Serializable {
     private String fragrancia;
 
     @NotBlank(message="Obrigatório preencher o link da imagem")
-    @Size(min=5, max=100, message="link deve ter entre 5 e 100 caracteres")
+    @Size(min=5, max=250, message="link deve ter entre 5 e 200 caracteres")
     private String imgUrl;
 
     @PastOrPresent(message="Não é possivel cadastrar um produto com data futura")
